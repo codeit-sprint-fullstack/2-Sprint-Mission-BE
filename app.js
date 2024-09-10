@@ -98,8 +98,10 @@ app.delete(
 app.get(
   '/products',
   asyncHandler(async (req, res) => {
-    const offset = req.query.offset || 0;
-    const limit = req.query.limit || 10;
+    const page = Number(req.query.offset) || 0;
+    const pageSize = Number(req.query.limit) || 3;
+
+    const offset = (page - 1) * pageSize;
 
     const search = req.query.search || '';
     const searchRegex = new RegExp(search, 'i');
@@ -113,7 +115,7 @@ app.get(
     )
       .sort(sortOption)
       .skip(offset)
-      .limit(limit);
+      .limit(pageSize);
     res.send(products);
   })
 );
