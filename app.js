@@ -106,14 +106,14 @@ app.get(
     const keyword = req.query.keyword || '';
     const keywordRegex = new RegExp(keyword, 'i');
 
-    const orderBy = req.query.orderBy;
-    const orderByOption = { createdAt: orderBy === 'recent' ? 'desc' : 'asc' };
+    const order = req.query.order;
+    const orderOption = { createdAt: order === 'recent' ? 'desc' : 'asc' };
 
     const products = await Product.find(
       { $or: [{ name: keywordRegex }, { description: keywordRegex }] }, // 검색 조건
       { name: 1, price: 1, createdAt: 1 }
     )
-      .sort(orderByOption)
+      .sort(orderOption)
       .skip(offset)
       .limit(pageSize);
     res.send(products);
