@@ -98,22 +98,22 @@ app.delete(
 app.get(
   '/products',
   asyncHandler(async (req, res) => {
-    const page = Number(req.query.offset) || 1;
-    const pageSize = Number(req.query.limit) || 10;
+    const page = Number(req.query.page) || 1;
+    const pageSize = Number(req.query.pageSize) || 10;
 
     const offset = (page - 1) * pageSize;
 
-    const search = req.query.search || '';
-    const searchRegex = new RegExp(search, 'i');
+    const keyword = req.query.keyword || '';
+    const keywordRegex = new RegExp(keyword, 'i');
 
-    const sort = req.query.sort;
-    const sortOption = { createdAt: sort === 'recent' ? 'desc' : 'asc' };
+    const orderBy = req.query.orderBy;
+    const orderByOption = { createdAt: orderBy === 'recent' ? 'desc' : 'asc' };
 
     const products = await Product.find(
-      { $or: [{ name: searchRegex }, { description: searchRegex }] }, // 검색 조건
+      { $or: [{ name: keywordRegex }, { description: keywordRegex }] }, // 검색 조건
       { name: 1, price: 1, createdAt: 1 }
     )
-      .sort(sortOption)
+      .sort(orderByOption)
       .skip(offset)
       .limit(pageSize);
     res.send(products);
