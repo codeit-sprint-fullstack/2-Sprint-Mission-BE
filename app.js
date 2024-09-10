@@ -106,7 +106,8 @@ app.get(
     const keyword = req.query.keyword || '';
     const keywordRegex = new RegExp(keyword, 'i');
 
-    const orderBy = req.query.orderBy || 'desc';
+    const orderBy = req.query.orderBy;
+    const orderByOption = { createdAt: orderBy === 'recent' ? 'desc' : 'asc' };
 
     const products = await Product.find(
       { $or: [{ name: keywordRegex }, { description: keywordRegex }] }, // 검색 조건
