@@ -101,7 +101,7 @@ app.get(
     const sort = req.query.sort;
     const sortOption = { createdAt: sort === 'recent' ? 'desc' : 'asc' };
 
-    const count = 3;
+    const count = Number(req.query.count);
 
     const products = await Product.find({}, { name: 1, price: 1, createdAt: 1 })
       .sort(sortOption)

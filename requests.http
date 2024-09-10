@@ -1,0 +1,24 @@
+GET http://localhost:4000/products
+###
+GET http://localhost:4000/products?sort=recent&count=3
+###
+GET http://localhost:4000/products/66dfb79bcebb0a8d2821b156
+###
+POST http://localhost:4000/products
+Content-Type: application/json
+
+{
+    "name": "화장대",
+    "description" : "환한 조명이 부착되어있는 화장대",
+    "price": "75000",
+    "tags": ["화장대", "가구"]
+}
+###
+PATCH http://localhost:4000/products/66dfdd80fe233a4b9ad16a10
+Content-Type: application/json
+
+{
+    "price": "55000"
+}
+###
+DELETE http://localhost:4000/products/66dfdd80fe233a4b9ad16a10
