@@ -12,7 +12,7 @@ mongoose
 const app = express();
 
 const corsOptions = {
-  origin: ['http://127.0.0.1:4000', 'https://netlify.com']
+  origin: ['http://127.0.0.1:3000', 'https://welcome-panda-market.netlify.app/']
 };
 
 app.use(express.json());
