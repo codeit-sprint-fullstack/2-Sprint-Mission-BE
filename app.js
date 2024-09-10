@@ -98,14 +98,22 @@ app.delete(
 app.get(
   '/products',
   asyncHandler(async (req, res) => {
+    const offset = req.query.offset || 0;
+    const limit = req.query.limit || 10;
+
+    const search = req.query.search || '';
+    const searchRegex = new RegExp(search, 'i');
+
     const sort = req.query.sort;
     const sortOption = { createdAt: sort === 'recent' ? 'desc' : 'asc' };
 
-    const count = Number(req.query.count);
-
-    const products = await Product.find({}, { name: 1, price: 1, createdAt: 1 })
+    const products = await Product.find(
+      { $or: [{ name: searchRegex }, { description: searchRegex }] }, // 검색 조건
+      { name: 1, price: 1, createdAt: 1 }
+    )
       .sort(sortOption)
-      .limit(count);
+      .skip(offset)
+      .limit(limit);
     res.send(products);
   })
 );

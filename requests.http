@@ -1,5 +1,7 @@
 GET http://localhost:4000/products
 ###
+GET http://localhost:4000/products?search=선풍기
+###
 GET http://localhost:4000/products?sort=recent&count=3
 ###
 GET http://localhost:4000/products/66dfb79bcebb0a8d2821b156
@@ -8,17 +10,17 @@ POST http://localhost:4000/products
 Content-Type: application/json
 
 {
-    "name": "화장대",
-    "description" : "환한 조명이 부착되어있는 화장대",
-    "price": "75000",
-    "tags": ["화장대", "가구"]
+    "name": "미니 선풍기",
+    "description" : "더운 날씨에 들고 다니기 좋은 미니 선풍기",
+    "price": "3000",
+    "tags": ["선풍기", "여름"]
 }
 ###
-PATCH http://localhost:4000/products/66dfdd80fe233a4b9ad16a10
+PATCH http://localhost:4000/products/66dfea9b96b760192e08856d
 Content-Type: application/json
 
 {
-    "price": "55000"
+    "price": "2000"
 }
 ###
 DELETE http://localhost:4000/products/66dfdd80fe233a4b9ad16a10
