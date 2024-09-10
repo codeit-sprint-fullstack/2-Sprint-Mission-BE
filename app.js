@@ -98,7 +98,7 @@ app.delete(
 app.get(
   '/products',
   asyncHandler(async (req, res) => {
-    const page = Number(req.query.offset) || 0;
+    const page = Number(req.query.offset) || 1;
     const pageSize = Number(req.query.limit) || 3;
 
     const offset = (page - 1) * pageSize;
