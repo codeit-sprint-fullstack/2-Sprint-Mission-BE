@@ -1,12 +1,22 @@
 import express from "express";
 import mongoose from "mongoose";
 import Product from "./models/Product.js";
-import { DATABASE_URL } from "./env.js";
+import * as dotenv from "dotenv";
+import cors from "cors";
 
-mongoose.connect(DATABASE_URL).then(() => console.log("Connected to DB"));
+dotenv.config();
+
+mongoose
+  .connect(process.env.DATABASE_URL)
+  .then(() => console.log("Connected to DB"));
 
 const app = express();
 
+const corsOptions = {
+  origin: ["http://127.0.0.1:5500"],
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 function asyncHandler(handler) {
@@ -101,4 +111,4 @@ app.get(
   })
 );
 
-app.listen(3000, () => console.log("server on"));
+app.listen(process.env.PORT || 3000, () => console.log("server on"));
