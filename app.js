@@ -4,8 +4,9 @@ import Item from "./models/Product.js";
 import * as dotenv from "dotenv";
 import cors from "cors";
 
+const app = express();
 dotenv.config();
-app.use(cors(corsOptions));
+
 app.use(express.json());
 
 const corsOptions = {
@@ -14,6 +15,9 @@ const corsOptions = {
     "https://codeit-sprint-mission1.netlify.app",
   ],
 };
+
+app.use(cors(corsOptions));
+app.use(express.json());
 
 function asyncHandler(handler) {
   return async function (req, res) {
