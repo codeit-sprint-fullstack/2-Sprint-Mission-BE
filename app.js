@@ -1,6 +1,11 @@
 import express from "express";
 import mongoose from "mongoose";
 import * as dotenv from "dotenv";
+import {
+  ValidationError,
+  NotFoundError,
+  InternalServerError,
+} from "./error.js";
 
 dotenv.config();
 
@@ -16,23 +21,26 @@ const app = express(); // JSON 요청 파싱
 app.use(express.json());
 //app.use(cors()); //나중에 corsOption 줄 예정
 
+//에러 처리
 function asyncHandler(handler) {
-  //에러 처리 및 상태코드
-  const newHandler = async function (req, res) {
+  return async (req, res, next) => {
     try {
-      await handler(req, res);
+      await handler(req, res, next);
     } catch (e) {
-      if (e.name === "ValidationError") {
-        res.status(400).send({ message: e.message });
-      } else if (e.name === "CastError") {
-        res.status(404).send({ message: "Cannot find given id." });
-      } else {
-        res.status(500).send({ message: e.message });
+      if (!(e instanceof ValidationError) && !(e instanceof NotFoundError)) {
+        // 400 404 아닌 경우 500으로 취급
+        e = new InternalServerError(e.message);
       }
+      next(e);
     }
   };
-  return newHandler;
 }
+
+// 전역 에러 핸들러
+
+app.use((err, req, res, next) => {
+  res.status(err.statusCode || 500).send({ message: err.message });
+});
 
 //상품 등록 API (post)
 
@@ -41,7 +49,7 @@ app.post(
   asyncHandler(async (req, res) => {
     const { name, description, price, tags } = req.body;
     if (!name || !description || !price || !tags) {
-      return res.status(400).send({ message: "모든 필드를 입력해주세요." }); //models/Products.js에서
+      throw new ValidationError("모든 필드를 입력해주세요."); //models/Products.js에서
     }
     const product = new Product({
       name,
@@ -62,7 +70,7 @@ app.get(
   asyncHandler(async (req, res) => {
     const product = await Product.findById(req.params.id);
     if (!product) {
-      return res.status(404).send({ message: "상품이 없습니다." }); //찾는 상품 없을 때
+      throw new NotFoundError("상품이 없습니다."); //찾는 상품 없을 때
     }
     res.status(200).send(product); // 잘 찾았을 떄
   })
@@ -81,7 +89,7 @@ app.patch(
     );
 
     if (!updatedProduct) {
-      return res.status(404).send({ message: "상품을 찾을 수 없습니다." });
+      throw new NotFoundError("상품을 찾을 수 없습니다.");
     }
 
     res.status(200).send(updatedProduct);
@@ -95,7 +103,7 @@ app.delete(
   asyncHandler(async (req, res) => {
     const product = await Product.findById(req.params.id);
     if (!product) {
-      return res.status(404).send({ message: "상품이 없습니다." });
+      throw new NotFoundError("상품이 없습니다.");
     }
     res.status(200).send({ message: "상품이 삭제되었습니다.", product });
   })
@@ -122,6 +130,7 @@ app.get(
     // 페이지네이션
     const offset = (parseInt(page) - 1) * parseInt(limit);
     const products = await Product.find(query)
+      .select("id name price createdAt") // 4가지만 받아옴
       .sort(sortOption)
       .skip(offset)
       .limit(parseInt(limit));

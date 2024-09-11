@@ -1,0 +1,29 @@
+### 상품 등록
+POST http://localhost:3000/products
+Content-Type: application/json
+
+{
+  "name": "중고 상품",
+  "description": "설명 텍스트",
+  "price": 20000,
+  "tags": ["전자기기", "중고"]
+}
+
+### 상품 목록 조회
+GET http://localhost:3000/products?page=1&limit=10
+
+### 상품 상세 조회
+GET http://localhost:3000/products/66e00c1b8343748c9b61321c
+
+### 상품 수정
+PATCH http://localhost:3000/products/66e00c1b8343748c9b61321c
+Content-Type: application/json
+
+{
+  "name": "청바지",
+  "description": "중고 청바지입니다.",
+  "price": 10000
+}
+
+### 상품 삭제
+DELETE http://localhost:3000/products/60e29f59fc13ae1f7a000000
