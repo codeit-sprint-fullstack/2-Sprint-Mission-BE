@@ -11,7 +11,7 @@ mongoose.connect(process.env.DATABASE_URL).then(() => console.log('connected to 
 const app = express();  
 
 const corsOptions = {
-  origin: ['http://127.0.0.1:3000', 'https://buffso-pandamarket.netlify.app/']
+  origin: ['http://127.0.0.1:3000', 'http://localhost:3000', 'https://buffso-pandamarket.netlify.app/']
 }
 app.use(cors(corsOptions));
 app.use(express.json());  // JSON 요청 파싱 미들웨어
@@ -65,8 +65,11 @@ app.get('/products', asyncHandler(async (req, res) => {
     .sort(sortOption)
     .skip(offset)
     .limit(pageSize);
-
-  res.send(products);
+  const totalCount = await Product.countDocuments(searchQuery);
+  res.send({
+    list: products,
+    totalCount: totalCount
+  });
 
 }));
 
