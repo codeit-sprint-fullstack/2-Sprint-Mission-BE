@@ -10,7 +10,7 @@
   },
   "type": "module",
   "scripts": {
-    "dev": "nodemon app/js",
+    "dev": "nodemon app.js",
     "seed": "node data/seed.js",
     "start": "node app.js"
   }
