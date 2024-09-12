@@ -106,13 +106,14 @@ app.get(
     };
 
     const sortCondition = sort === "recent" ? { createdAt: -1 } : {};
+    const totalProducts = await Product.countDocuments(searchCondition);
 
     const products = await Product.find(searchCondition)
       // .select(`name price createdAt`)
       .sort(sortCondition)
       .skip(offset)
       .limit(Number(pageSize));
-    res.send(products);
+    res.send({ products, total: totalProducts });
   })
 );
 
