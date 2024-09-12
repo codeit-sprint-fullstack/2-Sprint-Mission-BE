@@ -7,14 +7,12 @@ import cors from "cors";
 const app = express();
 dotenv.config();
 
-
-
 const corsOptions = {
   origin: [
     "http://127.0.0.1:3000",
     "https://codeit-sprint-mission1.netlify.app",
   ],
-  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
 };
 
 app.use(cors(corsOptions));
