@@ -36,9 +36,10 @@ app.get("/products", asyncHandler(async (req, res) => {
   const page = Number(req.query.page) || 1;
   const pageSize = Number(req.query.pageSize) || 10;
   const offset = (page - 1) * pageSize;
-
+  
+  const totalCount = await Product.countDocuments();
   const products = await Product.find().sort(sortOption).skip(offset).limit(pageSize);
-  res.send(products);
+  res.send({products, totalCount});
 }));
 
 app.get("/products/:id", asyncHandler(async (req, res) => {
