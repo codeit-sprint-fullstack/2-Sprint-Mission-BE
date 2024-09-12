@@ -1,0 +1,21 @@
+GET http://localhost:3000/products
+
+###
+GET http://localhost:3000/products/130
+###
+PATCH http://localhost:3000/products/130
+
+{
+    "name": "쿠쿠 밥솥",
+    "description": "쿠쿠하세요~~",
+    "price": 310000,
+    "tags": ["쿠쿠쿠쿠쿸"],
+    "images": [
+      "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/92/1725209779217/CRP-DHP0610FD.png"
+    ],
+    "ownerId": 92
+  },
+###
+DELETE http://localhost:3000/subscriptions/2
+
+
