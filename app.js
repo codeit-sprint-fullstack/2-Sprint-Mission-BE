@@ -111,7 +111,7 @@ app.get(
 
     const products = await Product.find(
       { $or: [{ name: keywordRegex }, { description: keywordRegex }] }, // 검색 조건
-      { name: 1, price: 1, createdAt: 1 }
+      { name: 1, price: 1, favoriteCount: 1, createdAt: 1 }
     )
       .sort(orderOption)
       .skip(offset)
