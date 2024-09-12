@@ -6,17 +6,21 @@ const ProductSchema = new mongoose.Schema(
       type: String,
       required: true,
       minLength: 1,
-      maxLength: 10
+      maxLength: 10,
     },
-    description: { type: String, minLength: 10, maxLength: 100 },
+    description: {
+      type: String,
+      minLength: 10,
+      maxLength: 100,
+      required: true,
+    },
     price: { type: Number, required: true, min: 0 },
     tags: { type: [String] },
     images: { type: [String] },
-    ownerId: { type: Number },
-    favoriteCount: { type: Number, default: 0, min: 0 }
+    favoriteCount: { type: Number, default: 0, min: 0 },
   },
   {
-    timestamps: true
+    timestamps: true,
   }
 );
 
