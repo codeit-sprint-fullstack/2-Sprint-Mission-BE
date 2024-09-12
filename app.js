@@ -32,8 +32,12 @@ function asyncHandler(handler) {
 }
 
 app.get("/products", asyncHandler(async (req, res) => {
-  const count = Number(req.query.count) || 0;
-  const products = await Product.find().sort({createdAt: 'desc'}).limit(count);
+  const sortOption = req.query.orderBy || {createdAt: 'desc'};
+  const page = Number(req.query.page) || 1;
+  const pageSize = Number(req.query.pageSize) || 10;
+  const offset = (page - 1) * pageSize;
+
+  const products = await Product.find().sort(sortOption).skip(offset).limit(pageSize);
   res.send(products);
 }));
 
