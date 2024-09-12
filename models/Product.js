@@ -17,6 +17,10 @@ const ProductSchema = new mongoose.Schema(
     tags: {
       type: [String],
       required: true
+    },
+    favoriteCount: {
+      type: Number,
+      default: 0
     }
   },
   {
