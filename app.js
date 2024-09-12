@@ -9,14 +9,14 @@ dotenv.config();
 
 app.use(express.json());
 
-const corsOptions = {
+/*const corsOptions = {
   origin: [
     "http://127.0.0.1:3000",
     "https://codeit-sprint-mission1.netlify.app",
   ],
-};
+};*/
 
-app.use(cors(corsOptions));
+app.use(cors(/*corsOptions*/));
 app.use(express.json());
 
 function asyncHandler(handler) {
