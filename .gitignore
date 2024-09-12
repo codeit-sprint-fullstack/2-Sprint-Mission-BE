@@ -1,0 +1,4 @@
+.env
+request.http
+/node_modules
+jsconfig.json
