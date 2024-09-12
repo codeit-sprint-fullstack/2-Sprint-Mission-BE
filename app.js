@@ -62,7 +62,7 @@ app.get(
       .sort(sortOption) // 정렬 적용
       .skip(offset) // offset 방식으로 페이지네이션
       .limit(Number(limit)) // 한 번에 가져올 상품 수 제한
-      .select("id name price createdAt"); // 선택한 필드만 조회
+      .select("id name price createdAt tags"); // 선택한 필드만 조회
     //전체 상품 수 계산 (검색 조건 적용)
     const totalItems = await Item.countDocuments(searchQuery);
 
