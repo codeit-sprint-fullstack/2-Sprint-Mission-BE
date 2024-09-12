@@ -1,9 +1,10 @@
 GET http://localhost:3000/products
 
 ###
-GET http://localhost:3000/products/130
+GET http://localhost:3000/products/66e2a835fe9e816ae626f192
 ###
-PATCH http://localhost:3000/products/130
+PATCH http://localhost:3000/products/66e2a835fe9e816ae626f193
+Content-Type: application/json
 
 {
     "name": "쿠쿠 밥솥",
@@ -12,10 +13,9 @@ PATCH http://localhost:3000/products/130
     "tags": ["쿠쿠쿠쿠쿸"],
     "images": [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/92/1725209779217/CRP-DHP0610FD.png"
-    ],
-    "ownerId": 92
-  },
+    ]
+}
 ###
-DELETE http://localhost:3000/subscriptions/2
+DELETE http://localhost:3000/products/66e2a835fe9e816ae626f192
 
 
