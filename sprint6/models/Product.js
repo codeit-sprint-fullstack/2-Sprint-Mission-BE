@@ -17,6 +17,13 @@ const ProductSchema = new mongoose.Schema(
     tag: {
       type: Array,
     },
+    image: {
+      type: Array,
+    },
+    favoriteCount: {
+      type: Number,
+      default: 0,
+    },
   },
   {
     timestamps: true,
