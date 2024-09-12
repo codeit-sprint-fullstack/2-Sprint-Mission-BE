@@ -37,9 +37,45 @@ app.get("/products", asyncHandler(async (req, res) => {
   res.send(products);
 }));
 
+app.get("/products/:id", asyncHandler(async (req, res) => {
+  const id = req.params.id;
+  const product = await Product.findById(id);
+
+  if (product) {
+    res.send(product);
+  } else {
+    res.status(404).send({message: '해당 데이터를 찾을 수 없습니다!'});
+  }
+}))
 app.post("/products", asyncHandler(async (req, res) => {
   const newProduct = await Product.create(req.body);
   res.send(newProduct);
+}))
+
+app.patch('/products/:id', asyncHandler(async (req, res) => {
+  const id = req.params.id;
+  const product = await Product.findById(id);
+
+  if (product) {
+    Object.keys(req.body).forEach((key) => {
+      product[key] = req.body[key];
+    });
+    await product.save();
+    res.send(product);
+  } else {
+    res.status(404).send({message: '해당 데이터를 찾을 수 없습니다!'});
+  }
+}))
+
+app.delete("/products/:id", asyncHandler(async (req, res) => {
+  const id = req.params.id;
+  const product = await Product.findByIdAndDelete(id);
+
+  if (product) {
+    res.sendStatus(204);
+  } else {
+    res.sendStatus(404).send({message: '해당 데이터를 찾을 수 없습니다!'})
+  }
 }))
 
 app.listen(process.env.PORT || 3000, () => console.log("Server on"));
