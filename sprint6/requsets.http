@@ -1,0 +1,27 @@
+GET http://localhost:4000/products
+
+###
+GET http://localhost:4000/products/66e247ac889cd6be7c316533
+
+###
+POST http://localhost:4000/products
+Content-Type: application/json
+
+{
+    "name": "유리컵",
+    "description": "갬성 넘치는 홈카페 차리기 가능",
+    "price": 5000
+}
+
+###
+PATCH http://localhost:4000/products/66e247ac889cd6be7c316533
+Content-Type: application/json
+
+{
+    "name": "어쩌고",
+    "description": "저쩌고"
+}
+
+
+###
+DELETE  http://localhost:4000/products/66e256f05e0e974e6a41fb50
