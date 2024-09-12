@@ -93,7 +93,25 @@ app.delete(
 app.get(
   "/products",
   asyncHandler(async (req, res) => {
-    const products = await Product.find();
+    const page = Number(req.query.page) || 1;
+    const pageSize = Number(req.query.pageSize) || 10;
+    const search = req.query.search || "";
+    const sort = req.query.sort || "recent";
+
+    const offset = (page - 1) * pageSize;
+
+    //검색 조건 https://lts0606.tistory.com/568
+    const searchCondition = {
+      $or: [{ name: { $regex: search } }, { description: { $regex: search } }],
+    };
+
+    const sortCondition = sort === "recent" ? { createdAt: -1 } : {};
+
+    const products = await Product.find(searchCondition)
+      // .select(`name price createdAt`)
+      .sort(sortCondition)
+      .skip(offset)
+      .limit(Number(pageSize));
     res.send(products);
   })
 );
