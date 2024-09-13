@@ -17,9 +17,9 @@ const ProductSchema = new mongoose.Schema({
 		type: Number,
 		validate: {
 			validator: (v) => {
-				return !isNaN(v) && Number(v) >= 1;
+				return !isNaN(v) && Number(v) >= 0;
 			},
-			message: "Must be a number which is larger or equal than 1."
+			message: "Price must be a number which is larger or equal than 0."
 		}
 	},
 	tags: {
