@@ -1,10 +1,11 @@
 import express from "express";
-// import mockTasks from './data/mock.js';
 import mongoose from 'mongoose';
-import { DATABASE_URL } from "./env.js";
-import Task from "./models/Task.js";
+import Product from "./models/Product.js";
+import cors from 'cors';
+import * as dotenv from 'dotenv';
+dotenv.config();
 
-mongoose.connect(DATABASE_URL).then(() => console.log("Connected to DB."))
+mongoose.connect(process.env.DATABASE_URL).then(() => console.log("Connected to DB."))
 
 const HttpStatus = Object.freeze({
   SUCCESS: 200,
@@ -21,6 +22,7 @@ const HttpStatus = Object.freeze({
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 
 // useAsync hook
@@ -44,27 +46,27 @@ function asyncHandler(handler) {
 	});
 }
 
-app.post("/tasks", asyncHandler(async (req, res) => {
-	const newTask = await Task.create(req.body);
-	res.send(newTask);
+app.post("/products", asyncHandler(async (req, res) => {
+	const newProduct = await Product.create(req.body);
+	res.send(newProduct);
 }));
 
-app.get("/tasks", asyncHandler(async (req, res) => {
+app.get("/products", asyncHandler(async (req, res) => {
 	const sort = req.query.sort;
 	const count = Number(req.query.count);
 	const sortOption = { createdAt: sort === "oldest" ? "asc" : "desc" };
 
-	const tasks = await Task.find().sort(sortOption).limit(count); // Full scan
+	const products = await Product.find().sort(sortOption).limit(count); // Full scan
 
-	res.send(tasks);
+	res.send(products);
 }));
 
-app.get("/tasks/:id", asyncHandler(async (req, res) => {
+app.get("/products/:id", asyncHandler(async (req, res) => {
 	const id = req.params.id;
-	const task = await Task.findById(id);
+	const product = await Product.findById(id);
 	// console.log(id);
-	if (task) {
-		res.send(task);
+	if (product) {
+		res.send(product);
 	}
 	else {
 		res.status(HttpStatus.NOT_FOUND).send({message: "없습니다."});
@@ -72,30 +74,30 @@ app.get("/tasks/:id", asyncHandler(async (req, res) => {
 }));
 
 // PUT 전체, PATCH 일부만
-app.patch("/tasks/:id", asyncHandler((req, res) => {
+app.patch("/products/:id", asyncHandler((req, res) => {
 	const id = Number(req.params.id);
-	const task = mockTasks.find(task => task.id === id);
-	if (task) {
+	const product = mockProducts.find(product => product.id === id);
+	if (product) {
 		Object.keys(req.body).forEach(key => {
-			task[key] = req.body[key];
+			product[key] = req.body[key];
 		});
-		res.send(task);
+		res.send(product);
 	}
 	else {
 		res.status(HttpStatus.NOT_FOUND).send({"message": "없습니다."});
 	}
 }));
 
-app.delete("/tasks/:id", asyncHandler(async (req, res) => {
+app.delete("/products/:id", asyncHandler(async (req, res) => {
 	const id = req.params.id;
-	const task = await Task.findByIdAndDelete(id);
-	if (task) {
-		res.status(HttpStatus.NO_CONTENT).send(task);
+	const product = await Product.findByIdAndDelete(id);
+	if (product) {
+		res.status(HttpStatus.NO_CONTENT).send(product);
 	}
 	else {
 		res.status(HttpStatus.NOT_FOUND).send();
 	}
 }));
 
-app.listen(3000, () => console.log("Server on"));
+app.listen(process.env.PORT || 3000, () => console.log("Server on"));
 console.log("Hi!");
