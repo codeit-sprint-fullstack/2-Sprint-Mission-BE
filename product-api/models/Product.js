@@ -23,7 +23,7 @@ const ProductSchema = new mongoose.Schema({
 		}
 	},
 	tags: {
-		type: String,
+		type: [String],
 		maxLength: 10,
 	},
 	favoriteCount: {
