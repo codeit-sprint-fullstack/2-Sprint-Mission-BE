@@ -21,7 +21,7 @@ function asyncHandler(handler) {
     try {
       await handler(req, res);
     } catch (e) {
-      if (e.name === "ValildationError") {
+      if (e.name === "ValidationError") {
         res.status(400).send({ message: e.message });
       } else if (e.name === "CastError") {
         res.status(404).send({ message: "Cannot find given id." });
@@ -34,10 +34,10 @@ function asyncHandler(handler) {
 
 app.get("/products", 
   asyncHandler(async (req, res) => {
-    const sort = req.query.orderBy;
-    const count = Number(req.query.pageSize) || 0;
+    const sort = req.query.orderBy || "recent";
+    const count = Number(req.query.pageSize) || 10;
 
-    const sortOptions = sort === "recent" ? { createdAt: "desc" } : { favoriteCnt: "desc" };
+    const sortOptions = sort === "favorite" ? { favoriteCnt: "asc" } : { createdAt: "desc" };
     const products = await Product.find().sort(sortOptions).limit(count);
 
     res.send(products);
@@ -84,7 +84,7 @@ app.patch("/products/:id",
 app.delete("/products/:id", 
   asyncHandler(async (req, res) => {
     const id = req.params.id;
-    const product = await product.findByIdAndDelete(id);
+    const product = await Product.findByIdAndDelete(id);
 
     if (product) {
       res.sendStatus(204);
