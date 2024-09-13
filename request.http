@@ -1,6 +1,6 @@
-GET http://localhost:3000/products/66e1555f39d3bd1dc529dd24
+GET http://localhost:5000/products/66e1555f39d3bd1dc529dd24
 ###
-POST http://localhost:3000/products
+POST http://localhost:5000/products
 Content-Type: application/json
 
 {
@@ -10,7 +10,7 @@ Content-Type: application/json
   "tags": ["아이폰"]
 }
 ###
-PATCH http://localhost:3000/products
+PATCH http://localhost:5000/products
 Content-Type: application/json
 
 {
@@ -20,8 +20,8 @@ Content-Type: application/json
   "tags": ["노트북"]
 }
 ###
-DELETE http://localhost:3000/products/66e1555f39d3bd1dc529dd24
+DELETE http://localhost:5000/products/66e1555f39d3bd1dc529dd24
 ###
-GET http://localhost:3000/products?page=2&limit=5&sort=recent
+GET http://localhost:5000/products?page=2&limit=5&sort=recent
 
 

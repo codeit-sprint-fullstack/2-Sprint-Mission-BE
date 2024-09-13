@@ -13,7 +13,7 @@ mongoose
 const app = express();
 
 const corsOptions = {
-  origin: ["http://127.0.0.1:5500"],
+  origin: ["http://localhost:3000"],
 };
 
 app.use(cors(corsOptions));
@@ -111,4 +111,4 @@ app.get(
   })
 );
 
-app.listen(process.env.PORT || 3000, () => console.log("server on"));
+app.listen(process.env.PORT || 5000, () => console.log("server on"));
