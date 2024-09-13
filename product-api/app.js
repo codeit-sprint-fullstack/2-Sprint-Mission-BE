@@ -63,6 +63,7 @@ app.get("/products", asyncHandler(async (req, res) => {
 	switch (orderBy) {
 		case "favorite":
 			sortOption = { favoriteCount: "desc" }
+			break;
 		case "recent":
 		default:
 			sortOption = { createdAt: "desc" };
