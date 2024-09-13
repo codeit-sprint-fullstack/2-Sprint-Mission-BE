@@ -53,10 +53,12 @@ app.post("/products", asyncHandler(async (req, res) => {
 
 app.get("/products", asyncHandler(async (req, res) => {
 	const sort = req.query.sort;
-	const count = Number(req.query.count);
-	const sortOption = { createdAt: sort === "oldest" ? "asc" : "desc" };
+	const page = Number(req.query.page);
+	const pageSize = Number(req.query.pageSize);
+	const keyword = req.query.keyword;
+	const sortOption = { createdAt: sort === "recent" ? "desc" : "asc" };
 
-	const products = await Product.find().sort(sortOption).limit(count); // Full scan
+	const products = await Product.find().sort(sortOption).offset(page).limit(pageSize); // Full scan
 
 	res.send(products);
 }));
