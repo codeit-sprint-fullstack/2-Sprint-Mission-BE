@@ -58,9 +58,9 @@ app.get("/products", asyncHandler(async (req, res) => {
 	if (isNaN(pageSize)) { pageSize = 10; }
 	const keyword = req.query.keyword;
 	const query = keyword ? { name: { $regex: keyword, $options: "i" } } : {};
-	const sort = req.query.sort;
+	const orderBy = req.query.orderBy;
 	let sortOption;
-	switch (sort) {
+	switch (orderBy) {
 		case "favorite":
 			sortOption = { favoriteCount: "desc" }
 		case "recent":
