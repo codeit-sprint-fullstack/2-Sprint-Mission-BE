@@ -57,7 +57,7 @@ app.get("/products", asyncHandler(async (req, res) => {
 	let pageSize = req.query.pageSize ? Number(req.query.pageSize) : 10;
 	if (isNaN(pageSize)) { pageSize = 10; }
 	const keyword = req.query.keyword;
-	const query = keyword ? { name: { $regex: keyword, $options: "i" } } : {};
+	const query = keyword ? { $or: [{ name: { $regex: keyword, $options: "i" } }, { description: { $regex: keyword, $options: "i" } }] } : {};
 	const orderBy = req.query.orderBy;
 	let sortOption;
 	switch (orderBy) {
@@ -77,7 +77,6 @@ app.get("/products", asyncHandler(async (req, res) => {
 app.get("/products/:id", asyncHandler(async (req, res) => {
 	const id = req.params.id;
 	const product = await Product.findById(id);
-	// console.log(id);
 	if (product) {
 		res.send(product);
 	}
