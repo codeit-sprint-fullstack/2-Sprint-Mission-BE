@@ -41,7 +41,10 @@ app.post(
   '/products',
   asyncHandler(async (req, res) => {
     const newProduct = await Product.create(req.body);
-    res.status(201).send(newProduct);
+    res.status(201).json({
+      id: newProduct.id,
+      ...newProduct.toJSON()
+    });
   })
 );
 
