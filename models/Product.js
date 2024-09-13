@@ -7,7 +7,8 @@ const productSchema = new mongoose.Schema(
       required: true
     },
     description: {
-      type: String
+      type: String,
+      required: true
     },
     price: {
       type: Number,
@@ -15,7 +16,8 @@ const productSchema = new mongoose.Schema(
       min: 0
     },
     tags: {
-      type: [String]
+      type: [String],
+      required: true
     },
     favoriteCount: {
       type: Number,

@@ -1,4 +1,4 @@
-GET http://localhost:3000/products?page=2&pageSize=8&orderBy=favorite&keyword=%EC%95%84%EC%9D%B4
+GET https://pandamarket-zyyr.onrender.com/products?page=2&pageSize=8&orderBy=favorite&keyword=%EC%95%84%EC%9D%B4
 ###
 GET http://localhost:3000/products/66e3cd68df557016e5bd89d4
 ###
