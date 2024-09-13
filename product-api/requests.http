@@ -2,12 +2,12 @@ GET https://two-sprint-mission-be-t2e7.onrender.com/products
 
 ###
 
-GET https://two-sprint-mission-be-t2e7.onrender.com/products?sort=oldest&count=3
+GET https://two-sprint-mission-be-t2e7.onrender.com/products?page=0&sort=recent&pageSize=10&keyword=갤
 
 
 ###
 
-GET https://two-sprint-mission-be-t2e7.onrender.com/products/66de5f06802add256a771428
+GET https://two-sprint-mission-be-t2e7.onrender.com/products/66e39a21e4682f0fbf4913c9
 
 
 ###
@@ -23,14 +23,14 @@ Content-Type: application/json
 
 ###
 
-PATCH https://two-sprint-mission-be-t2e7.onrender.com/products/6
+PATCH https://two-sprint-mission-be-t2e7.onrender.com/products/66e39a21e4682f0fbf4913c9
 Content-Type: application/json
 
 {
-	"isComplete": true
+	"name": "New 갤S21"
 }
 
 
 ###
 
-DELETE https://two-sprint-mission-be-t2e7.onrender.com/products/66de7c7ef37922f45399c50a
+DELETE https://two-sprint-mission-be-t2e7.onrender.com/products/66e39a21e4682f0fbf4913c9
