@@ -1,0 +1,36 @@
+GET http://localhost:3000/tasks
+
+###
+
+GET http://localhost:3000/tasks?sort=oldest&count=3
+
+
+###
+
+GET http://localhost:3000/tasks/66de5f06802add256a771428
+
+
+###
+
+POST http://localhost:3000/tasks
+Content-Type: application/json
+
+{
+	"title": "강아지 산책",
+	"description": "강아지랑 30분 산책하기"
+}
+
+
+###
+
+PATCH http://localhost:3000/tasks/6
+Content-Type: application/json
+
+{
+	"isComplete": true
+}
+
+
+###
+
+DELETE http://localhost:3000/tasks/66de7c7ef37922f45399c50a
