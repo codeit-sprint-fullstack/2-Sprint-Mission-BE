@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const ProductSchema = new mongoose.Schema(
+const productSchema = new mongoose.Schema(
   {
     name: {
       type: String,
@@ -16,11 +16,22 @@ const ProductSchema = new mongoose.Schema(
     },
     tags: {
       type: [String]
+    },
+    favoriteCount: {
+      type: Number,
+      default: 0
     }
   },
   {
     timestamps: true
   }
 );
-const Product = mongoose.model("Product", ProductSchema);
+productSchema.statics.getTotalCount = async function () {
+  return await this.countDocuments();
+};
+productSchema.methods.updateFavoriteCount = function () {
+  this.favoriteCount += 1;
+  return this.save();
+};
+const Product = mongoose.model("Product", productSchema);
 export default Product;

@@ -21,15 +21,25 @@ const asyncHandler = (handler) => {
     }
   };
 };
-
+const changeTypeNumber = ({ page = 1, pageSize = 8 }) => {
+  page = Number(page);
+  pageSize = Number(pageSize);
+  return {
+    page,
+    pageSize
+  };
+};
 app.get(
   "/products",
   asyncHandler(async (req, res) => {
-    const sort = req.query.sort;
-    const count = Number(req.query.count);
-    const sortOption =
-      sort === "price" ? { price: "desc" } : { createdAt: "desc" };
-    const foundProduct = await Product.find().sort(sortOption).limit(count);
+    const { page, pageSize } = changeTypeNumber(req.query);
+    const { orderBy, keyword } = req.query;
+    const sortOption = { createdAt: orderBy === "recent" ? "desc" : "asc" };
+    const query = keyword ? { name: { $regex: keyword, $options: "i" } } : {};
+    const foundProduct = await Product.find(query)
+      .sort(sortOption)
+      .skip((page - 1) * pageSize)
+      .limit(pageSize);
     res.send(foundProduct);
   })
 );

@@ -1,5 +1,4 @@
-GET http://localhost:3000/products
-
+GET http://localhost:3000/localhost:3000/products
 ###
 GET http://localhost:3000/products/66e2a835fe9e816ae626f192
 ###
