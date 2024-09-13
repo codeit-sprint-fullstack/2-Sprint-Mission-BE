@@ -52,8 +52,10 @@ app.post("/products", asyncHandler(async (req, res) => {
 }));
 
 app.get("/products", asyncHandler(async (req, res) => {
-	const page = Number(req.query.page) ?? 0;
-	const pageSize = Number(req.query.pageSize) ?? 10;
+	let page = req.query.page ? Number(req.query.page) : 0;
+	if (isNaN(page)) { page = 0; }
+	let pageSize = req.query.pageSize ? Number(req.query.pageSize) : 10;
+	if (isNaN(pageSize)) { pageSize = 10; }
 	const keyword = req.query.keyword;
 	const query = keyword ? { name: { $regex: keyword, $options: "i" } } : {};
 	const sort = req.query.sort;
@@ -66,7 +68,7 @@ app.get("/products", asyncHandler(async (req, res) => {
 			sortOption = { createdAt: "desc" };
 	}
 
-	const products = await Product.find(query).sort(sortOption).skip(page).limit(pageSize); // Full scan
+	const products = await Product.find(query).sort(sortOption).skip(page).limit(pageSize);
 	const totalCount = await Product.countDocuments();
 	res.send({ list: products, totalCount });
 }));
@@ -110,5 +112,5 @@ app.delete("/products/:id", asyncHandler(async (req, res) => {
 	}
 }));
 
-app.listen(process.env.PORT || 443, () => console.log("Server on"));
+app.listen(process.env.PORT || 3000, () => console.log("Server on"));
 console.log("Hi!");
