@@ -45,17 +45,26 @@ const changeTypeNumber = ({ page = 1, pageSize = 8 }) => {
 app.get(
   "/products",
   asyncHandler(async (req, res) => {
+    console.log(1);
     const { page, pageSize } = changeTypeNumber(req.query);
     const { orderBy, keyword } = req.query;
     const sortOption = { createdAt: orderBy === "recent" ? -1 : 1 };
     const searchQuery = keyword
-      ? { name: { $regex: keyword, $options: "i" } }
+      ? {
+          $or: [
+            { name: { $regex: keyword, $options: "i" } },
+            { description: { $regex: keyword, $options: "i" } }
+          ]
+        }
       : {};
+    console.log(searchQuery);
+    console.log(keyword);
     const totalCount = await Product.countDocuments(searchQuery);
     const list = await Product.find(searchQuery)
       .sort(sortOption)
       .skip((page - 1) * pageSize) // 페이지네이션을 위한 skip
       .limit(pageSize);
+
     res.send({
       totalCount,
       list
