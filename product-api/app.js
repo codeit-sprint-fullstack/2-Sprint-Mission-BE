@@ -55,7 +55,7 @@ app.get("/products", asyncHandler(async (req, res) => {
 	const page = Number(req.query.page) ?? 0;
 	const pageSize = Number(req.query.pageSize) ?? 10;
 	const keyword = req.query.keyword;
-	const query = { name: { $regex: keyword, $options: "i" } }
+	const query = keyword ? { name: { $regex: keyword, $options: "i" } } : {};
 	const sort = req.query.sort;
 	let sortOption;
 	switch (sort) {
