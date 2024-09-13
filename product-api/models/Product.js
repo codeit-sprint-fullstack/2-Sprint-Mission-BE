@@ -18,14 +18,18 @@ const ProductSchema = new mongoose.Schema({
 		validate: {
 			validator: (v) => {
 				return !isNaN(v) && Number(v) >= 1;
-				message: "Must be a number which is larger or equal than 1."
 			},
+			message: "Must be a number which is larger or equal than 1."
 		}
 	},
 	tags: {
 		type: String,
 		maxLength: 10,
 	},
+	favoriteCount: {
+		type: Number,
+		default: 0,
+	}
 }, {
 	timestamps: true, // createdAt, updatedAt 이 자동으로...
 });
