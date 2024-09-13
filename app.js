@@ -34,10 +34,10 @@ function asyncHandler(handler) {
 
 app.get("/products", 
   asyncHandler(async (req, res) => {
-    const sort = req.query.sort;
-    const count = Number(req.query.count) || 0;
+    const sort = req.query.orderBy;
+    const count = Number(req.query.pageSize) || 0;
 
-    const sortOptions = { createdAt: sort === "recent" ? "asc" : "desc" };
+    const sortOptions = sort === "recent" ? { createdAt: "desc" } : { favoriteCnt: "desc" };
     const products = await Product.find().sort(sortOptions).limit(count);
 
     res.send(products);
