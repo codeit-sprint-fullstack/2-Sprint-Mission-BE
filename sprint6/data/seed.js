@@ -1,11 +1,11 @@
 import mongoose from "mongoose";
 import data from './mock.js';
-import Task from '../models/Task.js';
+import Product from '../models/Product.js';
 import { DATABASE_URL } from "../env.js";
 
 mongoose.connect(DATABASE_URL); // Open
 
-await Task.deleteMany({});
-await Task.insertMany(data);
+await Product.deleteMany({});
+await Product.insertMany(data);
 
 mongoose.connection.close(); // Close
