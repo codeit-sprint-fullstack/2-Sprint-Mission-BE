@@ -1,8 +1,8 @@
 GET http://localhost:3000/products?page=2&pageSize=8&orderBy=favorite&keyword=%EC%95%84%EC%9D%B4
 ###
-GET http://localhost:3000/products/66e2a835fe9e816ae626f192
+GET http://localhost:3000/products/66e3cd68df557016e5bd89d4
 ###
-PATCH http://localhost:3000/products/66e2a835fe9e816ae626f193
+PATCH http://localhost:3000/products/66e3cd68df557016e5bd899f
 Content-Type: application/json
 
 {
@@ -15,6 +15,6 @@ Content-Type: application/json
     ]
 }
 ###
-DELETE http://localhost:3000/products/66e2a835fe9e816ae626f192
+DELETE http://localhost:3000/products/66e3cd68df557016e5bd899f
 
 

@@ -1,10 +1,23 @@
 import express from "express";
 import Product from "./models/Product.js";
 import mongoose from "mongoose";
-import { DATABASE_URL } from "./env.js";
-mongoose.connect(DATABASE_URL);
+import config from "./config.js";
+import cors from "cors";
+
+mongoose
+  .connect(config.mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => {
+    console.log("MongoDB에 성공적으로 연결되었습니다.");
+  })
+  .catch((error) => {
+    console.error("MongoDB 연결 실패:", error);
+  });
+
 const app = express();
+app.use(cors());
 app.use(express.json());
+
+const PORT = config.port || 3000;
 const PRODUCT_NOT_FOUND_MESSAGE = "Cannot find given id.";
 const asyncHandler = (handler) => {
   return async function (req, res) {
@@ -97,4 +110,4 @@ app.delete(
     }
   })
 );
-app.listen(3000, () => console.log("Server Started"));
+app.listen(PORT, () => console.log(`서버가 ${PORT}에서 실행중입니다.`));
