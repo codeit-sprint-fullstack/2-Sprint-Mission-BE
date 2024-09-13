@@ -26,6 +26,10 @@ const ProductSchema = new mongoose.Schema({
 		type: [String],
 		maxLength: 10,
 	},
+	images: {
+		type: [String],
+		required: true,
+	},
 	favoriteCount: {
 		type: Number,
 		default: 0,
