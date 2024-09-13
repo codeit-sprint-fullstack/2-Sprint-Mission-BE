@@ -26,12 +26,5 @@ const productSchema = new mongoose.Schema(
     timestamps: true
   }
 );
-productSchema.statics.getTotalCount = async function () {
-  return await this.countDocuments();
-};
-productSchema.methods.updateFavoriteCount = function () {
-  this.favoriteCount += 1;
-  return this.save();
-};
 const Product = mongoose.model("Product", productSchema);
 export default Product;

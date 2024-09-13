@@ -34,13 +34,19 @@ app.get(
   asyncHandler(async (req, res) => {
     const { page, pageSize } = changeTypeNumber(req.query);
     const { orderBy, keyword } = req.query;
-    const sortOption = { createdAt: orderBy === "recent" ? "desc" : "asc" };
-    const query = keyword ? { name: { $regex: keyword, $options: "i" } } : {};
-    const foundProduct = await Product.find(query)
+    const sortOption = { createdAt: orderBy === "recent" ? -1 : 1 };
+    const searchQuery = keyword
+      ? { name: { $regex: keyword, $options: "i" } }
+      : {};
+    const totalCount = await Product.countDocuments(searchQuery);
+    const list = await Product.find(searchQuery)
       .sort(sortOption)
-      .skip((page - 1) * pageSize)
+      .skip((page - 1) * pageSize) // 페이지네이션을 위한 skip
       .limit(pageSize);
-    res.send(foundProduct);
+    res.send({
+      totalCount,
+      list
+    });
   })
 );
 app.get(
