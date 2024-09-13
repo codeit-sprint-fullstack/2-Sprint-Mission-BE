@@ -111,4 +111,4 @@ app.get(
   })
 );
 
-app.listen(process.env.PORT || 5000, () => console.log("server on"));
+app.listen(process.env.PORT || 5000, () => console.log("server start"));
