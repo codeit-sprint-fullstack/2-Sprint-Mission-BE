@@ -70,7 +70,7 @@ app.get("/products", asyncHandler(async (req, res) => {
 	}
 
 	const products = await Product.find(query).sort(sortOption).skip(page).limit(pageSize);
-	const totalCount = await Product.countDocuments();
+	const totalCount = await Product.find(query).countDocuments();
 	res.send({ list: products, totalCount });
 }));
 
