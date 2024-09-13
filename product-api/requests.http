@@ -1,18 +1,18 @@
-GET http://localhost:3000/tasks
+GET https://two-sprint-mission-be-t2e7.onrender.com/products
 
 ###
 
-GET http://localhost:3000/tasks?sort=oldest&count=3
-
-
-###
-
-GET http://localhost:3000/tasks/66de5f06802add256a771428
+GET https://two-sprint-mission-be-t2e7.onrender.com/products?sort=oldest&count=3
 
 
 ###
 
-POST http://localhost:3000/tasks
+GET https://two-sprint-mission-be-t2e7.onrender.com/products/66de5f06802add256a771428
+
+
+###
+
+POST https://two-sprint-mission-be-t2e7.onrender.com/products
 Content-Type: application/json
 
 {
@@ -23,7 +23,7 @@ Content-Type: application/json
 
 ###
 
-PATCH http://localhost:3000/tasks/6
+PATCH https://two-sprint-mission-be-t2e7.onrender.com/products/6
 Content-Type: application/json
 
 {
@@ -33,4 +33,4 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:3000/tasks/66de7c7ef37922f45399c50a
+DELETE https://two-sprint-mission-be-t2e7.onrender.com/products/66de7c7ef37922f45399c50a
