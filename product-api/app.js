@@ -52,15 +52,23 @@ app.post("/products", asyncHandler(async (req, res) => {
 }));
 
 app.get("/products", asyncHandler(async (req, res) => {
-	const sort = req.query.sort;
-	const page = Number(req.query.page);
-	const pageSize = Number(req.query.pageSize);
+	const page = Number(req.query.page) ?? 0;
+	const pageSize = Number(req.query.pageSize) ?? 10;
 	const keyword = req.query.keyword;
-	const sortOption = { createdAt: sort === "recent" ? "desc" : "asc" };
+	const query = { name: { $regex: keyword, $options: "i" } }
+	const sort = req.query.sort;
+	let sortOption;
+	switch (sort) {
+		case "favorite":
+			sortOption = { favoriteCount: "desc" }
+		case "recent":
+		default:
+			sortOption = { createdAt: "desc" };
+	}
 
-	const products = await Product.find().sort(sortOption).offset(page).limit(pageSize); // Full scan
-
-	res.send(products);
+	const products = await Product.find(query).sort(sortOption).skip(page).limit(pageSize); // Full scan
+	const totalCount = await Product.countDocuments();
+	res.send({ list: products, totalCount });
 }));
 
 app.get("/products/:id", asyncHandler(async (req, res) => {
@@ -71,22 +79,23 @@ app.get("/products/:id", asyncHandler(async (req, res) => {
 		res.send(product);
 	}
 	else {
-		res.status(HttpStatus.NOT_FOUND).send({message: "없습니다."});
+		res.status(HttpStatus.NOT_FOUND).send({ message: "해당 id 에 대응하는 product 가 없습니다." });
 	}
 }));
 
 // PUT 전체, PATCH 일부만
-app.patch("/products/:id", asyncHandler((req, res) => {
-	const id = Number(req.params.id);
-	const product = mockProducts.find(product => product.id === id);
+app.patch("/products/:id", asyncHandler(async (req, res) => {
+	const id = req.params.id;
+	const product = await Product.findById(id);
 	if (product) {
 		Object.keys(req.body).forEach(key => {
 			product[key] = req.body[key];
 		});
+		await product.save();
 		res.send(product);
 	}
 	else {
-		res.status(HttpStatus.NOT_FOUND).send({"message": "없습니다."});
+		res.status(HttpStatus.NOT_FOUND).send({"message": "해당 id 에 대응하는 product 가 없습니다."});
 	}
 }));
 
@@ -101,5 +110,5 @@ app.delete("/products/:id", asyncHandler(async (req, res) => {
 	}
 }));
 
-app.listen(process.env.PORT || 3000, () => console.log("Server on"));
+app.listen(process.env.PORT || 443, () => console.log("Server on"));
 console.log("Hi!");
