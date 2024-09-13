@@ -16,8 +16,12 @@ POST https://two-sprint-mission-be-t2e7.onrender.com/products
 Content-Type: application/json
 
 {
-	"title": "강아지 산책",
-	"description": "강아지랑 30분 산책하기"
+	"name": "강아지 산책",
+	"description": "강아지랑 30분 산책하기",
+	"price": 10000,
+	"tags": ["강아지", "산책"],
+	"images": ["https://i.imgur.com/0lh3lI1.jpeg"],
+	"favoriteCount": 10000
 }
 
 
