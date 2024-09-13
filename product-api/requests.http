@@ -2,7 +2,7 @@ GET https://two-sprint-mission-be-t2e7.onrender.com/products
 
 ###
 
-GET https://two-sprint-mission-be-t2e7.onrender.com/products?page=0&sort=recent&pageSize=10&keyword=갤
+GET https://two-sprint-mission-be-t2e7.onrender.com/products?page=0&orderBy=favorite&pageSize=10&keyword=갤
 
 
 ###
