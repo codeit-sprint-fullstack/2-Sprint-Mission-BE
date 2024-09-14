@@ -36,11 +36,13 @@ app.get("/products",
   asyncHandler(async (req, res) => {
     const sort = req.query.orderBy || "recent";
     const count = Number(req.query.pageSize) || 10;
+    const page = Number(req.query.page) || 1;
 
     const sortOptions = sort === "favorite" ? { favoriteCnt: "asc" } : { createdAt: "desc" };
-    const products = await Product.find().sort(sortOptions).limit(count);
+    const totalCount = await Product.countDocuments();   
+    const products = await Product.find().sort(sortOptions).limit(count).skip((page - 1) * count);
 
-    res.send(products);
+    res.send({ data: products, totalCount });
   })
 );
 
