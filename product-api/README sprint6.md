@@ -32,5 +32,6 @@
 - [x]  CORS를 설정해 주세요.
 
 - [x]  render.com로 배포해 주세요.
+	// https://two-sprint-mission-be-t2e7.onrender.com 배포 완료.
 
 - [x]  MongoDB를 활용해 주세요.
