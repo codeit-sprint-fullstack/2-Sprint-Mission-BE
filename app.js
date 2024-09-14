@@ -38,7 +38,7 @@ app.get("/products",
     const count = Number(req.query.pageSize) || 10;
     const page = Number(req.query.page) || 1;
 
-    const sortOptions = sort === "favorite" ? { favoriteCnt: "asc" } : { createdAt: "desc" };
+    const sortOptions = sort === "favorite" ? { favoriteCnt: -1 } : { createdAt: -1 };
     const totalCount = await Product.countDocuments();   
     const products = await Product.find().sort(sortOptions).limit(count).skip((page - 1) * count);
 
