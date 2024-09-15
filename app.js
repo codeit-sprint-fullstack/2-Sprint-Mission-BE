@@ -9,15 +9,6 @@ app.use(express.json());
 app.use(cors());
 dotenv.config();
 
-const corsOptions = {
-  origin: [
-    "http://127.0.0.1:3000",
-    "http://localhost:3000",
-    "https://codeit-pandamarket-by-ggon.netlify.app",
-  ],
-  methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
-};
-
 mongoose
   .connect(process.env.DATABASE_URL)
   .then(() => console.log("Connected to DB"));
@@ -63,8 +54,7 @@ app.get(
     const items = await Item.find(searchQuery)
       .sort(sortOption)
       .skip(offset)
-      .limit(pageSize)
-      .select("id name price createdAt tags");
+      .limit(pageSize);
 
     const totalItems = await Item.countDocuments(searchQuery);
 

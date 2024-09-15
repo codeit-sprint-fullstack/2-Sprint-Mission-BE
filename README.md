@@ -36,6 +36,6 @@
 
 - [x] CORS를 설정해 주세요.
 
-- [ ] render.com로 배포해 주세요.
+- [x] render.com로 배포해 주세요.
 
 - [x] MongoDB를 활용해 주세요.
