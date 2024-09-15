@@ -102,22 +102,13 @@ app.get(
         { description: { $regex: search, $options: "i" } },
       ],
     };
-    const totalCount = await Product.countDocuments();
 
     const products = await Product.find(searchQuery)
       .sort(sortOption)
       .skip(skip)
       .limit(limit);
 
-    if (products) {
-      res.send(products);
-      res.status(200).json({
-        list: products,
-        totalCount,
-      });
-    } else {
-      res.status(404).send({ message: "Cannot find given products." });
-    }
+    res.send(products);
   })
 );
 
