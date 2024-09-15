@@ -1,6 +1,5 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import { DATABASE_URL } from './env.js';
 import Product from './models/product.js';
 import * as dotenv from 'dotenv'
 dotenv.config()
@@ -70,6 +69,8 @@ app.get('/products/:id', asynchandler(async (req, res) => {
         res.status(404).send({ message: "Cannot find given Id"})
     }
 }));
+
+console.log('DATABASE_URL:', process.env.DATABASE_URL);
 
 
 app.listen(process.env.PORT || 3000, () => console.log('Server Started'));
