@@ -16,7 +16,8 @@ const corsOptions = {
     "http://127.0.0.1:3000",
     "http://localhost:3000",
     "https://pandamarket-react.netlify.app/",
-  ], // 이후에 프론트엔드 주소 추가 필요
+    "https://pandamarket-react.netlify.app/registration",
+  ],
 };
 
 app.use(cors(corsOptions));
