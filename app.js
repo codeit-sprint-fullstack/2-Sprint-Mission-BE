@@ -37,10 +37,17 @@ app.get("/products",
     const sort = req.query.orderBy || "recent";
     const count = Number(req.query.pageSize) || 10;
     const page = Number(req.query.page) || 1;
+    const search = req.query.search || "";
 
     const sortOptions = sort === "favorite" ? { favoriteCnt: -1 } : { createdAt: -1 };
-    const totalCount = await Product.countDocuments();   
-    const products = await Product.find().sort(sortOptions).limit(count).skip((page - 1) * count);
+    const searchFilter = search ? { $or: [
+      { name: { $regex: search, $options: "i" } },
+      { description: { $regex: search, $options: "i" } },
+    ]}
+    : {};
+
+    const totalCount = await Product.countDocuments(searchFilter);   
+    const products = await Product.find(searchFilter).sort(sortOptions).limit(count).skip((page - 1) * count);
 
     res.send({ data: products, totalCount });
   })
@@ -96,4 +103,4 @@ app.delete("/products/:id",
   })
 );
 
-app.listen(process.env.PORT || 3000, () => console.log("Server Started"));
+app.listen(3000, () => console.log("Server Started"));
