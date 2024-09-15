@@ -12,7 +12,7 @@ mongoose
 
 const app = express();
 const corsOptions = {
-  origin: ["http://127.0.0.1:4000"], // 이후에 프론트엔드 주소 추가 필요
+  origin: ["http://127.0.0.1:3000", "http://localhost:3000"], // 이후에 프론트엔드 주소 추가 필요
 };
 
 app.use(cors(corsOptions));

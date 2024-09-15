@@ -16,13 +16,12 @@ const ProductSchema = new mongoose.Schema(
     },
     price: {
       type: Number,
-      equired: true,
+      required: true,
       default: 1,
       min: 1,
     },
     tag: {
       type: [String],
-      equired: true,
     },
     image: {
       type: [String],
