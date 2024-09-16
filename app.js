@@ -14,7 +14,7 @@ const app = express();
 const corsOptions = {
   origin: [
     'http://localhost:3000',
-    'https://welcome-to-pandamarket.netlify.app/'
+    'https://welcome-to-pandamarket.netlify.app/items'
   ]
 };
 
