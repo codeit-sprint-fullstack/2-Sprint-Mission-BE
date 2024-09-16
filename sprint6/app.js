@@ -16,6 +16,7 @@ const corsOptions = {
     "http://127.0.0.1:3000",
     "http://localhost:3000",
     "https://pandamarket-react.netlify.app/",
+    "https://pandamarket-react.netlify.app/items",
     "https://pandamarket-react.netlify.app/registration",
   ],
 };
