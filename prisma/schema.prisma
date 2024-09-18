@@ -1,0 +1,75 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  nickname  String
+  image     String?  @default("")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  favoriteProducts Product[]
+  ownArticles      Article[] @relation(name: "articleOwnership")
+  likeArticles     Article[] @relation(name: "likeOwnership")
+  ownComments      Comment[]
+}
+
+model Product {
+  id            String   @id @default(uuid())
+  name          String //min 1, max 10
+  description   String //min 10, max 100
+  price         Int //min 1
+  tags          String[] @default([])
+  images        String[] @default([])
+  favoriteCount Int      @default(0) //min 0
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  favoriteUsers User[]
+  comments      Comment[]
+
+  @@index([name, description], name: "productSearchQuery")
+}
+
+model Article {
+  id        String   @id @default(uuid())
+  title     String
+  content   String
+  likeCount Int      @default(0) //min 0
+  images    String[] @default([])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  owner     User      @relation(fields: [ownerId], references: [id], name: "articleOwnership", onDelete: SetDefault)
+  ownerId   String    @default("00000000-0000-0000-0000-000000000000")
+  likeUsers User[]    @relation(name: "likeOwnership")
+  comments  Comment[]
+
+  @@index([title, content], name: "articleSearchQuery")
+}
+
+model Comment {
+  id        String   @id @default(uuid())
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  owner     User     @relation(fields: [ownerId], references: [id], onDelete: SetDefault)
+  ownerId   String   @default("00000000-0000-0000-0000-000000000000")
+  article   Article? @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  articleId String?
+  product   Product? @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId String?
+}
