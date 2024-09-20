@@ -1,0 +1,35 @@
+###
+GET http://localhost:3000/products
+
+###
+GET http://localhost:3000/products?sort=recent
+
+###
+GET http://localhost:3000/products?sort=recent&page=1&pageSize=20
+
+
+###
+POST http://localhost:3000/products
+Content-Type: application/json
+
+{
+  "name": "신상품111",
+  "description": "111신상품에 대한 설명입니다.",
+  "price": 500
+}
+
+###
+GET http://localhost:3000/products/66e16955951b445c7d8387ed
+
+###
+PATCH  http://localhost:3000/products/66e16955951b445c7d8387ed
+Content-Type: application/json
+
+{
+  "name": "신상품 수정",
+  "description": "신상품에 대한 설명 수정 내용입니다.",
+  "price": 100
+}
+
+###
+DELETE http://localhost:3000/products/66e1648ac33dd48fd06204d7
