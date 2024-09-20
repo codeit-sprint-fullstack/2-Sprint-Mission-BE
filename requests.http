@@ -1,0 +1,26 @@
+GET http://localhost:4000/products
+###
+GET http://localhost:4000/products?offset=3
+###
+GET http://localhost:4000/products?sort=recent
+###
+GET http://localhost:4000/products/66e3837d534a6d3bea8058fb
+###
+POST http://localhost:4000/products
+Content-Type: application/json
+
+{
+    "name": "애플워치",
+    "description" : "흠집이 조금 있는 애플워치",
+    "price": "75000",
+    "tags": ["애플워치", "애플"]
+}
+###
+PATCH http://localhost:4000/products/66e24bfb180741e87232e25d
+Content-Type: application/json
+
+{
+    "favoriteCount": 9
+}
+###
+DELETE http://localhost:4000/products/66dfdd80fe233a4b9ad16a10
