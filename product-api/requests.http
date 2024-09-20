@@ -1,0 +1,40 @@
+GET https://two-sprint-mission-be-t2e7.onrender.com/products
+
+###
+
+GET https://two-sprint-mission-be-t2e7.onrender.com/products?page=0&orderBy=favorite&pageSize=10&keyword=갤
+
+
+###
+
+GET https://two-sprint-mission-be-t2e7.onrender.com/products/66e39a21e4682f0fbf4913c9
+
+
+###
+
+POST https://two-sprint-mission-be-t2e7.onrender.com/products
+Content-Type: application/json
+
+{
+	"name": "강아지 산책",
+	"description": "강아지랑 30분 산책하기",
+	"price": 10000,
+	"tags": ["강아지", "산책"],
+	"images": ["https://i.imgur.com/0lh3lI1.jpeg"],
+	"favoriteCount": 10000
+}
+
+
+###
+
+PATCH https://two-sprint-mission-be-t2e7.onrender.com/products/66e39a21e4682f0fbf4913c9
+Content-Type: application/json
+
+{
+	"name": "New 갤S21"
+}
+
+
+###
+
+DELETE https://two-sprint-mission-be-t2e7.onrender.com/products/66e39a21e4682f0fbf4913c9
