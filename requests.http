@@ -1,0 +1,12 @@
+GET https://localhost:3000/products
+
+
+POST https://localhost:3000/products
+Content-Type: application/json
+
+{
+    "name": "컴퓨터",
+    "description": "컴퓨터",
+    "price": 2000000,
+    "tag": "전자제품"
+}
