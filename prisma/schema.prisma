@@ -16,7 +16,7 @@ datasource db {
 model Product {
   id          String   @id @default(uuid())
   name        String
-  descroption String
+  description String
   price       Float
   tags        String[]
   createdAt   DateTime @default(now())
@@ -29,7 +29,7 @@ model Article {
   content   String
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
-  Comment   Comment[]
+  comment   Comment[]
 }
 
 model Comment {
