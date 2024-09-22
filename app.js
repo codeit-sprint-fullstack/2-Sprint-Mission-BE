@@ -10,17 +10,10 @@ import Product from "./models/Products.js";
 
 dotenv.config();
 
-/* mongoose
-  .connect(process.env.DATABASE_URL)
-  .then(() => console.log("Connected to DB"))
-  .catch((e) => console.log(e)); //.env 연결 및 실패
-*/
-
 const prisma = new PrismaClient();
-const app = express(); // JSON 요청 파싱
+const app = express();
 
 app.use(express.json());
-//app.use(cors()); //나중에 corsOption 줄 예정
 
 //에러 처리
 function asyncHandler(handler) {
@@ -50,19 +43,11 @@ app.post(
   asyncHandler(async (req, res) => {
     const { name, description, price, tags } = req.body;
     if (!name || !description || !price || !tags) {
-      throw new ValidationError("모든 필드를 입력해주세요."); //models/Products.js에서
+      throw new ValidationError("모든 필드를 입력해주세요.");
     }
-    /*
-    const product = new Product({
-      name,
-      description,
-      price,
-      tags,
-    });
 
-    await product.save();*/
     const product = await prisma.product.create({
-      data: { name, descroption, price, tags },
+      data: { name, description, price, tags },
     });
     res.status(201).send(product); //성공 시 상품 등록하기
   })
@@ -128,18 +113,33 @@ app.get(
     const { page = 1, limit = 10, sort = "recent", search } = req.query;
 
     //정렬
-    const sortOption = sort === "recent" ? { createdAt: -1 } : {}; //-1은 내림차순 정렬(시간은 큰 값 -> 작은 값)
+    const sortOption =
+      sort === "recent" ? { createdAt: "desc" } : { createdAt: "asc" }; //-1은 내림차순 정렬(시간은 큰 값 -> 작은 값)
 
     // 페이지네이션
     const offset = (parseInt(page) - 1) * parseInt(limit);
-    const products = await Product.find(query)
-      .select("id name price createdAt") // 4가지만 받아옴
-      .sort(sortOption)
-      .skip(offset)
-      .limit(parseInt(limit));
+
+    const searchCondition = search
+      ? {
+          OR: [
+            { name: { contains: search } },
+            { description: { contains: search } },
+          ],
+        }
+      : {};
+
+    // 상품 목록 조회
+    const products = await prisma.product.findMany({
+      where: searchCondition,
+      skip: offset,
+      take: parseInt(limit),
+      orderBy: sortOption,
+    });
 
     // 총 상품 개수 조회
-    const totalProducts = await Product.countDocuments(query);
+    const totalProducts = await prisma.product.count({
+      where: searchCondition,
+    });
 
     res.status(200).send({
       totalProducts,
@@ -171,7 +171,7 @@ app.post(
 );
 
 app.get(
-  "/articles:id",
+  "/articles/:id",
   asyncHandler(async (req, res) => {
     //조회
     const { id } = req.params;
@@ -184,12 +184,12 @@ app.get(
       throw new NotFoundError("게시글이 없습니다.");
     }
 
-    res.status(201).send(article);
+    res.status(200).send(article);
   })
 );
 
 app.patch(
-  "/articles:id",
+  "/articles/:id",
   asyncHandler(async (req, res) => {
     //수정
     const { title, content } = req.body;
@@ -205,7 +205,7 @@ app.patch(
     });
 
     if (!updateArticle) {
-      throw new NotFoundError("게시글을 찾을 수 없스비다.");
+      throw new NotFoundError("게시글을 찾을 수 없습니다.");
     }
 
     res.status(200).send(updateArticle);
@@ -226,11 +226,14 @@ app.delete(
 
 //댓글
 app.post(
-  "/comments",
+  //등록
+  "/articles/:articleId/comments",
   asyncHandler(async (req, res) => {
-    const { content, articleId } = req.body;
-    if (!content || !articleId) {
-      throw new ValidationError("모든 필드를 입력해주세요.");
+    const { content } = req.body;
+    const { articleId } = req.params;
+
+    if (!content) {
+      throw new ValidationError("댓글을 입력해주세요.");
     }
 
     const comment = await prisma.comment.create({
@@ -244,9 +247,9 @@ app.post(
   })
 );
 
-// 댓글 수정 API
+// 수정
 app.patch(
-  "/comments/:id",
+  "/articles/:articleId/comments/:id",
   asyncHandler(async (req, res) => {
     const { content } = req.body;
     const { id } = req.params;
@@ -267,9 +270,9 @@ app.patch(
   })
 );
 
-// 댓글 삭제 API
+// 삭제
 app.delete(
-  "/comments/:id",
+  "/articles/:articleId/comments/:id",
   asyncHandler(async (req, res) => {
     const { id } = req.params;
     const comment = await prisma.comment.delete({
@@ -277,6 +280,19 @@ app.delete(
     });
 
     res.status(200).send({ message: "댓글이 삭제되었습니다.", comment });
+  })
+);
+
+// 조회
+app.get(
+  "/articles/:articleId/comments",
+  asyncHandler(async (req, res) => {
+    const { articleId } = req.params;
+    const comment = await prisma.comment.findMany({
+      where: { articleId },
+    });
+
+    res.status(200).send(comment);
   })
 );
 
