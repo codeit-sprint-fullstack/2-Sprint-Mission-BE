@@ -1,0 +1,39 @@
+
+GET http://localhost:3000/products
+
+###
+GET http://localhost:3000/products/1e112c02-7c92-4d52-b76e-485e41e3f64d
+
+###
+GET http://localhost:3000/products?orderBy=oldest
+
+###
+GET http://localhost:3000/products?orderBy=recent&page=1&pageSize=2
+
+###
+GET http://localhost:3000/products?keyword=커피머신
+
+###
+POST http://localhost:3000/products
+Content-Type: application/json
+
+{
+  "name": "신상품111",
+  "description": "111신상품에 대한 설명입니다.",
+  "category": "ELECTRONICS",
+  "price": 100000,
+  "stock": 10
+}
+
+###
+PATCH  http://localhost:3000/products/3fb8482d-e2e6-4e41-9249-4b8c7a9c2901
+Content-Type: application/json
+
+{
+  "name": "신상품 수정",
+  "description": "신상품 수정에 대한 설명입니다.",
+  "price": 200000
+}
+
+###
+DELETE http://localhost:3000/products/3fb8482d-e2e6-4e41-9249-4b8c7a9c2901
