@@ -1,6 +1,8 @@
 import express from 'express';
 import asyncHandler from '../utils/ayncHandler.js';
 import { PrismaClient } from '@prisma/client';
+import { assert } from 'superstruct';
+import { CreatePoduct, PatchProduct } from '../structs.js';
 
 const prisma = new PrismaClient();
 const router = express.Router();
@@ -60,6 +62,8 @@ router.get('/:id', asyncHandler(async (req, res) => {
 }));
 
 router.post('/', asyncHandler(async(req, res) => {
+  assert(req.body, CreatePoduct);
+
   const product = await prisma.product.create({
     data: req.body,
   });
@@ -67,6 +71,8 @@ router.post('/', asyncHandler(async(req, res) => {
 }));
 
 router.patch('/:id', asyncHandler(async(req, res) => {
+  assert(req.body, PatchProduct);
+  
   const { id } = req.params;
   const product = await prisma.product.update({
     where : { id },
