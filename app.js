@@ -25,5 +25,3 @@ app.use((req, res, next) => {
 app.use('/products', productsRoute);
 
 app.listen(process.env.PORT || 3000, () => console.log('Server Started'));
-
-
