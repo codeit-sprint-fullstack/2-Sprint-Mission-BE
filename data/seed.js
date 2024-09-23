@@ -1,12 +1,25 @@
-import mongoose from "mongoose";
-import data from "./mock.js";
-import Item from "../models/Product.js";
-import * as dotenv from "dotenv";
-dotenv.config();
+import { PrismaClient } from "@prisma/client";
+import { data } from "./mock.js";
 
-mongoose.connect(process.env.DATABASE_URL);
+const prisma = new PrismaClient();
 
-await Item.deleteMany({});
-await Item.insertMany(data);
+async function main() {
+  //제품 삭제, 태그 삭제
+  await prisma.product.deleteMany();
 
-mongoose.connection.close();
+
+  await prisma.product.createMany({
+    data: data,
+    skipDuplicates: true,
+  });
+}
+
+main()
+  .then(async () => {
+    await prisma.$disconnect();
+  })
+  .catch(async (e) => {
+    console.error(e);
+    await prisma.$disconnect();
+    process.exit(1);
+  });
