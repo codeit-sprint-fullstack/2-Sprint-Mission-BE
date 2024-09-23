@@ -5,9 +5,6 @@ GET http://localhost:3000/articles
 GET http://localhost:3000/articles/523e4567-e89b-12d3-a456-426614174004
 
 ###
-GET http://localhost:3000/articles/523e4567-e89b-12d3-a456-426614174004/comments
-
-###
 GET http://localhost:3000/articles?orderBy=oldest
 
 ###
@@ -21,12 +18,12 @@ POST http://localhost:3000/articles
 Content-Type: application/json
 
 {
-  "title": "추가된 게시글 제목",
-  "content": "추가된 게시글 컨텐츠 내용입니다."
+  "title": "추가2된 게시글 제목",
+  "content": "추가2된 게시글 컨텐츠 내용입니다."
 }
 
 ###
-PATCH  http://localhost:3000/articles/0c215d64-524a-4d45-922f-3bd2a62e28
+PATCH  http://localhost:3000/articles/0c215d64-524a-4d45-922f-3bd2a62e28d6
 Content-Type: application/json
 
 {
@@ -35,4 +32,4 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:3000/articles/1cc93345-3263-41d0-8c28-e8592d322936
+DELETE http://localhost:3000/articles/823000f0-a9e2-412f-bfd5-9d23c43c057a

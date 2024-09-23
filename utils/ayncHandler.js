@@ -1,7 +1,7 @@
 import { Prisma } from "@prisma/client";
 
 function asyncHandler(handler) {
-  return async function (req, res) {
+  return async function (req, res, next) {
     try {
       await handler(req, res);
     } catch (e) {
