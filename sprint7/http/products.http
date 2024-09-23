@@ -7,7 +7,7 @@ POST http://localhost:3000/products
 Content-Type: application/json
 
 {
-    "name": "테스트",
+    "name": "",
     "description": "하루죙일 테스트만함",
     "price": 20000,
     "tag": ["테스트임"],
