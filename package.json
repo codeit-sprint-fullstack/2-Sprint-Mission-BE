@@ -6,7 +6,8 @@
     "express": "^4.20.0",
     "is-email": "^1.0.2",
     "is-uuid": "^1.0.2",
-    "superstruct": "^1.0.3"
+    "superstruct": "^1.0.3",
+    "mongoose": "^8.6.1"
   },
   "devDependencies": {
     "nodemon": "^3.1.4",
@@ -15,7 +16,8 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon app.js",
-    "start": "node app.js"
+    "start": "node app.js",
+    "seed": "node prisma/seed.js"
   },
   "prisma": {
     "seed": "node prisma/seed.js"
