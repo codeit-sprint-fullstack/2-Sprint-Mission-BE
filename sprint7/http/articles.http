@@ -1,0 +1,24 @@
+GET http://localhost:3000/articles
+###
+GET http://localhost:3000/articles?&order=newest&search=디비
+
+###
+POST http://localhost:3000/articles
+Content-Type: application/json
+
+{
+"title":"이거 생각보다 시간 오래 걸리네",
+"content": "자꾸 오류가 생겨브려"
+}
+
+###
+DELETE http://localhost:3000/articles/72c9f22e-3b9e-48b4-a7a9-75da83b37b18
+
+###
+PATCH http://localhost:3000/articles/3956b173-3578-43fa-9626-a3c93cbd40cf
+Content-Type: application/json
+
+{
+"title":"assert 추가 후",
+"content": "내용도 수정합니다람쥐"
+}
