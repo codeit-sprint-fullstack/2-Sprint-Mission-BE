@@ -1,26 +1,26 @@
 GET http://localhost:4000/products
 ###
-GET http://localhost:4000/products?offset=3
+GET http://localhost:4000/products?limit=3
 ###
-GET http://localhost:4000/products?sort=recent
+GET http://localhost:4000/products?order=favorite
 ###
-GET http://localhost:4000/products/66e3837d534a6d3bea8058fb
+GET http://localhost:4000/products/89a8e4eb-d2fa-4b19-aa8a-6b071f11cc00
 ###
 POST http://localhost:4000/products
 Content-Type: application/json
 
 {
     "name": "애플워치",
-    "description" : "흠집이 조금 있는 애플워치",
-    "price": "75000",
+    "description" : "흠집없는 깨끗한 애플워치",
+    "price": 75000,
     "tags": ["애플워치", "애플"]
 }
 ###
-PATCH http://localhost:4000/products/66e24bfb180741e87232e25d
+PATCH http://localhost:4000/products/7d3475ff-d416-436f-8bae-35c5162f73c6
 Content-Type: application/json
 
 {
     "favoriteCount": 9
 }
 ###
-DELETE http://localhost:4000/products/66dfdd80fe233a4b9ad16a10
+DELETE http://localhost:4000/products/7d3475ff-d416-436f-8bae-35c5162f73c6

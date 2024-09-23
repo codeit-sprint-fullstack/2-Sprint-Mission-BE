@@ -1,13 +1,12 @@
 import express from 'express';
-import mongoose from 'mongoose';
 import * as dotenv from 'dotenv';
 dotenv.config();
-import Product from './models/Product.js';
 import cors from 'cors';
+import { PrismaClient, Prisma } from '@prisma/client';
+import { assert } from 'superstruct';
+import { CreateProduct, PatchProduct } from './structs.js';
 
-mongoose
-  .connect(process.env.DATABASE_URL)
-  .then(() => console.log('Connected to DB'));
+const prisma = new PrismaClient();
 
 const app = express();
 
@@ -27,9 +26,15 @@ function asyncHandler(handler) {
     try {
       await handler(req, res);
     } catch (err) {
-      if (err.name === 'ValidationError') {
+      if (
+        err.name === 'StructError' ||
+        err instanceof Prisma.PrismaClientValidationError
+      ) {
         res.status(400).send({ message: err.message });
-      } else if (err.name === 'CastError') {
+      } else if (
+        err instanceof Prisma.PrismaClientKnownRequestError &&
+        err.code === 'P2025'
+      ) {
         res.status(404).send({ message: 'Cannot find given id.' });
       } else {
         res.status(500).send({ message: err.message });
@@ -43,11 +48,11 @@ function asyncHandler(handler) {
 app.post(
   '/products',
   asyncHandler(async (req, res) => {
-    const newProduct = await Product.create(req.body);
-    res.status(201).json({
-      id: newProduct.id,
-      ...newProduct.toJSON()
+    assert(req.body, CreateProduct);
+    const newProduct = await prisma.product.create({
+      data: req.body
     });
+    res.status(201).json(newProduct);
   })
 );
 
@@ -56,13 +61,10 @@ app.get(
   '/products/:id',
   asyncHandler(async (req, res) => {
     const id = req.params.id;
-    const product = await Product.findById(id, { updatedAt: 0 });
-
-    if (product) {
-      res.send(product);
-    } else {
-      res.status(404).send({ message: '해당 상품을 찾을 수 없습니다.' });
-    }
+    const product = await prisma.product.findUniqueOrThrow({
+      where: { id }
+    });
+    res.json(product);
   })
 );
 
@@ -70,18 +72,13 @@ app.get(
 app.patch(
   '/products/:id',
   asyncHandler(async (req, res) => {
+    assert(req.body, PatchProduct);
     const id = req.params.id;
-    const product = await Product.findById(id);
-
-    if (product) {
-      Object.keys(req.body).forEach((key) => {
-        product[key] = req.body[key];
-      });
-      await product.save();
-      res.send(product);
-    } else {
-      res.status(404).send({ message: '해당 상품을 찾을 수 없습니다.' });
-    }
+    const product = await prisma.product.update({
+      where: { id },
+      data: req.body
+    });
+    res.json(product);
   })
 );
 
@@ -90,13 +87,11 @@ app.delete(
   '/products/:id',
   asyncHandler(async (req, res) => {
     const id = req.params.id;
-    const product = await Product.findByIdAndDelete(id);
+    await prisma.product.delete({
+      where: { id }
+    });
 
-    if (product) {
-      res.sendStatus(204);
-    } else {
-      res.status(404).send({ message: '해당 상품을 찾을 수 없습니다.' });
-    }
+    res.sendStatus(204);
   })
 );
 
@@ -104,25 +99,25 @@ app.delete(
 app.get(
   '/products',
   asyncHandler(async (req, res) => {
-    const page = Number(req.query.page) || 1;
-    const pageSize = Number(req.query.pageSize);
+    const { offset = 0, limit = 10, order = 'recent', keyword } = req.query;
+    let orderBy;
+    if (order === 'recent') {
+      orderBy = { createdAt: 'desc' };
+    }
 
-    const offset = (page - 1) * pageSize;
+    // const page = Number(req.query.page) || 1;
+    // const pageSize = Number(req.query.pageSize);
 
-    const keyword = req.query.keyword || '';
-    const keywordRegex = new RegExp(keyword, 'i');
+    // offset = (page - 1) * pageSize;
 
-    const order = req.query.order;
-    const orderOption = { createdAt: order === 'recent' ? 'desc' : 'asc' };
+    // const keywordRegex = new RegExp(keyword, 'i');
 
-    const products = await Product.find(
-      { $or: [{ name: keywordRegex }, { description: keywordRegex }] }, // 검색 조건
-      { name: 1, price: 1, favoriteCount: 1, createdAt: 1 }
-    )
-      .sort(orderOption)
-      .skip(offset)
-      .limit(pageSize);
-    res.send(products);
+    const products = await prisma.product.findMany({
+      orderBy,
+      skip: parseInt(offset),
+      take: parseInt(limit)
+    });
+    res.json(products);
   })
 );
 
