@@ -18,8 +18,8 @@ POST http://localhost:3000/articles
 Content-Type: application/json
 
 {
-  "title": "추가2된 게시글 제목",
-  "content": "추가2된 게시글 컨텐츠 내용입니다."
+  "title": "추가3된 게시글 제목",
+  "content": "추가3된 게시글 컨텐츠 내용입니다."
 }
 
 ###

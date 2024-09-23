@@ -10,9 +10,6 @@ GET http://localhost:3000/products/1e112c02-7c92-4d52-b76e-485e41e3f64d/comments
 GET http://localhost:3000/products/1e112c02-7c92-4d52-b76e-485e41e3f64d/comments?take=2&cursor=2c36f5a2-8f0a-454c-8012-bb5447f4c202
 
 ###
-GET http://localhost:3000/products/523e4567-e89b-12d3-a456-426614174004/comments
-
-###
 POST http://localhost:3000/products/1e112c02-7c92-4d52-b76e-485e41e3f64d/comments
 Content-Type: application/json
 
@@ -21,12 +18,12 @@ Content-Type: application/json
 }
 
 ###
-Patch http://localhost:3000/products/comments/24495387-4e9c-45eb-8d1c-9e77642e33b2
+Patch http://localhost:3000/products/comments/362e1390-01b9-4c42-9007-706a1a083805
 Content-Type: application/json
 
 {
-  "content": "댓글 등록4-수정"
+  "content": "댓글 등록9-수정"
 }
 
 ###
-DELETE http://localhost:3000/products/comments/24495387-4e9c-45eb-8d1c-9e77642e33b2
+DELETE http://localhost:3000/products/comments/362e1390-01b9-4c42-9007-706a1a083805

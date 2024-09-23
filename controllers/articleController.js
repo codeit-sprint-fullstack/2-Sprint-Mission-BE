@@ -1,4 +1,6 @@
 import { PrismaClient } from "@prisma/client";
+import { assert } from 'superstruct';
+import { CreateArticle, PatchArticle } from "../structs.js";
 
 const prisma = new PrismaClient();
 
@@ -62,6 +64,8 @@ export const getArticleById =  async (req, res) => {
 };
 
 export const createArticle = async(req, res) => {
+  assert(req.body, CreateArticle);
+
   const article = await prisma.article.create({
     data: req.body,
   });
@@ -69,6 +73,8 @@ export const createArticle = async(req, res) => {
 };
 
 export const updateArticle = async(req, res) =>{
+  assert(req.body, PatchArticle);
+
   const { id } = req.params;
   const article = await prisma.article.update({
     where: { id },

@@ -10,9 +10,6 @@ GET http://localhost:3000/articles/523e4567-e89b-12d3-a456-426614174004/comments
 GET http://localhost:3000/articles/523e4567-e89b-12d3-a456-426614174004/comments?take=2&cursor=9a92b2b6-4690-47cf-b6f4-1c7df1f82b2d
 
 ###
-GET http://localhost:3000/articles/523e4567-e89b-12d3-a456-426614174004/comments
-
-###
 POST http://localhost:3000/articles/523e4567-e89b-12d3-a456-426614174004/comments
 Content-Type: application/json
 
