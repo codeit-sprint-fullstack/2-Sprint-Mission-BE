@@ -3,21 +3,17 @@ GET http://localhost:3000/products/17cc4f9c-1e71-4782-914a-c8a12dc6f94b/comments
 GET http://localhost:3000/products/17cc4f9c-1e71-4782-914a-c8a12dc6f94b/comments/620a8161-d60a-4545-bd36-ac048d90b56a
 
 ###
-POST http://localhost:3000/products
+POST http://localhost:3000/products/17cc4f9c-1e71-4782-914a-c8a12dc6f94b/comments
 Content-Type: application/json
 
-{
-    "content": "테스트용 댓글",
-}
+{"content": "이 제품 정말 좋아요"}
 
 ###
-PATCH http://localhost:3000/products/00d9c3ca-bff0-4135-8868-b2b385d63272
+PATCH http://localhost:3000/products/17cc4f9c-1e71-4782-914a-c8a12dc6f94b/comments/2e1c1bf9-bf25-4c62-9f95-7a761176502f
 Content-Type: application/json
 
-{
-    "name": "수정수정",
-}
+{"content": "수정수정"}
 
 
 ###
-DELETE http://localhost:3000/products/61003e12-6381-419c-a9d3-5f54f3448f52
+DELETE http://localhost:3000/products/17cc4f9c-1e71-4782-914a-c8a12dc6f94b/comments/620a8161-d60a-4545-bd36-ac048d90b56a

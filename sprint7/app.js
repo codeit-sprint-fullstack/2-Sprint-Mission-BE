@@ -177,49 +177,64 @@ app.delete(
 app.get(
   "/articles/:articleId/comments",
   asyncHandler(async (req, res) => {
+    const { limit = 10 } = req.query;
     const { articleId } = req.params;
-    const comments = await prisma.comment.findMany({
+    const lastPostInResults = secondQueryResults[3];
+    const myCursor = lastPostInResults.id;
+    const comments = await prisma.articleComment.findMany({
       where: { articleId },
+      take: parseInt(limit),
     });
     res.send(comments);
   })
 );
 
-app.get("/articles/:articleId/comments/:id", async (req, res) => {
-  const { articleId, id } = req.params;
-  const comment = await prisma.comment.findFirst({
-    where: { articleId, id },
-  });
-  res.send(comment);
-});
+app.get(
+  "/articles/:articleId/comments/:id",
+  asyncHandler(async (req, res) => {
+    const { articleId, id } = req.params;
+    const comment = await prisma.articleComment.findFirst({
+      where: { articleId, id },
+    });
+    res.send(comment);
+  })
+);
 
-app.patch("/articles/:articleId/comments/:id", async (req, res) => {
-  assert(req.body, PatchCommnet);
-  const { articleId, id } = req.params;
-  const comment = await prisma.comment.update({
-    where: { articleId, id },
-    data: req.body,
-  });
-  res.send(comment);
-});
+app.patch(
+  "/articles/:articleId/comments/:id",
+  asyncHandler(async (req, res) => {
+    assert(req.body, PatchCommnet);
+    const { articleId, id } = req.params;
+    const comment = await prisma.articleComment.update({
+      where: { articleId, id },
+      data: req.body,
+    });
+    res.send(comment);
+  })
+);
 
-app.post("/articles/:articleId/comments", async (req, res) => {
-  assert(req.body, CreateCommnet);
-  const { articleId } = req.params;
-  const comment = await prisma.comment.create({
-    where: { articleId },
-    data: req.body,
-  });
-  res.status(201).send(comment);
-});
+app.post(
+  "/articles/:articleId/comments",
+  asyncHandler(async (req, res) => {
+    assert(req.body, CreateCommnet);
+    const { articleId } = req.params;
+    const comment = await prisma.articleComment.create({
+      data: { ...req.body, articleId },
+    });
+    res.status(201).send(comment);
+  })
+);
 
-app.delete("/articles/:articleId/comments/:id", async (req, res) => {
-  const { articleId, id } = req.params;
-  await prisma.comment.delete({
-    where: { articleId, id },
-  });
-  res.sendStatus(204);
-});
+app.delete(
+  "/articles/:articleId/comments/:id",
+  asyncHandler(async (req, res) => {
+    const { articleId, id } = req.params;
+    await prisma.articleComment.delete({
+      where: { articleId, id },
+    });
+    res.sendStatus(204);
+  })
+);
 
 /**********ProductComment***********/
 app.get(
