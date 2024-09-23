@@ -99,23 +99,25 @@ app.delete(
 app.get(
   '/products',
   asyncHandler(async (req, res) => {
-    const { offset = 0, limit = 10, order = 'recent', keyword } = req.query;
-    let orderBy;
-    if (order === 'recent') {
-      orderBy = { createdAt: 'desc' };
-    }
+    const {
+      page = 1,
+      pageSize = 10,
+      order = 'recent',
+      keyword = ''
+    } = req.query;
 
-    // const page = Number(req.query.page) || 1;
-    // const pageSize = Number(req.query.pageSize);
-
-    // offset = (page - 1) * pageSize;
-
-    // const keywordRegex = new RegExp(keyword, 'i');
+    const offset = (page - 1) * pageSize;
 
     const products = await prisma.product.findMany({
-      orderBy,
-      skip: parseInt(offset),
-      take: parseInt(limit)
+      where: {
+        OR: [
+          { name: { contains: keyword } },
+          { description: { contains: keyword } }
+        ]
+      },
+      orderBy: order === 'recent' ? { createdAt: 'desc' } : {},
+      skip: offset,
+      take: parseInt(pageSize)
     });
     res.json(products);
   })

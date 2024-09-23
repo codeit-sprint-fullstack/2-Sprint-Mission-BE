@@ -1,8 +1,8 @@
 GET http://localhost:4000/products
 ###
-GET http://localhost:4000/products?limit=3
+GET http://localhost:4000/products?page=1&pageSize=3
 ###
-GET http://localhost:4000/products?order=favorite
+GET http://localhost:4000/products?keyword=깨끗
 ###
 GET http://localhost:4000/products/89a8e4eb-d2fa-4b19-aa8a-6b071f11cc00
 ###
