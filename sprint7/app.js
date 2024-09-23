@@ -54,6 +54,13 @@ app.get(
       orderBy,
       take: parseInt(limit),
       skip: parseInt(offset),
+      include: {
+        comments: {
+          select: {
+            content: true,
+          },
+        },
+      },
     });
     res.send(products);
   })
@@ -65,6 +72,13 @@ app.get(
     const { id } = req.params;
     const product = await prisma.product.findUnique({
       where: { id },
+      include: {
+        comments: {
+          select: {
+            content: true,
+          },
+        },
+      },
     });
     res.send(product);
   })
@@ -109,9 +123,12 @@ app.delete(
 app.get(
   "/articles",
   asyncHandler(async (req, res) => {
-    const { offset = 0, limit = 10, order = "newest", search = "" } = req.query;
+    const { page = 1, limit = 10, order = "newest", search = "" } = req.query;
+    const offset = (page - 1) * limit;
+
     let orderBy =
       order === "oldest" ? { createdAt: "asc" } : { createdAt: "desc" };
+
     const articles = await prisma.article.findMany({
       where: {
         OR: [
@@ -120,9 +137,22 @@ app.get(
         ],
       },
       orderBy,
-      skip: parseInt(offset),
-      take: parseInt(limit),
+      skip: Number(offset),
+      take: Number(limit),
+      select: {
+        id: true,
+        title: true,
+        content: true,
+        createdAt: true,
+        // updatedAt은 선택하지 않음
+        comments: {
+          select: {
+            content: true,
+          },
+        },
+      },
     });
+
     res.send(articles);
   })
 );
@@ -133,6 +163,17 @@ app.get(
     const { id } = req.params;
     const article = await prisma.article.findUnique({
       where: { id },
+      select: {
+        id: true,
+        title: true,
+        content: true,
+        createdAt: true,
+        comments: {
+          select: {
+            content: true,
+          },
+        },
+      },
     });
     res.send(article);
   })
@@ -177,13 +218,15 @@ app.delete(
 app.get(
   "/articles/:articleId/comments",
   asyncHandler(async (req, res) => {
-    const { limit = 10 } = req.query;
+    const { limit = 5, cursor } = req.query;
     const { articleId } = req.params;
-    const lastPostInResults = secondQueryResults[3];
-    const myCursor = lastPostInResults.id;
     const comments = await prisma.articleComment.findMany({
       where: { articleId },
       take: parseInt(limit),
+      cursor: {
+        id: cursor,
+      },
+      orderBy: { createdAt: "asc" },
     });
     res.send(comments);
   })
@@ -243,6 +286,7 @@ app.get(
     const { productId } = req.params;
     const comments = await prisma.productComment.findMany({
       where: { productId },
+      orderBy: { createdAt: "asc" },
     });
     res.send(comments);
   })

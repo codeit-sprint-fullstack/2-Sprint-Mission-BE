@@ -3,6 +3,9 @@ GET http://localhost:3000/articles
 GET http://localhost:3000/articles?&order=newest&search=디비
 
 ###
+GET http://localhost:3000/articles/42d39153-358c-48f3-a802-6b3aaa0c0f79
+
+###
 POST http://localhost:3000/articles
 Content-Type: application/json
 
