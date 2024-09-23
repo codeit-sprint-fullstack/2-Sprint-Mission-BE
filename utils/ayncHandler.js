@@ -5,6 +5,10 @@ function asyncHandler(handler) {
     try {
       await handler(req, res);
     } catch (e) {
+      if (res.headersSent) {
+        // 이미 응답이 전송된 경우에는 next로 에러를 전달하여 Express가 기본 처리를 하도록 함
+        return next(e); 
+      }      
       if (
         e.name === 'StructError' ||
         e instanceof Prisma.PrismaClientValidationError
@@ -14,7 +18,7 @@ function asyncHandler(handler) {
         e instanceof Prisma.PrismaClientKnownRequestError &&
         e.code === 'P2025'
       ) {
-        res.sendStatus(404);
+        res.status(404).send({message: 'Resource not found with the given ID'});
       } else {
         res.status(500).send({ message: e.message });
       }

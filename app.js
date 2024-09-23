@@ -3,6 +3,7 @@ dotenv.config();
 import express from "express";
 import cors from 'cors';
 import productsRoute from './routes/productsRoute.js';
+import articlesRoute from './routes/articlesRoute.js';
 
 const app = express();
 app.use(express.json());       // JSON 요청 파싱 미들웨어
@@ -23,5 +24,6 @@ app.use((req, res, next) => {
 });
 
 app.use('/products', productsRoute);
+app.use('/articles', articlesRoute);
 
 app.listen(process.env.PORT || 3000, () => console.log('Server Started'));

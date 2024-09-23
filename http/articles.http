@@ -1,0 +1,38 @@
+
+GET http://localhost:3000/articles
+
+###
+GET http://localhost:3000/articles/523e4567-e89b-12d3-a456-426614174004
+
+###
+GET http://localhost:3000/articles/523e4567-e89b-12d3-a456-426614174004/comments
+
+###
+GET http://localhost:3000/articles?orderBy=oldest
+
+###
+GET http://localhost:3000/articles?orderBy=recent&page=1&pageSize=2
+
+###
+GET http://localhost:3000/articles?keyword=중고거래
+
+###
+POST http://localhost:3000/articles
+Content-Type: application/json
+
+{
+  "title": "추가된 게시글 제목",
+  "content": "추가된 게시글 컨텐츠 내용입니다."
+}
+
+###
+PATCH  http://localhost:3000/articles/0c215d64-524a-4d45-922f-3bd2a62e28
+Content-Type: application/json
+
+{
+  "title": "수정된 게시글 제목",
+  "content": "수정된 게시글 컨텐츠 내용입니다."
+}
+
+###
+DELETE http://localhost:3000/articles/1cc93345-3263-41d0-8c28-e8592d322936

@@ -40,10 +40,13 @@ router.get('/', asyncHandler(async (req, res) => {
     where, 
     orderBy: orderConfig,
     skip,
-    take
+    take,
+    include: {
+      productComments: true
+    }
   });
   // 총 개수
-  const totalCount = await prisma.product.count();
+  const totalCount = await prisma.product.count({ where });
   res.send({
     list: products,
     totalCount: totalCount
@@ -53,13 +56,31 @@ router.get('/', asyncHandler(async (req, res) => {
 router.get('/:id', asyncHandler(async (req, res) => {
   const { id } = req.params;
   const product = await prisma.product.findUnique({
-    where : { id }
+    where : { id },
+    include: {
+      productComments: true, 
+    }
   });
   if (!product) {
     return res.status(404).send({message: 'No product found with the given ID'});
   }
   res.send(product);
 }));
+
+router.get('/:id/comments', asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  
+  const productComments = await prisma.productComment.findMany({
+    where: { productId: id },
+  });
+
+  if (productComments.length === 0) {
+    return res.status(404).send({message: 'No comments found for the given product ID'});
+  }
+
+  res.send(productComments);
+}));
+
 
 router.post('/', asyncHandler(async(req, res) => {
   assert(req.body, CreatePoduct);
@@ -83,12 +104,10 @@ router.patch('/:id', asyncHandler(async(req, res) => {
 
 router.delete('/:id', asyncHandler(async(req, res) => {
   const { id } = req.params;
-  const product = await prisma.product.delete({
+  await prisma.product.delete({
     where : { id },
   });
   res.sendStatus(204);
 }));
-
-
 
 export default router;
