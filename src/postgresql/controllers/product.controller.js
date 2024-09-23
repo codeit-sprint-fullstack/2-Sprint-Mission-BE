@@ -1,7 +1,7 @@
 import { assert } from 'superstruct';
-import { TypeError } from '../utils/error.js';
 import { CreateProduct, PatchProduct, Uuid } from '../../struct.js';
 import { MESSAGES } from '../../constants.js';
+import { TypeError } from '../../error.js';
 
 export class ProductController {
   constructor(productService) {
@@ -18,31 +18,33 @@ export class ProductController {
       throw new TypeError('page and pageSize should be an integer');
     }
 
-    res.status(200).json(
-      await this.service.getProductsAndCount({
-        orderBy,
-        page,
-        pageSize,
-        keyword,
-      })
-    );
+    const resBody = await this.service.getPaginatedProducts({
+      orderBy,
+      page,
+      pageSize,
+      keyword,
+    });
+
+    res.json(resBody);
   };
 
   getProductById = async (req, res) => {
     assert(req.params.id, Uuid);
     const id = req.params.id;
 
-    const product = await this.service.getProductById(id);
+    const product = await this.service.getProduct(id);
 
-    if (product) res.json(product);
-    else res.status(404).json({ message: MESSAGES.NOID });
+    if (!product) res.status(404).json({ message: MESSAGES.NOID });
+
+    res.json(product);
   };
 
   postProduct = async (req, res) => {
     assert(req.body, CreateProduct);
-    const newProduct = await this.service.postProduct(req.body);
 
-    res.status(201).json(newProduct);
+    const product = await this.service.postProduct(req.body);
+
+    res.status(201).json(product);
   };
 
   patchProductById = async (req, res) => {
@@ -50,19 +52,21 @@ export class ProductController {
     assert(req.body, PatchProduct);
     const id = req.params.id;
 
-    const product = await this.service.patchProductById(id, req.body);
+    const product = await this.service.patchProduct(id, req.body);
 
-    if (product) res.json(product);
-    else res.status(404).json({ message: MESSAGES.NOID });
+    if (!product) res.status(404).json({ message: MESSAGES.NOID });
+
+    res.json(product);
   };
 
   deleteProductById = async (req, res) => {
     assert(req.params.id, Uuid, MESSAGES.IDFORMAT);
     const id = req.params.id;
 
-    const product = await this.service.deleteProductById(id);
+    const product = await this.service.deleteProduct(id);
 
-    if (product) res.status(200).json(product);
-    else res.status(404).json({ message: MESSAGES.NOID });
+    if (!product) res.status(404).json({ message: MESSAGES.NOID });
+
+    res.json(product);
   };
 }

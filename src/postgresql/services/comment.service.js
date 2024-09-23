@@ -1,31 +1,47 @@
 export class CommentService {
-  constructor(commentModel) {
-    this.model = commentModel;
+  constructor(commentDB) {
+    this.db = commentDB;
   }
 
   getComments = async () => {
-    return await this.model.findMany();
+    const comments = await this.db.findMany();
+
+    return comments;
   };
 
-  getCommentsAndCursor = async ({ id, limit, cursor, type }) => {
-    return await this.model.findManyAndCursor({ id, limit, cursor, type });
+  getPaginatedComments = async ({ id, limit, cursor, type }) => {
+    const resBody = await this.db.findManyAndCursor({
+      id,
+      limit,
+      cursor,
+      type,
+    });
+
+    return resBody;
   };
 
   postComment = async (body) => {
-    return await this.model.create(body);
+    const comment = await this.db.create(body);
+
+    return comment;
   };
 
-  patchCommentById = async (id, body) => {
-    let product = await this.model.findById(id);
-    if (!product) return;
+  patchComment = async (id, body) => {
+    const comment = await this.db.findById(id);
+    if (!comment) return;
 
     Object.keys(body).forEach((k) => {
-      product[k] = body[k];
+      comment[k] = body[k];
     });
-    return await this.model.update(id, product);
+
+    const updated = await this.db.update(id, comment);
+
+    return updated;
   };
 
-  deleteCommentById = async (id) => {
-    return await this.model.deleteById(id);
+  deleteComment = async (id) => {
+    const comment = await this.db.deleteById(id);
+
+    return comment;
   };
 }

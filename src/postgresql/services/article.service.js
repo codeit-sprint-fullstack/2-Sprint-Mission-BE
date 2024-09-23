@@ -1,12 +1,12 @@
 export class ArticleService {
-  constructor(articleModel) {
-    this.model = articleModel;
+  constructor(articleDB) {
+    this.db = articleDB;
   }
 
-  getArticlesAndCount = async ({ orderBy, page, pageSize, keyword }) => {
-    const totalCount = await this.model.count(keyword);
+  getPaginatedArticles = async ({ orderBy, page, pageSize, keyword }) => {
+    const totalCount = await this.db.count(keyword);
 
-    const list = await this.model.findMany({
+    const list = await this.db.findMany({
       orderBy,
       page,
       pageSize,
@@ -16,25 +16,34 @@ export class ArticleService {
     return { totalCount, list };
   };
 
-  getArticleById = async (id) => {
-    return await this.model.findById(id);
+  getArticle = async (id) => {
+    const article = await this.db.findById(id);
+
+    return article;
   };
 
   postArticle = async (body) => {
-    return await this.model.create(body);
+    const article = await this.db.create(body);
+
+    return article;
   };
 
-  patchArticleById = async (id, body) => {
-    let product = await this.model.findById(id);
-    if (!product) return;
+  patchArticle = async (id, body) => {
+    const article = await this.db.findById(id);
+    if (!article) return;
 
     Object.keys(body).forEach((k) => {
-      product[k] = body[k];
+      article[k] = body[k];
     });
-    return await this.model.update(id, product);
+
+    const updated = await this.db.update(id, article);
+
+    return updated;
   };
 
-  deleteArticleById = async (id) => {
-    return await this.model.deleteById(id);
+  deleteArticle = async (id) => {
+    const article = await this.db.deleteById(id);
+
+    return article;
   };
 }

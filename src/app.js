@@ -1,149 +1,137 @@
 import express from 'express';
+import 'express-async-errors';
 import cors from 'cors';
-// import { asyncHandler as mongodbAsyncHandler } from './mongodb/utils/async-handler.js';
 // import { productController as mongodbProductController } from './mongodb/containers/product.container.js';
-import { asyncHandler as postgresAsyncHandler } from './postgresql/utils/async-handler.js';
 import { productController as postgresProductController } from './postgresql/containers/product.container.js';
 import { articleController as postgresArticleController } from './postgresql/containers/article.container.js';
 import { userController as postgresUserController } from './postgresql/containers/user.container.js';
 import { commentController as postgresCommentController } from './postgresql/containers/comment.container.js';
+import { Prisma } from '@prisma/client';
+import { CastError, TypeError, ValidationError } from './error.js';
+import { StructError } from 'superstruct';
 
 const app = express();
 app.use(cors());
 app.use(express.json());
-app.listen(process.env.PORT || 3000, () => console.log('Server Started'));
 
 /***************************    FOR_DEV  **************************************************/
 {
-  app.get(
-    '/dev/users',
-    postgresAsyncHandler(postgresUserController.getUsersDev)
-  );
+  app.get('/dev/users', postgresUserController.getUsersDev);
 
-  app.get(
-    '/dev/comments',
-    postgresAsyncHandler(postgresCommentController.getCommentsDev)
-  );
+  app.get('/dev/comments', postgresCommentController.getCommentsDev);
+
+  app.get('/dev/error', async (req, res) => {
+    throw new Error('TEST ERROR');
+  });
 }
 
-/***************************    PRODUCTS  **************************************************/
+/***************************    PRODUCTS    **************************************************/
 {
   // get API
-  // app.get('/products', mongodbAsyncHandler(mongodbProductController.getProducts));
-  app.get(
-    '/products',
-    postgresAsyncHandler(postgresProductController.getProducts)
-  );
+  // app.get('/products', (mongodbProductController.getProducts));
+  app.get('/products', postgresProductController.getProducts);
 
   // get :id API
   // app.get(
   //   '/products/:id',
-  //   mongodbAsyncHandler(mongodbProductController.getProductById)
+  //   (mongodbProductController.getProductById)
   // );
-  app.get(
-    '/products/:id',
-    postgresAsyncHandler(postgresProductController.getProductById)
-  );
+  app.get('/products/:id', postgresProductController.getProductById);
 
   // get :id/comments API
   app.get(
     '/products/:id/comments',
-    postgresAsyncHandler(postgresCommentController.getCommentsOfProduct)
+    postgresCommentController.getCommentsOfProduct
   );
 
   // post API
   // app.post(
   //   '/products/',
-  //   mongodbAsyncHandler(mongodbProductController.postProduct)
+  //   (mongodbProductController.postProduct)
   // );
-  app.post(
-    '/products/',
-    postgresAsyncHandler(postgresProductController.postProduct)
-  );
+  app.post('/products/', postgresProductController.postProduct);
 
   // post :id/comments API
   app.post(
     '/products/:id/comments',
-    postgresAsyncHandler(postgresCommentController.postCommentOfProduct)
+    postgresCommentController.postCommentOfProduct
   );
 
   // patch API
   // app.patch(
   //   '/products/:id',
-  //   mongodbAsyncHandler(mongodbProductController.patchProductById)
+  //   (mongodbProductController.patchProductById)
   // );
-  app.patch(
-    '/products/:id',
-    postgresAsyncHandler(postgresProductController.patchProductById)
-  );
+  app.patch('/products/:id', postgresProductController.patchProductById);
 
   // delete API
   // app.delete(
   //   '/products/:id',
-  //   mongodbAsyncHandler(mongodbProductController.deleteProductById)
+  //   (mongodbProductController.deleteProductById)
   // );
-  app.delete(
-    '/products/:id',
-    postgresAsyncHandler(postgresProductController.deleteProductById)
-  );
+  app.delete('/products/:id', postgresProductController.deleteProductById);
 }
 
-/***************************    ARTICLE  **************************************************/
+/***************************    ARTICLE    **************************************************/
 {
   // get API
-  app.get(
-    '/articles',
-    postgresAsyncHandler(postgresArticleController.getArticles)
-  );
+  app.get('/articles', postgresArticleController.getArticles);
 
   // get :id API
-  app.get(
-    '/articles/:id',
-    postgresAsyncHandler(postgresArticleController.getArticleById)
-  );
+  app.get('/articles/:id', postgresArticleController.getArticleById);
 
   // get :id/comments API
   app.get(
     '/articles/:id/comments',
-    postgresAsyncHandler(postgresCommentController.getCommentsOfArticle)
+    postgresCommentController.getCommentsOfArticle
   );
 
   // post API
-  app.post(
-    '/articles/',
-    postgresAsyncHandler(postgresArticleController.postArticle)
-  );
+  app.post('/articles/', postgresArticleController.postArticle);
 
   // post :id/comments API
   app.post(
     '/articles/:id/comments',
-    postgresAsyncHandler(postgresCommentController.postCommentOfArticle)
+    postgresCommentController.postCommentOfArticle
   );
 
   // patch API
-  app.patch(
-    '/articles/:id',
-    postgresAsyncHandler(postgresArticleController.patchArticleById)
-  );
+  app.patch('/articles/:id', postgresArticleController.patchArticleById);
 
   // delete API
-  app.delete(
-    '/articles/:id',
-    postgresAsyncHandler(postgresArticleController.deleteArticleById)
-  );
+  app.delete('/articles/:id', postgresArticleController.deleteArticleById);
 }
 
-/***************************    COMMENT  **************************************************/
+/***************************    COMMENT    **************************************************/
 {
   // patch API
-  app.patch(
-    '/comments/:id',
-    postgresAsyncHandler(postgresCommentController.patchCommentById)
-  );
+  app.patch('/comments/:id', postgresCommentController.patchCommentById);
 
   // delete API
-  app.delete(
-    '/comments/:id',
-    postgresAsyncHandler(postgresCommentController.deleteCommentById)
-  );
+  app.delete('/comments/:id', postgresCommentController.deleteCommentById);
 }
+
+/***************************    HANDLER    **************************************************/
+function errorHandler(err, req, res, next) {
+  console.error(err);
+  if (
+    err instanceof Prisma.PrismaClientValidationError ||
+    err instanceof TypeError ||
+    err instanceof ValidationError
+  ) {
+    res.status(400).send({ message: err.message });
+  } else if (
+    err instanceof StructError ||
+    (err instanceof Prisma.PrismaClientKnownRequestError &&
+      err.code === 'P2025') ||
+    err instanceof CastError
+  ) {
+    res.sendStatus(404);
+  } else {
+    res.status(500).send({ message: err.message });
+  }
+}
+
+app.use(errorHandler);
+
+app.listen(process.env.PORT || 3000, () => console.log('Server Started'));

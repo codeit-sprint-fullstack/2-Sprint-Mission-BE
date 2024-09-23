@@ -1,7 +1,7 @@
 import { assert } from 'superstruct';
-import { TypeError } from '../utils/error.js';
 import { CreateComment, Cursor, PatchComment, Uuid } from '../../struct.js';
 import { MESSAGES } from '../../constants.js';
+import { TypeError } from '../../error.js';
 
 export class CommentController {
   constructor(commentService) {
@@ -9,7 +9,7 @@ export class CommentController {
   }
 
   getCommentsDev = async (req, res) => {
-    res.status(200).json(await this.service.getComments());
+    res.json(await this.service.getComments());
   };
 
   getCommentsOfArticle = async (req, res) => {
@@ -23,14 +23,14 @@ export class CommentController {
       throw new TypeError('limit should be an integer');
     }
 
-    res.status(200).json(
-      await this.service.getCommentsAndCursor({
-        id: articleId,
-        limit,
-        cursor,
-        type: 'article',
-      })
-    );
+    const resBody = await this.service.getPaginatedComments({
+      id: articleId,
+      limit,
+      cursor,
+      type: 'article',
+    });
+
+    res.status(200).json(resBody);
   };
 
   getCommentsOfProduct = async (req, res) => {
@@ -44,42 +44,39 @@ export class CommentController {
       throw new TypeError('limit should be an integer');
     }
 
-    res.status(200).json(
-      await this.service.getCommentsAndCursor({
-        id: productId,
-        limit,
-        cursor,
-        type: 'product',
-      })
-    );
+    const resBody = await this.service.getPaginatedComments({
+      id: productId,
+      limit,
+      cursor,
+      type: 'product',
+    });
+
+    res.status(200).json(resBody);
   };
 
   postCommentOfArticle = async (req, res) => {
     assert(req.params.id, Uuid, MESSAGES.IDFORMAT);
     assert(req.body, CreateComment);
-
     const articleId = req.params.id;
 
-    res.status(201).json(
-      await this.service.postComment({
-        ...req.body,
-        articleId,
-      })
-    );
+    const comment = await this.service.postComment({
+      ...req.body,
+      articleId,
+    });
+    res.status(201).json(comment);
   };
 
   postCommentOfProduct = async (req, res) => {
     assert(req.params.id, Uuid, MESSAGES.IDFORMAT);
     assert(req.body, CreateComment);
-
     const productId = req.params.id;
 
-    res.status(201).json(
-      await this.service.postComment({
-        ...req.body,
-        productId,
-      })
-    );
+    const comment = await this.service.postComment({
+      ...req.body,
+      productId,
+    });
+
+    res.status(201).json(comment);
   };
 
   patchCommentById = async (req, res) => {
@@ -87,19 +84,21 @@ export class CommentController {
     assert(req.body, PatchComment);
     const id = req.params.id;
 
-    const product = await this.service.patchCommentById(id, req.body);
+    const comment = await this.service.patchComment(id, req.body);
 
-    if (product) res.json(product);
-    else res.status(404).json({ message: MESSAGES.NOID });
+    if (!comment) res.status(404).json({ message: MESSAGES.NOID });
+
+    res.json(comment);
   };
 
   deleteCommentById = async (req, res) => {
     assert(req.params.id, Uuid, MESSAGES.IDFORMAT);
     const id = req.params.id;
 
-    const product = await this.service.deleteCommentById(id);
+    const comment = await this.service.deleteComment(id);
 
-    if (product) res.status(200).json(product);
-    else res.status(404).json({ message: MESSAGES.NOID });
+    if (!comment) res.status(404).json({ message: MESSAGES.NOID });
+
+    res.json(comment);
   };
 }

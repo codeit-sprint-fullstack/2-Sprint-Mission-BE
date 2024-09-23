@@ -1,4 +1,4 @@
-import { TypeError } from '../utils/error.js';
+import { TypeError } from '../../error.js';
 
 export class UserController {
   constructor(userService) {
@@ -15,13 +15,13 @@ export class UserController {
       throw new TypeError('page and pageSize should be an integer');
     }
 
-    res.status(200).json(
-      await this.service.getUsersAndCount({
-        orderBy,
-        page,
-        pageSize,
-        keyword,
-      })
-    );
+    const resBody = await this.service.getPaginatedUsers({
+      orderBy,
+      page,
+      pageSize,
+      keyword,
+    });
+
+    res.json(resBody);
   };
 }

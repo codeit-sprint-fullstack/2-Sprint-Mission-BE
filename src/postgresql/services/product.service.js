@@ -1,12 +1,12 @@
 export class ProductService {
-  constructor(productModel) {
-    this.model = productModel;
+  constructor(productDB) {
+    this.db = productDB;
   }
 
-  getProductsAndCount = async ({ orderBy, page, pageSize, keyword }) => {
-    const totalCount = await this.model.count(keyword);
+  getPaginatedProducts = async ({ orderBy, page, pageSize, keyword }) => {
+    const totalCount = await this.db.count(keyword);
 
-    const list = await this.model.findMany({
+    const list = await this.db.findMany({
       orderBy,
       page,
       pageSize,
@@ -16,25 +16,34 @@ export class ProductService {
     return { totalCount, list };
   };
 
-  getProductById = async (id) => {
-    return await this.model.findById(id);
+  getProduct = async (id) => {
+    const product = await this.db.findById(id);
+
+    return product;
   };
 
   postProduct = async (body) => {
-    return await this.model.create(body);
+    const product = await this.db.create(body);
+
+    return product;
   };
 
-  patchProductById = async (id, body) => {
-    let product = await this.model.findById(id);
+  patchProduct = async (id, body) => {
+    const product = await this.db.findById(id);
     if (!product) return;
 
     Object.keys(body).forEach((k) => {
       product[k] = body[k];
     });
-    return await this.model.update(id, product);
+
+    const updated = await this.db.update(id, product);
+
+    return updated;
   };
 
-  deleteProductById = async (id) => {
-    return await this.model.deleteById(id);
+  deleteProduct = async (id) => {
+    const product = await this.db.deleteById(id);
+
+    return product;
   };
 }

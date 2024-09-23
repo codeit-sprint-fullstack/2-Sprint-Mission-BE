@@ -1,7 +1,7 @@
 import { assert } from 'superstruct';
-import { TypeError } from '../utils/error.js';
 import { CreateArticle, PatchArticle, Uuid } from '../../struct.js';
 import { MESSAGES } from '../../constants.js';
+import { TypeError } from '../../error.js';
 
 export class ArticleController {
   constructor(articleService) {
@@ -18,51 +18,55 @@ export class ArticleController {
       throw new TypeError('page and pageSize should be an integer');
     }
 
-    res.status(200).json(
-      await this.service.getArticlesAndCount({
-        orderBy,
-        page,
-        pageSize,
-        keyword,
-      })
-    );
+    const resBody = await this.service.getPaginatedArticles({
+      orderBy,
+      page,
+      pageSize,
+      keyword,
+    });
+
+    res.status(200).json(resBody);
   };
 
   getArticleById = async (req, res) => {
     assert(req.params.id, Uuid);
     const id = req.params.id;
 
-    const article = await this.service.getArticleById(id);
+    const article = await this.service.getArticle(id);
 
-    if (article) res.json(article);
-    else res.status(404).json({ message: MESSAGES.NOID });
+    if (!article) res.status(404).json({ message: MESSAGES.NOID });
+
+    res.json(article);
   };
 
   postArticle = async (req, res) => {
     assert(req.body, CreateArticle);
-    const newArticle = await this.service.postArticle(req.body);
 
-    res.status(201).json(newArticle);
+    const article = await this.service.postArticle(req.body);
+
+    res.status(201).json(article);
   };
 
-  patchArticleById = async (req, res) => {
+  patchArticle = async (req, res) => {
     assert(req.params.id, Uuid, MESSAGES.IDFORMAT);
     assert(req.body, PatchArticle);
     const id = req.params.id;
 
-    const product = await this.service.patchArticleById(id, req.body);
+    const article = await this.service.patchArticle(id, req.body);
 
-    if (product) res.json(product);
-    else res.status(404).json({ message: MESSAGES.NOID });
+    if (!article) res.status(404).json({ message: MESSAGES.NOID });
+
+    res.json(article);
   };
 
-  deleteArticleById = async (req, res) => {
+  deleteArticle = async (req, res) => {
     assert(req.params.id, Uuid, MESSAGES.IDFORMAT);
     const id = req.params.id;
 
-    const product = await this.service.deleteArticleById(id);
+    const article = await this.service.deleteArticle(id);
 
-    if (product) res.status(200).json(product);
-    else res.status(404).json({ message: MESSAGES.NOID });
+    if (!article) res.status(404).json({ message: MESSAGES.NOID });
+
+    res.json(article);
   };
 }
