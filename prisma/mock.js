@@ -1,4 +1,4 @@
-const mockData = [
+export const mockData = [
   {
     id: 188,
     name: "쿠쿠 밥솥",
@@ -3890,4 +3890,3 @@ const mockData = [
     updatedAt: "2024-07-29T05:45:03.249Z"
   }
 ];
-export default mockData;
