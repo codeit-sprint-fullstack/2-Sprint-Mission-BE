@@ -9,7 +9,7 @@ import {
 } from '../controllers/articleController.js';
 
 const router = express.Router();
-
+// /articles
 router.get('/', asyncHandler(getArticles));
 router.get('/:id', asyncHandler(getArticleById));
 router.post('/', asyncHandler(createArticle));

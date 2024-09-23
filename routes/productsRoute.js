@@ -9,7 +9,7 @@ import {
 } from '../controllers/productController.js';
 
 const router = express.Router();
-
+// /products
 router.get('/', asyncHandler(getProcuts));
 router.get('/:id', asyncHandler(getProductById));
 router.post('/', asyncHandler(createProduct));

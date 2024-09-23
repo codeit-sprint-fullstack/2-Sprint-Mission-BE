@@ -38,7 +38,7 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:3000/products/dc027da1-2932-4bf9-8d4c-7866f00c5237
+DELETE http://localhost:3000/products/997b2f43-01d1-4ed8-a094-39cd4a4406c8
 
 ###
-GET http://localhost:3000/products/dc027da1-2932-4bf9-8d4c-7866f00c5237
+GET http://localhost:3000/products/997b2f43-01d1-4ed8-a094-39cd4a4406c8

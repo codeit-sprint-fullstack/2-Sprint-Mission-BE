@@ -1,5 +1,11 @@
 import { Prisma } from "@prisma/client";
 
+/*
+const asyncHandler = (fn) => (req, res, next) => {
+  Promise.resolve(fn(req, res, next)).catch(next);
+};
+*/
+
 function asyncHandler(handler) {
   return async function (req, res, next) {
     try {
@@ -25,5 +31,4 @@ function asyncHandler(handler) {
     }
   };
 }
-
 export default asyncHandler;

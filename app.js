@@ -4,6 +4,8 @@ import express from "express";
 import cors from 'cors';
 import productsRoute from './routes/productsRoute.js';
 import articlesRoute from './routes/articlesRoute.js';
+import articleCommentsRoute from './routes/articleCommentsRoute.js';
+import productCommentsRoute from './routes/productCommentsRoute.js';
 
 const app = express();
 app.use(express.json());       // JSON 요청 파싱 미들웨어
@@ -24,6 +26,15 @@ app.use((req, res, next) => {
 });
 
 app.use('/products', productsRoute);
+app.use('/products', productCommentsRoute);
 app.use('/articles', articlesRoute);
+app.use('/articles', articleCommentsRoute);
+
+// 404 Not Found 처리
+app.use((_, res) => {
+  res.status(404).send({
+    message: 'The resource you are looking for does not exist',
+  });
+});
 
 app.listen(process.env.PORT || 3000, () => console.log('Server Started'));
