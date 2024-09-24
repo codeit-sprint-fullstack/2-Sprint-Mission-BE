@@ -12,3 +12,10 @@ export const CreateProduct = s.object({
 });
 
 export const PatchProduct = s.partial(CreateProduct);
+
+export const CreateArticle = s.object({
+  title: s.size(s.string(), 1, 60),
+  content: s.string(),
+});
+
+export const PatchArticle = s.partial(CreateArticle);

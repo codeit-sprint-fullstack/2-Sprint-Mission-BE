@@ -1,7 +1,12 @@
 import express from "express";
 import { PrismaClient, Prisma } from "@prisma/client";
 import { assert } from "superstruct";
-import { CreateProduct, PatchProduct } from "./structs.js";
+import {
+  CreateProduct,
+  PatchProduct,
+  CreateArticle,
+  PatchArticle,
+} from "./structs.js";
 import * as dotenv from "dotenv";
 import cors from "cors";
 
@@ -40,6 +45,7 @@ function asyncHandler(handler) {
   };
 }
 
+// product
 app.post(
   "/products",
   asyncHandler(async (req, res) => {
@@ -80,7 +86,7 @@ app.delete(
   "/products/:id",
   asyncHandler(async (req, res) => {
     const { id } = req.params;
-    const product = await prisma.product.delete({
+    await prisma.product.delete({
       where: { id },
     });
     res.sendStatus(204);
@@ -107,6 +113,77 @@ app.get(
     });
 
     res.send(products);
+  })
+);
+
+// article
+app.post(
+  "/articles",
+  asyncHandler(async (req, res) => {
+    assert(req.body, CreateArticle);
+    const article = await prisma.article.create({
+      data: req.body,
+    });
+    res.status(201).send(article);
+  })
+);
+
+app.get(
+  "/articles/:id",
+  asyncHandler(async (req, res) => {
+    const { id } = req.params;
+    const article = await prisma.article.findUniqueOrThrow({
+      where: { id },
+    });
+
+    res.send(article);
+  })
+);
+
+app.patch(
+  "/articles/:id",
+  asyncHandler(async (req, res) => {
+    assert(req.body, PatchArticle);
+    const { id } = req.params;
+    const article = await prisma.article.update({
+      where: { id },
+      data: req.body,
+    });
+    res.send(article);
+  })
+);
+
+app.delete(
+  "/articles/:id",
+  asyncHandler(async (req, res) => {
+    const { id } = req.params;
+    await prisma.article.delete({
+      where: { id },
+    });
+    res.sendStatus(204);
+  })
+);
+
+app.get(
+  "/articles",
+  asyncHandler(async (req, res) => {
+    const { page = 1, limit = 10, sort = "recent", search = "" } = req.query;
+    const skip = (page - 1) * limit;
+    const sortOption = { createdAt: sort === "recent" ? "desc" : "asc" };
+
+    const articles = await prisma.article.findMany({
+      where: {
+        OR: [
+          { title: { contains: search, mode: "insensitive" } },
+          { content: { contains: search, mode: "insensitive" } },
+        ],
+      },
+      orderBy: sortOption,
+      skip: skip,
+      take: parseInt(limit),
+    });
+
+    res.send(articles);
   })
 );
 
