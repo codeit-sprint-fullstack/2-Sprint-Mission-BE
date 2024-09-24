@@ -1,9 +1,9 @@
-GET http://localhost:3000/users
+GET https://two-sprint-mission-be-8e56.onrender.com/users
 ###
 GET http://localhost:3000/users/f47ac10b-58cc-4372-a567-0e02b2c3d479
 ###
 //**************************Product*********************************************
-GET http://localhost:3000/products
+GET https://two-sprint-mission-be-8e56.onrender.com/products
 ###
 PATCH http://localhost:3000/products/2f72ee0e-be18-4fe5-bae0-28cc59a9a081
 Content-Type: application/json
@@ -21,9 +21,9 @@ Content-Type: application/json
 DELETE http://localhost:3000/products/2f72ee0e-be18-4fe5-bae0-28cc59a9a081
 ###
 //**********************Article******************************************
-GET http://localhost:3000/articles?page=0&pageSize=10&orderBy=recent&keyword=%EC%95%84%ED%8B%B0%ED%81%B4
+GET https://two-sprint-mission-be-8e56.onrender.com/articles
 ###
-POST http://localhost:3000/articles
+POST https://two-sprint-mission-be-8e56.onrender.com/articles
 Content-Type: application/json
 
 {
