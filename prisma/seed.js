@@ -1,16 +1,25 @@
 import { PrismaClient } from "@prisma/client";
-import { data } from "./mock.js";
+import { product, article, comment } from "./mock.js";
 
 const prisma = new PrismaClient();
 
 async function main() {
-  //제품 삭제, 태그 삭제
   await prisma.product.deleteMany();
-
+  await prisma.article.deleteMany();
+  await prisma.comment.deleteMany();
 
   await prisma.product.createMany({
-    data: data,
+    data: product,
     skipDuplicates: true,
+  });
+
+  await prisma.article.createMany({
+    data: article,
+    skipDuplicates: true,
+  });
+  
+  await prisma.comment.createMany({
+    data: comment,
   });
 }
 
