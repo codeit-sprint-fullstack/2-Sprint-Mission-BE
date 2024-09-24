@@ -13,16 +13,61 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Product {
-  id            String   @id @default(uuid())
-  name          String
-  description   String
-  price         Float
-  tags          String[]
-  images        String[]
-  favoriteCount Int
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+model User {
+  id              String           @id @default(uuid())
+  email           String           @unique
+  nickname        String
+  password        String
+  pwdIter         Int              @default(1000)
+  articles        Article[]
+  articleComments ArticleComment[]
+  productComments ProductComment[]
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
 }
 
+model Product {
+  id              String           @id @default(uuid())
+  name            String
+  description     String
+  price           Float
+  tags            String[]
+  images          String[]
+  favoriteCount   Int
+  productComments ProductComment[]
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+}
 
+model Article {
+  id              String           @id @default(uuid())
+  title           String
+  authorId        String
+  author          User             @relation(fields: [authorId], references: [id], onDelete: Restrict)
+  content         String
+  articleComments ArticleComment[]
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+}
+
+model ProductComment {
+  id          String   @id @default(uuid())
+  content     String
+  productId   String
+  product     Product  @relation(fields: [productId], references: [id], onDelete: Restrict)
+  commenterId String
+  commenter   User     @relation(fields: [commenterId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model ArticleComment {
+  id          String   @id @default(uuid())
+  content     String
+  articleId   String
+  article     Article  @relation(fields: [articleId], references: [id])
+  commenterId String
+  commenter   User     @relation(fields: [commenterId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

@@ -12,20 +12,20 @@
 
 #### 중고마켓
 
-- [ ] mongoDB에서 PostgreSQL을 사용하도록 코드를 마이그레이션 해주세요.
+- [x] mongoDB에서 PostgreSQL을 사용하도록 코드를 마이그레이션 해주세요.
 
 #### 공통
 
-- [ ] PostgreSQL를 이용해 주세요.
-- [ ] 데이터 모델 간의 관계를 고려하여 onDelete를 설정해 주세요.
-- [ ] 데이터베이스 시딩 코드를 작성해 주세요.
-- [ ] 각 API에 적절한 에러 처리를 해 주세요.
-- [ ] 각 API 응답에 적절한 상태 코드를 리턴하도록 해 주세요.
+- [x] PostgreSQL를 이용해 주세요.
+- [x] 데이터 모델 간의 관계를 고려하여 onDelete를 설정해 주세요.
+- [x] 데이터베이스 시딩 코드를 작성해 주세요.
+- [x] 각 API에 적절한 에러 처리를 해 주세요.
+- [x] 각 API 응답에 적절한 상태 코드를 리턴하도록 해 주세요.
 
 #### 자유게시판
 
-- [ ] Article 스키마를 작성해 주세요.
-	- [ ] id, title, content, createdAt, updatedAt 필드를 가집니다.
+- [x] Article 스키마를 작성해 주세요.
+	- [x] id, title, content, createdAt, updatedAt 필드를 가집니다.
 - [ ] 게시글 등록 API를 만들어 주세요.
 	- [ ] title, content를 입력해 게시글을 등록합니다.
 - [ ] 게시글 조회 API를 만들어 주세요.

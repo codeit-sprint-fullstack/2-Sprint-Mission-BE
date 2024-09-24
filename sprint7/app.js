@@ -6,6 +6,7 @@ import {
 	PatchProduct,
 } from './structs.js';
 import * as dotenv from 'dotenv';
+import { assert } from "superstruct";
 
 dotenv.config();
 const prisma = new PrismaClient();
@@ -56,12 +57,12 @@ app.post("/products", asyncHandler(async (req, res) => {
 	res.send(product);
 }));
 
-app.patch("/products", asyncHandler(async (req, res) => {
+app.patch("/products/:id", asyncHandler(async (req, res) => {
 	assert(req.body, PatchProduct);
-	const { id, ...productFields } = req.body;
+	const { id } = req.params;
 	const product = await prisma.product.update({
 		where: { id },
-		data: { ...productFields },
+		data: req.body,
 	});
 	res.send(product);
 }));
@@ -89,9 +90,9 @@ app.get("/products", asyncHandler(async (req, res) => {
 		default:
 			orderBy = { createdAt: "desc" };
 	}
-	const totalCount = await prisma.product.findMany({
+	const totalCount = await prisma.product.count({
 		where: query,
-	}).count();
+	});
 	const products = await prisma.product.findMany({
 		where: query,
 		orderBy,
@@ -102,42 +103,19 @@ app.get("/products", asyncHandler(async (req, res) => {
 }));
 
 app.get("/products/:id", asyncHandler(async (req, res) => {
-	const id = req.params.id;
-	const product = await Product.findById(id);
-	if (product) {
-		res.send(product);
-	}
-	else {
-		res.status(HttpStatus.NOT_FOUND).send({ message: "해당 id 에 대응하는 product 가 없습니다." });
-	}
-}));
-
-// PUT 전체, PATCH 일부만
-app.patch("/products/:id", asyncHandler(async (req, res) => {
-	const id = req.params.id;
-	const product = await Product.findById(id);
-	if (product) {
-		Object.keys(req.body).forEach(key => {
-			product[key] = req.body[key];
-		});
-		await product.save();
-		res.send(product);
-	}
-	else {
-		res.status(HttpStatus.NOT_FOUND).send({"message": "해당 id 에 대응하는 product 가 없습니다."});
-	}
+	const { id } = req.params;
+	const product = await prisma.product.findUniqueOrThrow({
+		where: { id },
+	});
+	res.send(product);
 }));
 
 app.delete("/products/:id", asyncHandler(async (req, res) => {
-	const id = req.params.id;
-	const product = await Product.findByIdAndDelete(id);
-	if (product) {
-		res.status(HttpStatus.NO_CONTENT).send(product);
-	}
-	else {
-		res.status(HttpStatus.NOT_FOUND).send();
-	}
+const { id } = req.params;
+	const product = await prisma.product.delete({
+		where: { id },
+	});
+	res.status(HttpStatus.NO_CONTENT).send(product);
 }));
 
 app.listen(process.env.PORT || 3000, () => console.log("Server on"));
-console.log("Hi!");

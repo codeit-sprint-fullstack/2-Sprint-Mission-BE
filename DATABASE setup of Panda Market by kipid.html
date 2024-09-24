@@ -65,20 +65,139 @@ panda_market_dev DATABASE 가 없으면 알아서 만들어 준다.
 
 
 
+## Schema 모음.
+
+Product 관련: <refer class="model-Product"></refer>, <refer class="struct-Product"></refer>, <refer class="model-ProductComment"></refer>
+
+User 관련: <refer class="model-User"></refer>
+
+Article 관련: <refer class="model-Article"></refer>, <refer class="model-ArticleComment"></refer>
+
+
+
 ## Schema 짜기.
+
+<div id="model-Product"><div class="number none">Product</div>
 
 ```
 model Product {
-  id            String   @id @default(uuid())
-  name          String
-  description   String
-  price         Float
-  tags          String[]
-  images        String[]
-  favoriteCount Int
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  id              String           @id @default(uuid())
+  name            String
+  description     String
+  price           Float
+  tags            String[]
+  images          String[]
+  favoriteCount   Int
+  productComments ProductComment[]
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
 }
+```/
+
+</div>
+
+<div id="model-User"><div class="number none">User</div>
+
+```
+model User {
+  id              String           @id @default(uuid())
+  email           String           @unique
+  nickname        String
+  password        String
+  articles        Article[]
+  articleComments ArticleComment[]
+  productComments ProductComment[]
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+}
+```/
+
+</div>
+
+<div id="model-Article"><div class="number none">Article</div>
+
+```
+model Article {
+  id              String           @id @default(uuid())
+  title           String
+  authorId        String
+  author          User             @relation(fields: [authorId], references: [id], onDelete: Restrict)
+  content         String
+  articleComments ArticleComment[]
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+}
+```/
+
+</div>
+
+<div id="model-ProductComment"><div class="number none">ProductComment</div>
+
+```
+model ProductComment {
+  id          String   @id @default(uuid())
+  content     String
+  productId   String
+  product     Product  @relation(fields: [productId], references: [id], onDelete: Restrict)
+  commenterId String
+  commenter   User     @relation(fields: [commenterId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+```/
+
+</div>
+
+<div id="model-ArticleComment"><div class="number none">ArticleComment</div>
+
+```
+model ArticleComment {
+  id          String   @id @default(uuid())
+  content     String
+  articleId   String
+  article     Article  @relation(fields: [articleId], references: [id])
+  commenterId String
+  commenter   User     @relation(fields: [commenterId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+```/
+
+</div>
+
+
+
+
+
+### DATA seeding
+
+적당한 mock data 를 가지고 DATA 를 seeding 해주자.
+
+```
+import { PrismaClient } from "@prisma/client";
+import data from "./mock.js";
+import * as dotenv from 'dotenv';
+
+dotenv.config();
+const prisma = new PrismaClient();
+
+async function main() {
+	await prisma.product.deleteMany();
+	await prisma.product.createMany({
+		data,
+		skipDuplicates: true,
+	})
+}
+
+main()
+	.then(async () => {
+		await prisma.$disconnect();
+	})
+	.catch(async (e) => {
+		console.error(e);
+		await prisma.$disconnect();
+		process.exit(1);
+	});
 ```/
 
 
@@ -86,6 +205,8 @@ model Product {
 ### prisma superstruct
 
 다음과 같은 제약 조건을 걸어주자.
+
+<div id="struct-Product"><div class="number none">struct-Product</div>
 
 ```
 import * as s from 'superstruct';
@@ -97,8 +218,8 @@ export const CreateProduct = s.object({
 	name: s.size(s.string(), 1, 10),
 	description: s.size(s.string(), 10, 100),
 	price: s.min(s.number(), 0),
-	tags: s.set(s.string()),
-	images: s.set(s.string()),
+	tags: s.array(s.string()),
+	images: s.array(s.string()),
 	favoriteCount: s.min(s.integer(), 0),
 });
 
@@ -107,6 +228,24 @@ export const PatchProduct = s.object({
 	...s.partial(CreateProduct),
 });
 ```/
+
+</div>
+
+<div class="p">
+<code>s.set(s.string())</code> 은 어떻게 데이터를 보내는지 모르겠어서 못썼음. 그냥 array 방식으로 묶으면 될줄 알았는데... =ㅇ=;; <code>["가", "나", "다"]</code> 는 Set 가 아니라고 함.
+</div>
+
+<div id="struct-Article"><div class="number none">struct-Article</div>
+
+```
+export const CreateArticle = s.object()
+ title           String
+  authorId        String
+  author          User             @relation(fields: [authorId], references: [id], onDelete: Restrict)
+  content         Str
+```/
+
+</div>
 
 
 ## RRA
