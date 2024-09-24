@@ -16,11 +16,11 @@ Content-Type: application/json
     "tags": ["애플워치", "애플"]
 }
 ###
-PATCH http://localhost:4000/products/7d3475ff-d416-436f-8bae-35c5162f73c6
+PATCH http://localhost:4000/products/1fe13845-709d-4ddd-bee7-52cfa5ac70f5
 Content-Type: application/json
 
 {
-    "favoriteCount": 9
+    "price": 65000
 }
 ###
 DELETE http://localhost:4000/products/7d3475ff-d416-436f-8bae-35c5162f73c6
