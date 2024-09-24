@@ -67,13 +67,13 @@ app.get(
     const products = await prisma.product.findMany({
       orderBy,
       skip: page * pageSize,
-      take: pageSize,
-      where: {
-        OR: [
-          { name: { contains: keyword, mode: "insensitive" } },
-          { description: { contains: keyword, mode: "insensitive" } }
-        ]
-      }
+      take: pageSize
+      // where: {
+      //   OR: [
+      //     { name: { contains: keyword, mode: "insensitive" } },
+      //     { description: { contains: keyword, mode: "insensitive" } }
+      //   ]
+      // }
     });
     res.send(products);
   })
@@ -137,13 +137,13 @@ app.get(
     const article = await prisma.article.findMany({
       orderBy,
       skip: page * pageSize,
-      take: pageSize,
-      where: {
-        OR: [
-          { title: { contains: keyword } },
-          { content: { contains: keyword } }
-        ]
-      }
+      take: pageSize
+      // where: {
+      //   OR: [
+      //     { title: { contains: keyword } },
+      //     { content: { contains: keyword } }
+      //   ]
+      // }
     });
     res.send(article);
   })
