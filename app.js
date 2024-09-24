@@ -14,7 +14,7 @@ import {
   CreateArticleComment,
   PatchArticleComment
 } from "./structs.js";
-
+import { asyncHandler, checkAndConvertPageParams } from "./helper.js";
 const app = express();
 //app.use(cors());
 app.use(express.json());
@@ -22,27 +22,7 @@ app.use(express.json());
 const PORT = config.port || 3000;
 const NOT_FOUND_MESSAGE = "Cannot find given id.";
 const NOT_FOUND_USERID_MESSAGE = "User ID is required";
-const asyncHandler = (handler) => {
-  return async function (req, res) {
-    try {
-      await handler(req, res);
-    } catch (e) {
-      if (
-        e.name === "StructError" ||
-        e instanceof Prisma.PrismaClientValidationError
-      ) {
-        res.status(400).send({ message: e.message });
-      } else if (
-        e instanceof Prisma.PrismaClientUnknownRequestError &&
-        e.code === "P2025"
-      ) {
-        res.status(404).send({ message: NOT_FOUND_MESSAGE });
-      } else {
-        res.status(500).send({ message: e.message });
-      }
-    }
-  };
-};
+
 const prisma = new PrismaClient();
 //************* USER*************/
 app.get(
@@ -72,12 +52,9 @@ app.get(
 app.get(
   "/products",
   asyncHandler(async (req, res) => {
-    const {
-      page = 0,
-      pageSize = 10,
-      order = "oldest",
-      keyword = ""
-    } = req.query;
+    const { page, pageSize, order, keyword } = checkAndConvertPageParams(
+      req.query
+    );
     const orderBy =
       order === "oldest"
         ? { createdAt: "asc" }
@@ -88,8 +65,8 @@ app.get(
         : {};
     const products = await prisma.product.findMany({
       orderBy,
-      skip: parseInt(page) * parseInt(pageSize),
-      take: parseInt(pageSize),
+      skip: page * pageSize,
+      take: pageSize,
       where: {
         OR: [
           { name: { contains: keyword, mode: "insensitive" } },
@@ -151,20 +128,15 @@ app.delete(
 app.get(
   "/articles",
   asyncHandler(async (req, res) => {
-    const {
-      page = 0,
-      pageSize = 4,
-      order = "recent",
-      keyword = ""
-    } = req.query;
-    const pageInt = parseInt(page);
-    const pageSizeInt = parseInt(pageSize);
+    const { page, pageSize, order, keyword } = checkAndConvertPageParams(
+      req.query
+    );
     const orderBy =
       order === "recent" ? { createdAt: "desc" } : { createdAt: "asc" };
     const article = await prisma.article.findMany({
       orderBy,
-      skip: pageInt * pageSizeInt,
-      take: pageSizeInt,
+      skip: page * pageSize,
+      take: pageSize,
       where: {
         OR: [
           { title: { contains: keyword } },
