@@ -1,0 +1,24 @@
+GET http://localhost:4000/articles
+###
+GET http://localhost:4000/articles?page=1&pageSize=3
+###
+GET http://localhost:4000/articles?keyword=맥북
+###
+GET http://localhost:4000/articles/6c02b8b0-2d01-4a24-8e11-ffffa4569e3e
+###
+POST http://localhost:4000/articles
+Content-Type: application/json
+
+{
+    "title": "닌텐도 DS 파시는 분 없나요?",
+    "content" : "요즘 닌텐도가 너무 하고싶은데 파시는 분 없나요?"
+}
+###
+PATCH http://localhost:4000/articles/6c02b8b0-2d01-4a24-8e11-ffffa4569e3e
+Content-Type: application/json
+
+{
+    "title": "진짜 대박 정보 드립니다."
+}
+###
+DELETE http://localhost:4000/articles/75fa7d92-8c34-49f6-a01e-3e400c03259b

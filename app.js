@@ -3,7 +3,8 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 import cors from 'cors';
 import productRoutes from './routes/productRoutes.js';
-import { handleErrors } from './utils/errorHandler.js';
+import articleRoutes from './routes/articleRoutes.js';
+import { handleErrors } from './utils/globalErrorHandler.js';
 import requestLogger from './utils/requestLogger.js';
 import responseLogger from './utils/responseLogger.js';
 
@@ -23,6 +24,8 @@ app.use(requestLogger);
 app.use(responseLogger);
 
 app.use('/products', productRoutes);
+app.use('/articles', articleRoutes);
+
 app.use(handleErrors);
 
 app.listen(process.env.PORT, () => console.log('server on'));

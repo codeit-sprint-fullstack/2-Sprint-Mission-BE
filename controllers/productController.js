@@ -1,15 +1,15 @@
 import prisma from '../models/productModel.js';
-import { Prisma } from '@prisma/client';
 import { assert } from 'superstruct';
 import { CreateProduct, PatchProduct } from '../structs.js';
-import { AppError } from '../utils/errorHandler.js';
+import { handleError } from '../utils/handleError.js';
 
 // 상품 등록
 export const createProduct = async (req, res, next) => {
   try {
     assert(req.body, CreateProduct);
+    const { name, description, price, tags } = req.body;
     const newProduct = await prisma.product.create({
-      data: req.body
+      data: { name, description, price, tags }
     });
     res.locals.data = newProduct;
     res.status(201).json(newProduct);
@@ -21,7 +21,7 @@ export const createProduct = async (req, res, next) => {
 // 상품 상세 조회
 export const getProductById = async (req, res, next) => {
   try {
-    const id = req.params.id;
+    const { id } = req.params;
     const product = await prisma.product.findUniqueOrThrow({
       where: { id }
     });
@@ -37,7 +37,7 @@ export const getProductById = async (req, res, next) => {
 export const updateProduct = async (req, res, next) => {
   try {
     assert(req.body, PatchProduct);
-    const id = req.params.id;
+    const { id } = req.params;
     const product = await prisma.product.update({
       where: { id },
       data: req.body
@@ -52,11 +52,11 @@ export const updateProduct = async (req, res, next) => {
 // 상품 삭제
 export const deleteProduct = async (req, res, next) => {
   try {
-    const id = req.params.id;
+    const { id } = req.params;
     await prisma.product.delete({
       where: { id }
     });
-    res.sendStatus(204);
+    res.status(204).json();
   } catch (err) {
     handleError(err, next);
   }
@@ -96,13 +96,4 @@ export const getProducts = async (req, res, next) => {
   } catch (err) {
     handleError(err, next);
   }
-};
-
-const handleError = (err, next) => {
-  if (err.name === 'StructError') {
-    return next(new AppError(400, err.message));
-  } else if (err instanceof Prisma.PrismaClientKnownRequestError) {
-    return next(new AppError(404, 'Product not found'));
-  }
-  return next(new AppError(500, 'Internal Server Error'));
 };

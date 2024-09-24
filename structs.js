@@ -8,3 +8,10 @@ export const CreateProduct = s.object({
 });
 
 export const PatchProduct = s.partial(CreateProduct);
+
+export const CreateArticle = s.object({
+  title: s.string(),
+  content: s.string()
+});
+
+export const PatchArticle = s.partial(CreateArticle);
