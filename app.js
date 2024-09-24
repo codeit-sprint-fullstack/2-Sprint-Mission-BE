@@ -2,7 +2,8 @@ import express from "express";
 import { Prisma } from "@prisma/client";
 import config from "./config.js";
 import cors from "cors";
-import { PrismaClient } from "@prisma/client";
+import pkg from "@prisma/client"; // Default import
+const { PrismaClient } = pkg; // PrismaClient 가져오기
 import { assert } from "superstruct";
 import {
   CreateProduct,

@@ -1,7 +1,5 @@
-import {
-  PrismaClientValidationError,
-  PrismaClientUnknownRequestError
-} from "@prisma/client";
+import pkg from "@prisma/client"; // Default import
+const { PrismaClientValidationError, PrismaClientUnknownRequestError } = pkg; // 필요한 클래스 구조 분해
 export const asyncHandler = (handler) => {
   return async function (req, res) {
     try {
