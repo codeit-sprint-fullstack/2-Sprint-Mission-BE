@@ -32,7 +32,7 @@ export const getCommentsByProductId = async (req, res) => {
   const productComments = await prisma.productComment.findMany(queryOptions);
 
    if (productComments.length === 0) {
-     return res.status(404).send({message: 'No comments for the given aritcle ID'});
+     return res.status(404).send({message: 'No comments for the given product ID'});
    }
   res.send(productComments);
 }
@@ -63,9 +63,10 @@ export const updateProductComment = async (req, res) => {
   const { commentId } = req.params;
   const { content } = req.body;
 
-  if(!content) {
-    return res.status(400).send({ message: 'Content is requied' });
-  }
+  //유효성 검사를 추가하여 아래 코드는 더이상 필요없음
+  // if(!content) {
+  //   return res.status(400).send({ message: 'Content is requied' });
+  // }
   const updatedProductComment = await prisma.productComment.update({
     where: { id: commentId },
     data: { content },

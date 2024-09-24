@@ -1,11 +1,11 @@
 import { Prisma } from "@prisma/client";
 
-/*
+
+/*  // 사용하기는 간단하나, 잘못된 요청에도 500 오류가 발생되는 듯
 const asyncHandler = (fn) => (req, res, next) => {
   Promise.resolve(fn(req, res, next)).catch(next);
 };
 */
-
 function asyncHandler(handler) {
   return async function (req, res, next) {
     try {

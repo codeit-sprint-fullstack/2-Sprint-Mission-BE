@@ -1,5 +1,5 @@
 import express from 'express';
-import asyncHandler from '../utils/ayncHandler.js';
+import asyncHandler from '../middleware/ayncHandler.js';
 import { 
   getArticles, 
   getArticleById, 

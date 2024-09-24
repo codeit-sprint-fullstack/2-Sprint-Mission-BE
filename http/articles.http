@@ -18,8 +18,8 @@ POST http://localhost:3000/articles
 Content-Type: application/json
 
 {
-  "title": "추가3된 게시글 제목",
-  "content": "추가3된 게시글 컨텐츠 내용입니다."
+  "title": "추가4된 게시글 제목",
+  "content": "추가4된 게시글 컨텐츠 내용입니다."
 }
 
 ###
@@ -33,3 +33,16 @@ Content-Type: application/json
 
 ###
 DELETE http://localhost:3000/articles/823000f0-a9e2-412f-bfd5-9d23c43c057a
+
+###
+GET http://localhost:3000/articles/99868427-fd04-4e63-87e1-0330d66249
+
+
+###
+POST http://localhost:3000/articles
+Content-Type: application/json
+
+{
+  "title": 133,
+  "content": "오류 유발 컨텐츠."
+}

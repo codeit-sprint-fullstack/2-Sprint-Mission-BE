@@ -62,10 +62,10 @@ export const updateArticleComment = async (req, res) => {
 
   const { commentId } = req.params;
   const { content } = req.body;
-
-  if(!content) {
-    return res.status(400).send({ message: 'Content is requied' });
-  }
+  //유효성 검사를 추가하여 아래 코드는 더이상 필요없음
+  // if(!content) {
+  //   return res.status(400).send({ message: 'Content is requied' });
+  // }
   const updatedArticleComment = await prisma.articleComment.update({
     where: { id: commentId },
     data: { content },
