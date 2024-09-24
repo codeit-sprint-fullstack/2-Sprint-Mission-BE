@@ -1,7 +1,7 @@
 import express from "express";
 import { Prisma } from "@prisma/client";
 import config from "./config.js";
-//import cors from "cors";
+import cors from "cors";
 import { PrismaClient } from "@prisma/client";
 import { assert } from "superstruct";
 import {
@@ -16,7 +16,7 @@ import {
 } from "./structs.js";
 import { asyncHandler, checkAndConvertPageParams } from "./helper.js";
 const app = express();
-//app.use(cors());
+app.use(cors());
 app.use(express.json());
 
 const PORT = config.port || 3000;
