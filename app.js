@@ -110,7 +110,15 @@ app.get(
       {
         $or: [{ name: keywordRegex }, { description: keywordRegex }],
       },
-      { name: 1, price: 1, favoriteCount: 1, createdAt: 1 }
+      {
+        name: 1,
+        description: 1,
+        price: 1,
+        favoriteCount: 1,
+        tags: 1,
+        images: 1,
+        createdAt: 1,
+      }
     )
       .sort(sortOption)
       .skip(offset)
