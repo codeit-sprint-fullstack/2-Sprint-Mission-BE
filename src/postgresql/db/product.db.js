@@ -5,7 +5,14 @@ export class ProductDB {
 
   count = async (keyword) => {
     const searchOption = keyword
-      ? { where: { productSearchQuery: { contains: keyword } } }
+      ? {
+          where: {
+            OR: [
+              { name: { contains: keyword } },
+              { description: { contains: keyword } },
+            ],
+          },
+        }
       : {};
 
     const count = await this.db.count(searchOption);
@@ -18,14 +25,21 @@ export class ProductDB {
       orderBy: { createdAt: orderBy === 'recent' ? 'desc' : 'asc' },
     };
     const searchOption = keyword
-      ? { where: { searchQuery: { contains: keyword } } }
+      ? {
+          where: {
+            OR: [
+              { name: { contains: keyword } },
+              { description: { contains: keyword } },
+            ],
+          },
+        }
       : {};
 
     const products = await this.db.findMany({
       ...searchOption,
       ...sortOption,
       take: pageSize,
-      skip: page * pageSize,
+      skip: (page - 1) * pageSize,
     });
 
     return products;

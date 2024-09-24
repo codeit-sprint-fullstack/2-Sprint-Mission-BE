@@ -5,7 +5,7 @@ export class UserDB {
 
   count = async (keyword) => {
     const searchOption = keyword
-      ? { where: { productSearchQuery: { contains: keyword } } }
+      ? { where: { nickname: { contains: keyword } } }
       : {};
 
     const count = await this.db.count(searchOption);
@@ -25,7 +25,7 @@ export class UserDB {
     }
 
     const searchOption = keyword
-      ? { where: { searchQuery: { contains: keyword } } }
+      ? { where: { nickname: { contains: keyword } } }
       : {};
 
     const users = await this.db.findMany({

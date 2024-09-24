@@ -14,10 +14,6 @@ export class ProductController {
     const pageSize = Number(req.query.pageSize) || 10;
     const keyword = req.query.keyword || '';
 
-    if (isNaN(page) || isNaN(pageSize)) {
-      throw new TypeError('page and pageSize should be an integer');
-    }
-
     const resBody = await this.service.getPaginatedProducts({
       orderBy,
       page,
@@ -47,7 +43,7 @@ export class ProductController {
     res.status(201).json(product);
   };
 
-  patchProductById = async (req, res) => {
+  patchProduct = async (req, res) => {
     assert(req.params.id, Uuid, MESSAGES.IDFORMAT);
     assert(req.body, PatchProduct);
     const id = req.params.id;
@@ -59,7 +55,7 @@ export class ProductController {
     res.json(product);
   };
 
-  deleteProductById = async (req, res) => {
+  deleteProduct = async (req, res) => {
     assert(req.params.id, Uuid, MESSAGES.IDFORMAT);
     const id = req.params.id;
 

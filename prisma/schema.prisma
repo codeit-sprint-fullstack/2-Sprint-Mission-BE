@@ -16,7 +16,7 @@ datasource db {
 model User {
   id        String   @id @default(uuid())
   nickname  String
-  image     String?  @default("")
+  image     String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -31,16 +31,32 @@ model Product {
   name          String //min 1, max 10
   description   String //min 10, max 100
   price         Int //min 1
-  tags          String[] @default([])
-  images        String[] @default([])
   favoriteCount Int      @default(0) //min 0
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 
-  favoriteUsers User[]
-  comments      Comment[]
+  favoriteUsers  User[]
+  comments       Comment[]
+  Product_Tags   Product_Tag[]
+  Product_Images Product_Image[]
 
   @@index([name, description], name: "productSearchQuery")
+}
+
+model Product_Tag {
+  id  String @id @default(uuid())
+  tag String
+
+  product   Product @relation(fields: [productId], references: [id])
+  productId String
+}
+
+model Product_Image {
+  id    String @id @default(uuid())
+  image String
+
+  product   Product @relation(fields: [productId], references: [id])
+  productId String
 }
 
 model Article {
@@ -52,8 +68,8 @@ model Article {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  owner     User      @relation(fields: [ownerId], references: [id], name: "articleOwnership", onDelete: SetDefault)
-  ownerId   String    @default("00000000-0000-0000-0000-000000000000")
+  owner     User?     @relation(fields: [ownerId], references: [id], name: "articleOwnership", onDelete: SetNull)
+  ownerId   String?
   likeUsers User[]    @relation(name: "likeOwnership")
   comments  Comment[]
 
@@ -66,8 +82,8 @@ model Comment {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  owner     User     @relation(fields: [ownerId], references: [id], onDelete: SetDefault)
-  ownerId   String   @default("00000000-0000-0000-0000-000000000000")
+  owner     User?    @relation(fields: [ownerId], references: [id], onDelete: SetNull)
+  ownerId   String?
   article   Article? @relation(fields: [articleId], references: [id], onDelete: Cascade)
   articleId String?
   product   Product? @relation(fields: [productId], references: [id], onDelete: Cascade)

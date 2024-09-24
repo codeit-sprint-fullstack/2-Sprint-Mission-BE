@@ -5,7 +5,14 @@ export class ArticleDB {
 
   count = async (keyword) => {
     const searchOption = keyword
-      ? { where: { productSearchQuery: { contains: keyword } } }
+      ? {
+          where: {
+            OR: [
+              { title: { contains: keyword } },
+              { content: { contains: keyword } },
+            ],
+          },
+        }
       : {};
 
     const count = await this.db.count(searchOption);
@@ -25,7 +32,14 @@ export class ArticleDB {
     }
 
     const searchOption = keyword
-      ? { where: { searchQuery: { contains: keyword } } }
+      ? {
+          where: {
+            OR: [
+              { title: { contains: keyword } },
+              { content: { contains: keyword } },
+            ],
+          },
+        }
       : {};
 
     const articles = await this.db.findMany({

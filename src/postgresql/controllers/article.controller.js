@@ -14,10 +14,6 @@ export class ArticleController {
     const pageSize = Number(req.query.pageSize) || 10;
     const keyword = req.query.keyword || '';
 
-    if (isNaN(page) || isNaN(pageSize)) {
-      throw new TypeError('page and pageSize should be an integer');
-    }
-
     const resBody = await this.service.getPaginatedArticles({
       orderBy,
       page,

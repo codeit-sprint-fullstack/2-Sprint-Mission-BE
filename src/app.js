@@ -14,6 +14,23 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+function validation(req, res, next) {
+  const page = req.query.page;
+  const pageSize = req.query.pageSize;
+  const limit = req.query.limit;
+
+  if (page && isNaN(Number(page)))
+    throw new TypeError('page should be an integer');
+  if (pageSize && isNaN(Number(pageSize)))
+    throw new TypeError('pageSize should be an integer');
+  if (limit && isNaN(Number(limit)))
+    throw new TypeError('limit should be an integer');
+
+  next();
+}
+
+app.use(validation);
+
 /***************************    FOR_DEV  **************************************************/
 {
   app.get('/dev/users', postgresUserController.getUsersDev);
@@ -62,14 +79,14 @@ app.use(express.json());
   //   '/products/:id',
   //   (mongodbProductController.patchProductById)
   // );
-  app.patch('/products/:id', postgresProductController.patchProductById);
+  app.patch('/products/:id', postgresProductController.patchProduct);
 
   // delete API
   // app.delete(
   //   '/products/:id',
   //   (mongodbProductController.deleteProductById)
   // );
-  app.delete('/products/:id', postgresProductController.deleteProductById);
+  app.delete('/products/:id', postgresProductController.deleteProduct);
 }
 
 /***************************    ARTICLE    **************************************************/
@@ -96,19 +113,19 @@ app.use(express.json());
   );
 
   // patch API
-  app.patch('/articles/:id', postgresArticleController.patchArticleById);
+  app.patch('/articles/:id', postgresArticleController.patchArticle);
 
   // delete API
-  app.delete('/articles/:id', postgresArticleController.deleteArticleById);
+  app.delete('/articles/:id', postgresArticleController.deleteArticle);
 }
 
 /***************************    COMMENT    **************************************************/
 {
   // patch API
-  app.patch('/comments/:id', postgresCommentController.patchCommentById);
+  app.patch('/comments/:id', postgresCommentController.patchComment);
 
   // delete API
-  app.delete('/comments/:id', postgresCommentController.deleteCommentById);
+  app.delete('/comments/:id', postgresCommentController.deleteComment);
 }
 
 /***************************    HANDLER    **************************************************/

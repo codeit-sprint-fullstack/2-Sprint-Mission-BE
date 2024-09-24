@@ -19,10 +19,6 @@ export class CommentController {
     const limit = Number(req.query.limit) || 10;
     const cursor = req.query.cursor;
 
-    if (isNaN(limit)) {
-      throw new TypeError('limit should be an integer');
-    }
-
     const resBody = await this.service.getPaginatedComments({
       id: articleId,
       limit,
@@ -39,10 +35,6 @@ export class CommentController {
     const productId = req.params.id;
     const limit = Number(req.query.limit) || 10;
     const cursor = req.query.cursor;
-
-    if (isNaN(limit)) {
-      throw new TypeError('limit should be an integer');
-    }
 
     const resBody = await this.service.getPaginatedComments({
       id: productId,
@@ -79,7 +71,7 @@ export class CommentController {
     res.status(201).json(comment);
   };
 
-  patchCommentById = async (req, res) => {
+  patchComment = async (req, res) => {
     assert(req.params.id, Uuid, MESSAGES.IDFORMAT);
     assert(req.body, PatchComment);
     const id = req.params.id;
@@ -91,7 +83,7 @@ export class CommentController {
     res.json(comment);
   };
 
-  deleteCommentById = async (req, res) => {
+  deleteComment = async (req, res) => {
     assert(req.params.id, Uuid, MESSAGES.IDFORMAT);
     const id = req.params.id;
 
