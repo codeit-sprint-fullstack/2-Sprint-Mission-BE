@@ -1,14 +1,14 @@
 GET http://localhost:3000/products
 ###
-GET http://localhost:3000/products?order=oldest&search=폰
+GET http://localhost:3000/products/8b97d216-b1ed-43bb-a179-619d9b2cc104
 
 ###
 POST http://localhost:3000/products
 Content-Type: application/json
 
 {
-    "name": "",
-    "description": "하루죙일 테스트만함",
+    "name": "하 라우트 어렵네",
+    "description": "내가 바보가 되엇수",
     "price": 20000,
     "tag": ["테스트임"],
   "image": [],

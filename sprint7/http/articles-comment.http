@@ -9,7 +9,7 @@ GET http://localhost:3000/articles/b8f11e76-0a9e-4b3f-bccf-8d9b4fbf331e/comments
 POST http://localhost:3000/articles/b8f11e76-0a9e-4b3f-bccf-8d9b4fbf331e/comments
 Content-Type: application/json
 
-{"content": "찐막"}
+{"content": "들어가라]"}
 
 ###
 PATCH http://localhost:3000/articles/b8f11e76-0a9e-4b3f-bccf-8d9b4fbf331e/comments/b340dac2-d83d-47ce-874d-5822e634ca8d
@@ -19,4 +19,4 @@ Content-Type: application/json
 
 
 ###
-DELETE http://localhost:3000/articles/61003e12-6381-419c-a9d3-5f54f3448f52
+DELETE http://localhost:3000/articles/b8f11e76-0a9e-4b3f-bccf-8d9b4fbf331e/comments/b340dac2-d83d-47ce-874d-5822e634ca8d
