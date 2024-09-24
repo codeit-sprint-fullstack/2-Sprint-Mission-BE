@@ -39,8 +39,6 @@ model Product {
   comments       Comment[]
   Product_Tags   Product_Tag[]
   Product_Images Product_Image[]
-
-  @@index([name, description], name: "productSearchQuery")
 }
 
 model Product_Tag {
@@ -72,8 +70,6 @@ model Article {
   ownerId   String?
   likeUsers User[]    @relation(name: "likeOwnership")
   comments  Comment[]
-
-  @@index([title, content], name: "articleSearchQuery")
 }
 
 model Comment {
