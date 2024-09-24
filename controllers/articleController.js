@@ -25,7 +25,7 @@ export const getArticleById = async (req, res, next) => {
     const article = await prisma.article.findUniqueOrThrow({
       where: { id },
       include: {
-        comments: {
+        articleComments: {
           select: {
             content: true,
             createdAt: true,

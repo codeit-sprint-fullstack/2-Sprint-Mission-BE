@@ -4,10 +4,10 @@ POST http://localhost:4000/articles/6c02b8b0-2d01-4a24-8e11-ffffa4569e3e/comment
 Content-Type: application/json
 
 {
-    "content" : "포켓몬 스티커 저도 너무 필요해요 !!!"
+    "content" : "포켓몬 스티커 몇 장 있긴한데, 이거라도 구매하실래요?"
 }
 ###
-PATCH http://localhost:4000/articles/6c02b8b0-2d01-4a24-8e11-ffffa4569e3e/comments/db7f9a40-e6af-4149-8195-7e02e923d742
+PATCH http://localhost:4000/articles/6c02b8b0-2d01-4a24-8e11-ffffa4569e3e/comments/5ad0a1b9-388b-404b-8e8a-db369298a353
 Content-Type: application/json
 
 {

@@ -1,20 +1,20 @@
-import prisma from '../models/commentModel.js';
+import prisma from '../models/productCommentModel.js';
 import { assert } from 'superstruct';
-import { CreateComment, PatchComment } from '../structs.js';
+import { CreateProductComment, PatchProductComment } from '../structs.js';
 import { handleError } from '../utils/handleError.js';
 
 // 댓글 등록
-export const createComment = async (req, res, next) => {
+export const createProductComment = async (req, res, next) => {
   try {
-    assert(req.body, CreateComment);
+    assert(req.body, CreateProductComment);
     const { content } = req.body;
-    const { articleId } = req.params;
+    const { productId } = req.params;
 
-    const newComment = await prisma.comment.create({
+    const newComment = await prisma.productComment.create({
       data: {
         content,
-        articleId,
-        ownerUserId: '맹구' // 임시 하드 코딩
+        productId,
+        ownerUserId: '김철수' // 임시 하드 코딩
       }
     });
     res.locals.data = newComment;
@@ -25,13 +25,13 @@ export const createComment = async (req, res, next) => {
 };
 
 // 댓글 수정
-export const updateComment = async (req, res, next) => {
+export const updateProductComment = async (req, res, next) => {
   try {
-    assert(req.body, PatchComment);
+    assert(req.body, PatchProductComment);
     const { content } = req.body;
     const { commentId } = req.params;
 
-    const comment = await prisma.comment.update({
+    const comment = await prisma.productComment.update({
       where: { id: commentId },
       data: { content }
     });
@@ -44,11 +44,11 @@ export const updateComment = async (req, res, next) => {
 };
 
 // 댓글 삭제
-export const deleteComment = async (req, res, next) => {
+export const deleteProductComment = async (req, res, next) => {
   try {
     const { commentId } = req.params;
 
-    await prisma.comment.delete({
+    await prisma.productComment.delete({
       where: { id: commentId }
     });
 
@@ -59,12 +59,12 @@ export const deleteComment = async (req, res, next) => {
 };
 
 // 댓글 목록 조회
-export const getComments = async (req, res, next) => {
+export const getProductComments = async (req, res, next) => {
   try {
     const { articleId } = req.params;
     const { cursor } = req.query;
 
-    const comments = await prisma.comment.findMany({
+    const comments = await prisma.productComment.findMany({
       where: { articleId },
       select: {
         id: true,

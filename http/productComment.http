@@ -1,0 +1,17 @@
+GET http://localhost:4000/products/daf3132b-ff3f-4aab-969d-4bce7610d233/comments
+###
+POST http://localhost:4000/products/daf3132b-ff3f-4aab-969d-4bce7610d233/comments
+Content-Type: application/json
+
+{
+    "content" : "크기도 좋고 아주 유용할 것 같아요!"
+}
+###
+PATCH http://localhost:4000/products/daf3132b-ff3f-4aab-969d-4bce7610d233/comments/b52c1960-ab95-480f-b803-a8a60f7a8242
+Content-Type: application/json
+
+{
+    "content": "텀블러가 상태가 정말 좋네요. 구매 의사 있습니다."
+}
+###
+DELETE http://localhost:4000/products/daf3132b-ff3f-4aab-969d-4bce7610d233/comments/b52c1960-ab95-480f-b803-a8a60f7a8242

@@ -23,7 +23,16 @@ export const getProductById = async (req, res, next) => {
   try {
     const { id } = req.params;
     const product = await prisma.product.findUniqueOrThrow({
-      where: { id }
+      where: { id },
+      include: {
+        productComments: {
+          select: {
+            content: true,
+            createdAt: true,
+            ownerUserId: true
+          }
+        }
+      }
     });
     const { updatedAt, ...filteredProduct } = product;
     res.locals.data = filteredProduct;
