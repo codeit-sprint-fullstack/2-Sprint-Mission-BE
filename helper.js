@@ -1,3 +1,7 @@
+import {
+  PrismaClientValidationError,
+  PrismaClientUnknownRequestError
+} from "@prisma/client";
 export const asyncHandler = (handler) => {
   return async function (req, res) {
     try {
@@ -5,11 +9,11 @@ export const asyncHandler = (handler) => {
     } catch (e) {
       if (
         e.name === "StructError" ||
-        e instanceof Prisma.PrismaClientValidationError
+        e instanceof PrismaClientValidationError
       ) {
         res.status(400).send({ message: e.message });
       } else if (
-        e instanceof Prisma.PrismaClientUnknownRequestError &&
+        e instanceof PrismaClientUnknownRequestError &&
         e.code === "P2025"
       ) {
         res.status(404).send({ message: NOT_FOUND_MESSAGE });
