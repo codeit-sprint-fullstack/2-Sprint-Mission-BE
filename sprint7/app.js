@@ -226,8 +226,8 @@ app.get(
       },
     };
     if (cursor) {
-      queryOption.cursor = {
-        createdAt: new Date(cursor),
+      queryOption.where.createdAt = {
+        gte: new Date(cursor), // cursor로 들어온 createdAt 이후의 데이터를 가져오기
       };
       queryOption.skip = 1;
     }
@@ -289,12 +289,25 @@ app.delete(
 app.get(
   "/products/:productId/comments",
   asyncHandler(async (req, res) => {
+    const { limit = 5, cursor } = req.query;
     const { productId } = req.params;
-    const comments = await prisma.productComment.findMany({
+
+    const queryOption = {
       where: { productId },
-      orderBy: { createdAt: "desc" },
-    });
-    res.send(comments);
+      take: parseInt(limit),
+      orderBy: { createdAt: "asc" },
+    };
+    if (cursor) {
+      queryOption.where.createdAt = {
+        gte: new Date(cursor),
+      };
+      queryOption.skip = 1;
+    }
+
+    const comments = await prisma.productComment.findMany(queryOption);
+    const nextCursor =
+      comments.length > 0 ? comments[comments.length - 1].createdAt : null;
+    res.send({ comments, nextCursor });
   })
 );
 

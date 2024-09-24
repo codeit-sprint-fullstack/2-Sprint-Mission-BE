@@ -1,12 +1,15 @@
 GET http://localhost:3000/articles/b8f11e76-0a9e-4b3f-bccf-8d9b4fbf331e/comments
+
+###
+GET http://localhost:3000/articles/b8f11e76-0a9e-4b3f-bccf-8d9b4fbf331e/comments?limit=5&cursor=2024-09-24T02:47:43.276Z
 ###
 GET http://localhost:3000/articles/b8f11e76-0a9e-4b3f-bccf-8d9b4fbf331e/comments/350b47be-b243-4ce8-8cfa-c3e4b7365ef4
 
 ###
-POST http://localhost:3000/articles/70e1e61d-f2ae-4d7d-bf8f-d65eafdb6a45/comments
+POST http://localhost:3000/articles/b8f11e76-0a9e-4b3f-bccf-8d9b4fbf331e/comments
 Content-Type: application/json
 
-{"content": "누워서 자고싶은 사람 여기여기 붙어라"}
+{"content": "찐막"}
 
 ###
 PATCH http://localhost:3000/articles/b8f11e76-0a9e-4b3f-bccf-8d9b4fbf331e/comments/b340dac2-d83d-47ce-874d-5822e634ca8d
