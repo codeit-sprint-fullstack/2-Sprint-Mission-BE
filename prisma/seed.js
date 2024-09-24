@@ -8,6 +8,8 @@ async function main() {
   await prisma.article.deleteMany();
   await prisma.productComment.deleteMany();
   await prisma.articleComment.deleteMany();
+  mockData.product.forEach((el) => console.log(el));
+  mockData.article.forEach((el) => console.log(el));
   console.log("createUser");
   await prisma.user.createMany({
     data: mockData.user,
@@ -15,16 +17,22 @@ async function main() {
   });
   console.log("createUser END");
   console.log("createProduct start");
-  await prisma.product.createMany({
-    data: mockData.product,
-    skipDuplicates: true
-  });
+  await prisma.product
+    .createMany({
+      data: mockData.product,
+      skipDuplicates: true
+    })
+    .then(() => console.log("Products created."))
+    .catch((err) => console.error("Error creating products:", err));
   console.log("createProduct END");
   console.log("crateAriticle start");
-  await prisma.article.createMany({
-    data: mockData.article,
-    skipDuplicates: true
-  });
+  await prisma.article
+    .createMany({
+      data: mockData.article,
+      skipDuplicates: true
+    })
+    .then(() => console.log("Articles created."))
+    .catch((err) => console.error("Error creating articles:", err));
   console.log("crateAriticle end");
   console.log("productComment start");
   await prisma.productComment.createMany({
