@@ -13,3 +13,24 @@ export const CreateProduct = s.object({
   favoriteCount: s.min(s.number(), 0)
 });
 export const PatchProduct = s.partial(CreateProduct);
+
+export const CreateUser = s.object({
+  email: s.define(isEmail, isEmail),
+  nickName: s.string(),
+  image: s.string()
+});
+export const CreateArticle = s.object({
+  title: s.string(),
+  content: s.string()
+});
+export const PatchArticle = s.partial(CreateArticle);
+
+export const CreateProductComment = s.object({
+  content: s.string()
+});
+export const PatchProductCommnet = s.partial(CreateProductComment);
+
+export const CreateArticleComment = s.object({
+  content: s.string()
+});
+export const PatchArticleComment = s.partial(CreateArticleComment);

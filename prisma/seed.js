@@ -1,16 +1,25 @@
 import { PrismaClient } from "@prisma/client";
-import { mockData } from "./mock.js";
+import { mockProductData, mockUserData, mockArticleData } from "./mock.js";
 const prisma = new PrismaClient();
 
 async function main() {
-  const inputData = mockData.map(({ id, ownerId, ...rest }) => {
-    return rest;
-  });
   await prisma.product.deleteMany();
   await prisma.product.createMany({
-    data: inputData,
+    data: mockProductData,
     skipDuplicates: true
   });
+  // await prisma.user.deleteMany();
+  // await prisma.user.createMany({
+  //   data: mockUserData,
+  //   skipDuplicates: true
+  // });
+  // await prisma.article.deleteMany();
+  // const articleSeed = mockArticleData.map(async (article) => {
+  //   await prisma.article.create({
+  //     data: article
+  //   });
+  // });
+  // await Promise.all(articleSeed);
 }
 main()
   .then(async () => {
