@@ -217,15 +217,24 @@ app.get(
   asyncHandler(async (req, res) => {
     const { limit = 5, cursor } = req.query;
     const { articleId } = req.params;
-    const comments = await prisma.articleComment.findMany({
+
+    const queryOption = {
       where: { articleId },
       take: parseInt(limit),
-      cursor: {
-        id: cursor,
+      orderBy: {
+        createdAt: "asc",
       },
-      orderBy: { createdAt: "desc" },
-    });
-    res.send(comments);
+    };
+    if (cursor) {
+      queryOption.cursor = {
+        createdAt: new Date(cursor),
+      };
+      queryOption.skip = 1;
+    }
+    const comments = await prisma.articleComment.findMany(queryOption);
+    const nextCursor =
+      comments.length > 0 ? comments[comments.length - 1].createdAt : null;
+    res.send({ comments, nextCursor });
   })
 );
 
