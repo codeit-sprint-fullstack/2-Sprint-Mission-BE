@@ -42,5 +42,5 @@ model Comment {
   articleId   String
   ownerUserId String
 
-  article Article @relation(fields: [articleId], references: [id])
+  article Article @relation(fields: [articleId], references: [id], onDelete: Cascade)
 }
