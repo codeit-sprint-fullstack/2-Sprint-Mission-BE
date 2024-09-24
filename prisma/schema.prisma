@@ -13,17 +13,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id        String   @id @default(uuid())
-  nickname  String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  favoriteProducts Product[]
-  articles         Article[]
-  comments         Comment[]
-}
-
 model Product {
   id            String   @id @default(uuid())
   name          String
@@ -33,8 +22,6 @@ model Product {
   favoriteCount Int      @default(0)
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
-
-  favoriteUsers User[]
 }
 
 model Article {
@@ -43,20 +30,17 @@ model Article {
   content   String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  userId    String
 
-  user     User      @relation(fields: [userId], references: [id])
   comments Comment[]
 }
 
 model Comment {
-  id        String   @id @default(uuid())
-  content   String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  userId    String
-  articleId String
+  id          String   @id @default(uuid())
+  content     String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  articleId   String
+  ownerUserId String
 
-  user    User    @relation(fields: [userId], references: [id])
   article Article @relation(fields: [articleId], references: [id])
 }

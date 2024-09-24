@@ -23,7 +23,10 @@ export const getArticleById = async (req, res, next) => {
   try {
     const { id } = req.params;
     const article = await prisma.article.findUniqueOrThrow({
-      where: { id }
+      where: { id },
+      include: {
+        comments: true
+      }
     });
     const { updatedAt, ...filteredArticle } = article;
     res.locals.data = filteredArticle;
