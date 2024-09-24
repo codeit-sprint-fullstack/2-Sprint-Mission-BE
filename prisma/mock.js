@@ -1,42 +1,6 @@
 export const PRODUCTS = [
   {
-    id: 199,
-    name: "아이폰 16 pro",
-    description: "따끈한 아이폰!",
-    price: 1290000,
-    tags: [],
-    createdAt: "2024-09-20T13:03:49.397Z",
-    updatedAt: "2024-09-23T01:17:37.428Z",
-  },
-  {
-    id: 198,
-    name: "갤럭시 링 골드",
-    description: "갤럭시 링 골드 팝니다~ d",
-    price: 500000,
-    tags: ["스마트링"],
-    createdAt: "2024-09-19T07:22:29.075Z",
-    updatedAt: "2024-09-23T02:07:15.633Z",
-  },
-  {
-    id: 197,
-    name: "갤럭시 버즈3",
-    description: "버즈3 입니다~",
-    price: 500000,
-    tags: ["이어폰"],
-    createdAt: "2024-09-19T07:20:17.749Z",
-    updatedAt: "2024-09-23T02:37:01.449Z",
-  },
-  {
-    id: 190,
-    name: "갤럭시워치 6 팝니다~~",
-    description: "하자 없어요~~",
-    price: 400000,
-    tags: ["갤럭시"],
-    createdAt: "2024-09-19T04:41:23.772Z",
-    updatedAt: "2024-09-22T11:59:27.096Z",
-  },
-  {
-    id: 188,
+    id: "66e1685ad6ae861dd68105ed",
     name: "쿠쿠 밥솥",
     description: "쿠쿠하세요~~",
     price: 310000,
@@ -45,7 +9,7 @@ export const PRODUCTS = [
     updatedAt: "2024-09-22T13:54:08.966Z",
   },
   {
-    id: 153,
+    id: "66e1685ad6ae861dd68105ee",
     name: "토스터",
     description: "토스트를 만들기 위한 토스터~",
     price: 19000,
@@ -54,7 +18,7 @@ export const PRODUCTS = [
     updatedAt: "2024-08-30T10:42:33.978Z",
   },
   {
-    id: 146,
+    id: "66e1685ad6ae861dd68105ef",
     name: "상품 이름",
     description: "string",
     price: 0,
@@ -63,7 +27,7 @@ export const PRODUCTS = [
     updatedAt: "2024-09-04T08:20:57.019Z",
   },
   {
-    id: 136,
+    id: "66e1685ad6ae861dd68105f0",
     name: "화사한 분위기의 수련",
     description: "무료 이미지 꽃, 수련, water lily",
     price: 12000,
@@ -72,7 +36,7 @@ export const PRODUCTS = [
     updatedAt: "2024-08-21T02:06:50.311Z",
   },
   {
-    id: 135,
+    id: "66e1685ad6ae861dd68105f1",
     name: "밝은 분위기의 벽지와 전등",
     description: "무료 이미지 전등, 벽지, 인테리어",
     price: 36000,
@@ -81,7 +45,7 @@ export const PRODUCTS = [
     updatedAt: "2024-09-22T14:00:04.177Z",
   },
   {
-    id: 134,
+    id: "66e1685ad6ae861dd68105f2",
     name: "갤럭시북4",
     description: "또 다른 갤럭시를 만나보세요",
     price: 1000000,
@@ -90,7 +54,7 @@ export const PRODUCTS = [
     updatedAt: "2024-08-21T02:06:41.073Z",
   },
   {
-    id: 133,
+    id: "66e1685ad6ae861dd68105f3",
     name: "갤럭시 탭 S7",
     description: "삼성 갤럭시 탭 S7",
     price: 350000,
@@ -99,7 +63,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 132,
+    id: "66e1685ad6ae861dd68105f4",
     name: "보스 헤드폰",
     description: "보스 노이즈 캔슬링 헤드폰 700",
     price: 350000,
@@ -108,7 +72,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 131,
+    id: "66e1685ad6ae861dd68105f5",
     name: "사무용 의자",
     description: "편안한 사무용 의자",
     price: 120000,
@@ -117,7 +81,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 130,
+    id: "66e1685ad6ae861dd68105f6",
     name: "스니커즈",
     description: "편안한 스니커즈",
     price: 100000,
@@ -126,7 +90,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 129,
+    id: "66e1685ad6ae861dd68105f7",
     name: "레노버 노트북",
     description: "레노버 아이디어패드 5",
     price: 800000,
@@ -135,7 +99,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 128,
+    id: "66e1685ad6ae861dd68105f8",
     name: "갤럭시 S21",
     description: "삼성 갤럭시 S21",
     price: 600000,
@@ -144,7 +108,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 127,
+    id: "66e1685ad6ae861dd68105f9",
     name: "아이패드",
     description: "애플 아이패드 10.2인치",
     price: 450000,
@@ -153,7 +117,7 @@ export const PRODUCTS = [
     updatedAt: "2024-09-22T11:58:43.696Z",
   },
   {
-    id: 126,
+    id: "66e1685ad6ae861dd68105fa",
     name: "퀸사이즈 침대",
     description: "퀸사이즈 침대 프레임",
     price: 500000,
@@ -162,7 +126,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 125,
+    id: "66e1685ad6ae861dd68105fb",
     name: "판다인형",
     description: "귀여운 판다인형입니다",
     price: 30000,
@@ -171,7 +135,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 124,
+    id: "66e1685ad6ae861dd68105fc",
     name: "맥북 프로",
     description: "애플 맥북 프로 13인치",
     price: 1500000,
@@ -180,7 +144,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 123,
+    id: "66e1685ad6ae861dd68105fd",
     name: "스니커즈",
     description: "편안한 스니커즈",
     price: 100000,
@@ -189,7 +153,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 122,
+    id: "66e1685ad6ae861dd68105fe",
     name: "갤럭시 탭 S7",
     description: "삼성 갤럭시 탭 S7",
     price: 350000,
@@ -198,7 +162,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 121,
+    id: "66e1685ad6ae861dd68105ff",
     name: "보스 헤드폰",
     description: "보스 노이즈 캔슬링 헤드폰 700",
     price: 350000,
@@ -207,7 +171,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 120,
+    id: "66e1685ad6ae861dd6810601",
     name: "사무용 의자",
     description: "편안한 사무용 의자",
     price: 120000,
@@ -216,7 +180,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 119,
+    id: "66e1685ad6ae861dd6810602",
     name: "레노버 노트북",
     description: "레노버 아이디어패드 5",
     price: 800000,
@@ -225,7 +189,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 118,
+    id: "66e1685ad6ae861dd6810603",
     name: "갤럭시 S21",
     description: "삼성 갤럭시 S21",
     price: 600000,
@@ -234,7 +198,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 117,
+    id: "66e1685ad6ae861dd6810604",
     name: "아이패드",
     description: "애플 아이패드 10.2인치",
     price: 450000,
@@ -243,7 +207,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 116,
+    id: "66e1685ad6ae861dd6810605",
     name: "퀸사이즈 침대",
     description: "퀸사이즈 침대 프레임",
     price: 500000,
@@ -252,7 +216,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 115,
+    id: "66e1685ad6ae861dd6810606",
     name: "판다인형",
     description: "귀여운 판다인형입니다",
     price: 30000,
@@ -261,7 +225,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 114,
+    id: "66e1685ad6ae861dd6810607",
     name: "갤럭시 탭 S7",
     description: "삼성 갤럭시 탭 S7",
     price: 350000,
@@ -270,7 +234,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 113,
+    id: "66e1685ad6ae861dd6810608",
     name: "보스 헤드폰",
     description: "보스 노이즈 캔슬링 헤드폰 700",
     price: 350000,
@@ -279,7 +243,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 112,
+    id: "66e1685ad6ae861dd6810609",
     name: "사무용 의자",
     description: "편안한 사무용 의자",
     price: 120000,
@@ -288,7 +252,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 111,
+    id: "66e1685ad6ae861dd681060a",
     name: "스니커즈",
     description: "편안한 스니커즈",
     price: 100000,
@@ -297,7 +261,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 110,
+    id: "66e1685ad6ae861dd681060b",
     name: "레노버 노트북",
     description: "레노버 아이디어패드 5",
     price: 800000,
@@ -306,7 +270,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 109,
+    id: "66e1685ad6ae861dd681060c",
     name: "갤럭시 S21",
     description: "삼성 갤럭시 S21",
     price: 600000,
@@ -315,7 +279,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 108,
+    id: "66e1685ad6ae861dd681060d",
     name: "아이패드",
     description: "애플 아이패드 10.2인치",
     price: 450000,
@@ -324,7 +288,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 107,
+    id: "66e1685ad6ae861dd681060e",
     name: "퀸사이즈 침대",
     description: "퀸사이즈 침대 프레임",
     price: 500000,
@@ -333,7 +297,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 106,
+    id: "66e1685ad6ae861dd681060f",
     name: "판다인형",
     description: "귀여운 판다인형입니다",
     price: 30000,
@@ -342,7 +306,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 105,
+    id: "66e1685ad6ae861dd6810610",
     name: "맥북 프로",
     description: "애플 맥북 프로 13인치",
     price: 1500000,
@@ -351,7 +315,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 104,
+    id: "66e1685ad6ae861dd6810611",
     name: "스니커즈",
     description: "편안한 스니커즈",
     price: 100000,
@@ -360,7 +324,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 103,
+    id: "66e1685ad6ae861dd6810612",
     name: "갤럭시 탭 S7",
     description: "삼성 갤럭시 탭 S7",
     price: 350000,
@@ -369,7 +333,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 102,
+    id: "66e1685ad6ae861dd6810613",
     name: "보스 헤드폰",
     description: "보스 노이즈 캔슬링 헤드폰 700",
     price: 350000,
@@ -378,7 +342,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 101,
+    id: "66e1685ad6ae861dd6810614",
     name: "사무용 의자",
     description: "편안한 사무용 의자",
     price: 120000,
@@ -387,7 +351,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 100,
+    id: "66e1685ad6ae861dd6810615",
     name: "레노버 노트북",
     description: "레노버 아이디어패드 5",
     price: 800000,
@@ -396,7 +360,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 99,
+    id: "66e1685ad6ae861dd6810616",
     name: "갤럭시 S21",
     description: "삼성 갤럭시 S21",
     price: 600000,
@@ -405,7 +369,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 98,
+    id: "66e1685ad6ae861dd6810617",
     name: "아이패드",
     description: "애플 아이패드 10.2인치",
     price: 450000,
@@ -414,7 +378,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 97,
+    id: "66e1685ad6ae861dd6810618",
     name: "퀸사이즈 침대",
     description: "퀸사이즈 침대 프레임",
     price: 500000,
@@ -423,7 +387,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 96,
+    id: "66e1685ad6ae861dd6810619",
     name: "판다인형",
     description: "귀여운 판다인형입니다",
     price: 30000,
@@ -432,7 +396,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 95,
+    id: "66e1685ad6ae861dd681061a",
     name: "갤럭시 탭 S7",
     description: "삼성 갤럭시 탭 S7",
     price: 350000,
@@ -441,7 +405,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 94,
+    id: "66e1685ad6ae861dd681061b",
     name: "보스 헤드폰",
     description: "보스 노이즈 캔슬링 헤드폰 700",
     price: 350000,
@@ -450,7 +414,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 93,
+    id: "66e1685ad6ae861dd681061c",
     name: "사무용 의자",
     description: "편안한 사무용 의자",
     price: 120000,
@@ -459,7 +423,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 92,
+    id: "66e1685ad6ae861dd681061d",
     name: "스니커즈",
     description: "편안한 스니커즈",
     price: 100000,
@@ -468,7 +432,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 91,
+    id: "66e1685ad6ae861dd681061e",
     name: "레노버 노트북",
     description: "레노버 아이디어패드 5",
     price: 800000,
@@ -477,7 +441,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 90,
+    id: "66e1685ad6ae861dd681061f",
     name: "갤럭시 S21",
     description: "삼성 갤럭시 S21",
     price: 600000,
@@ -486,7 +450,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 89,
+    id: "66e1685ad6ae861dd6810620",
     name: "아이패드",
     description: "애플 아이패드 10.2인치",
     price: 450000,
@@ -495,7 +459,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 88,
+    id: "66e1685ad6ae861dd6810621",
     name: "퀸사이즈 침대",
     description: "퀸사이즈 침대 프레임",
     price: 500000,
@@ -504,7 +468,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 87,
+    id: "66e1685ad6ae861dd6810622",
     name: "판다인형",
     description: "귀여운 판다인형입니다",
     price: 30000,
@@ -513,7 +477,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 86,
+    id: "66e1685ad6ae861dd6810623",
     name: "맥북 프로",
     description: "애플 맥북 프로 13인치",
     price: 1500000,
@@ -522,7 +486,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 85,
+    id: "66e1685ad6ae861dd6810624",
     name: "스니커즈",
     description: "편안한 스니커즈",
     price: 100000,
@@ -531,7 +495,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 84,
+    id: "66e1685ad6ae861dd6810625",
     name: "갤럭시 탭 S7",
     description: "삼성 갤럭시 탭 S7",
     price: 350000,
@@ -540,7 +504,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 83,
+    id: "66e1685ad6ae861dd6810626",
     name: "보스 헤드폰",
     description: "보스 노이즈 캔슬링 헤드폰 700",
     price: 350000,
@@ -549,7 +513,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 82,
+    id: "66e1685ad6ae861dd6810627",
     name: "사무용 의자",
     description: "편안한 사무용 의자",
     price: 120000,
@@ -558,7 +522,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 81,
+    id: "66e1685ad6ae861dd6810628",
     name: "레노버 노트북",
     description: "레노버 아이디어패드 5",
     price: 800000,
@@ -567,7 +531,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 80,
+    id: "66e1685ad6ae861dd6810629",
     name: "갤럭시 S21",
     description: "삼성 갤럭시 S21",
     price: 600000,
@@ -576,7 +540,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 79,
+    id: "66e1685ad6ae861dd681062a",
     name: "아이패드",
     description: "애플 아이패드 10.2인치",
     price: 450000,
@@ -585,7 +549,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 78,
+    id: "66e1685ad6ae861dd681062b",
     name: "퀸사이즈 침대",
     description: "퀸사이즈 침대 프레임",
     price: 500000,
@@ -594,7 +558,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 77,
+    id: "66e1685ad6ae861dd681062c",
     name: "판다인형",
     description: "귀여운 판다인형입니다",
     price: 30000,
@@ -603,7 +567,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 76,
+    id: "66e1685ad6ae861dd681062d",
     name: "갤럭시 탭 S7",
     description: "삼성 갤럭시 탭 S7",
     price: 350000,
@@ -612,7 +576,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 75,
+    id: "66e1685ad6ae861dd681062e",
     name: "보스 헤드폰",
     description: "보스 노이즈 캔슬링 헤드폰 700",
     price: 350000,
@@ -621,7 +585,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 74,
+    id: "66e1685ad6ae861dd681062f",
     name: "사무용 의자",
     description: "편안한 사무용 의자",
     price: 120000,
@@ -630,7 +594,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 73,
+    id: "66e1685ad6ae861dd6810630",
     name: "스니커즈",
     description: "편안한 스니커즈",
     price: 100000,
@@ -639,7 +603,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 72,
+    id: "66e1685ad6ae861dd6810631",
     name: "레노버 노트북",
     description: "레노버 아이디어패드 5",
     price: 800000,
@@ -648,7 +612,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 71,
+    id: "66e1685ad6ae861dd6810632",
     name: "갤럭시 S21",
     description: "삼성 갤럭시 S21",
     price: 600000,
@@ -657,7 +621,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 70,
+    id: "66e1685ad6ae861dd6810633",
     name: "아이패드",
     description: "애플 아이패드 10.2인치",
     price: 450000,
@@ -666,7 +630,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 69,
+    id: "66e1685ad6ae861dd6810634",
     name: "퀸사이즈 침대",
     description: "퀸사이즈 침대 프레임",
     price: 500000,
@@ -675,7 +639,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 68,
+    id: "66e1685ad6ae861dd6810635",
     name: "판다인형",
     description: "귀여운 판다인형입니다",
     price: 30000,
@@ -684,7 +648,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 67,
+    id: "66e1685ad6ae861dd6810636",
     name: "맥북 프로",
     description: "애플 맥북 프로 13인치",
     price: 1500000,
@@ -693,7 +657,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 66,
+    id: "66e1685ad6ae861dd6810637",
     name: "스니커즈",
     description: "편안한 스니커즈",
     price: 100000,
@@ -702,7 +666,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 65,
+    id: "66e1685ad6ae861dd6810638",
     name: "갤럭시 탭 S7",
     description: "삼성 갤럭시 탭 S7",
     price: 350000,
@@ -711,7 +675,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 64,
+    id: "66e1685ad6ae861dd6810639",
     name: "보스 헤드폰",
     description: "보스 노이즈 캔슬링 헤드폰 700",
     price: 350000,
@@ -720,7 +684,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 63,
+    id: "66e1685ad6ae861dd681063a",
     name: "사무용 의자",
     description: "편안한 사무용 의자",
     price: 120000,
@@ -729,7 +693,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 62,
+    id: "66e1685ad6ae861dd681063b",
     name: "레노버 노트북",
     description: "레노버 아이디어패드 5",
     price: 800000,
@@ -738,7 +702,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 61,
+    id: "66e1685ad6ae861dd681063c",
     name: "갤럭시 S21",
     description: "삼성 갤럭시 S21",
     price: 600000,
@@ -747,7 +711,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 60,
+    id: "66e1685ad6ae861dd681063d",
     name: "아이패드",
     description: "애플 아이패드 10.2인치",
     price: 450000,
@@ -756,7 +720,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 59,
+    id: "66e1685ad6ae861dd681063e",
     name: "퀸사이즈 침대",
     description: "퀸사이즈 침대 프레임",
     price: 500000,
@@ -765,7 +729,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 58,
+    id: "66e1685ad6ae861dd681063f",
     name: "판다인형",
     description: "귀여운 판다인형입니다",
     price: 30000,
@@ -774,7 +738,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 57,
+    id: "66e1685ad6ae861dd6810640",
     name: "갤럭시 탭 S7",
     description: "삼성 갤럭시 탭 S7",
     price: 350000,
@@ -783,7 +747,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 56,
+    id: "66e1685ad6ae861dd6810641",
     name: "보스 헤드폰",
     description: "보스 노이즈 캔슬링 헤드폰 700",
     price: 350000,
@@ -792,7 +756,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 55,
+    id: "66e1685ad6ae861dd6810642",
     name: "사무용 의자",
     description: "편안한 사무용 의자",
     price: 120000,
@@ -801,7 +765,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 54,
+    id: "66e1685ad6ae861dd6810643",
     name: "스니커즈",
     description: "편안한 스니커즈",
     price: 100000,
@@ -810,7 +774,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 53,
+    id: "66e1685ad6ae861dd6810644",
     name: "레노버 노트북",
     description: "레노버 아이디어패드 5",
     price: 800000,
@@ -819,7 +783,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 52,
+    id: "66e1685ad6ae861dd6810645",
     name: "갤럭시 S21",
     description: "삼성 갤럭시 S21",
     price: 600000,
@@ -828,7 +792,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 51,
+    id: "66e1685ad6ae861dd6810646",
     name: "아이패드",
     description: "애플 아이패드 10.2인치",
     price: 450000,
@@ -837,7 +801,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 50,
+    id: "66e1685ad6ae861dd6810647",
     name: "퀸사이즈 침대",
     description: "퀸사이즈 침대 프레임",
     price: 500000,
@@ -846,7 +810,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 49,
+    id: "66e1685ad6ae861dd6810648",
     name: "판다인형",
     description: "귀여운 판다인형입니다",
     price: 30000,
@@ -855,7 +819,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 48,
+    id: "66e1685ad6ae861dd6810649",
     name: "맥북 프로",
     description: "애플 맥북 프로 13인치",
     price: 1500000,
@@ -864,7 +828,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 47,
+    id: "66e1685ad6ae861dd681064a",
     name: "스니커즈",
     description: "편안한 스니커즈",
     price: 100000,
@@ -873,7 +837,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 46,
+    id: "66e1685ad6ae861dd681064b",
     name: "갤럭시 탭 S7",
     description: "삼성 갤럭시 탭 S7",
     price: 350000,
@@ -882,7 +846,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 45,
+    id: "66e1685ad6ae861dd681064c",
     name: "보스 헤드폰",
     description: "보스 노이즈 캔슬링 헤드폰 700",
     price: 350000,
@@ -891,7 +855,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 44,
+    id: "66e1685ad6ae861dd681064d",
     name: "사무용 의자",
     description: "편안한 사무용 의자",
     price: 120000,
@@ -900,7 +864,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 43,
+    id: "66e1685ad6ae861dd681064e",
     name: "레노버 노트북",
     description: "레노버 아이디어패드 5",
     price: 800000,
@@ -909,7 +873,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 42,
+    id: "66e1685ad6ae861dd681064f",
     name: "갤럭시 S21",
     description: "삼성 갤럭시 S21",
     price: 600000,
@@ -918,7 +882,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 41,
+    id: "66e1685ad6ae861dd6810650",
     name: "아이패드",
     description: "애플 아이패드 10.2인치",
     price: 450000,
@@ -927,7 +891,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 40,
+    id: "66e1685ad6ae861dd6810651",
     name: "퀸사이즈 침대",
     description: "퀸사이즈 침대 프레임",
     price: 500000,
@@ -936,7 +900,7 @@ export const PRODUCTS = [
     updatedAt: "2024-08-08T03:07:23.555Z",
   },
   {
-    id: 39,
+    id: "66e1685ad6ae861dd6810652",
     name: "판다인형",
     description: "귀여운 판다인형입니다",
     price: 30000,
@@ -945,7 +909,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 38,
+    id: "66e1685ad6ae861dd6810653",
     name: "갤럭시 탭 S7",
     description: "삼성 갤럭시 탭 S7",
     price: 350000,
@@ -954,7 +918,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 37,
+    id: "66e1685ad6ae861dd6810654",
     name: "보스 헤드폰",
     description: "보스 노이즈 캔슬링 헤드폰 700",
     price: 350000,
@@ -963,7 +927,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 36,
+    id: "66e1685ad6ae861dd6810655",
     name: "사무용 의자",
     description: "편안한 사무용 의자",
     price: 120000,
@@ -972,7 +936,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 35,
+    id: "66e1685ad6ae861dd6810656",
     name: "스니커즈",
     description: "편안한 스니커즈",
     price: 100000,
@@ -981,7 +945,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 34,
+    id: "66e1685ad6ae861dd6810657",
     name: "레노버 노트북",
     description: "레노버 아이디어패드 5",
     price: 800000,
@@ -990,7 +954,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 33,
+    id: "66e1685ad6ae861dd6810658",
     name: "갤럭시 S21",
     description: "삼성 갤럭시 S21",
     price: 600000,
@@ -999,7 +963,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 32,
+    id: "66e1685ad6ae861dd6810659",
     name: "아이패드",
     description: "애플 아이패드 10.2인치",
     price: 450000,
@@ -1008,7 +972,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 31,
+    id: "66e1685ad6ae861dd681065a",
     name: "퀸사이즈 침대",
     description: "퀸사이즈 침대 프레임",
     price: 500000,
@@ -1017,7 +981,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 30,
+    id: "66e1685ad6ae861dd681065b",
     name: "판다인형",
     description: "귀여운 판다인형입니다",
     price: 30000,
@@ -1026,7 +990,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 29,
+    id: "66e1685ad6ae861dd681065c",
     name: "맥북 프로",
     description: "애플 맥북 프로 13인치",
     price: 1500000,
@@ -1035,7 +999,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 28,
+    id: "66e1685ad6ae861dd681065d",
     name: "스니커즈",
     description: "편안한 스니커즈",
     price: 100000,
@@ -1044,7 +1008,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 27,
+    id: "66e1685ad6ae861dd681065e",
     name: "갤럭시 탭 S7",
     description: "삼성 갤럭시 탭 S7",
     price: 350000,
@@ -1053,7 +1017,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 26,
+    id: "66e1685ad6ae861dd681065f",
     name: "보스 헤드폰",
     description: "보스 노이즈 캔슬링 헤드폰 700",
     price: 350000,
@@ -1062,7 +1026,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 25,
+    id: "66e1685ad6ae861dd6810660",
     name: "사무용 의자",
     description: "편안한 사무용 의자",
     price: 120000,
@@ -1071,7 +1035,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 24,
+    id: "66e1685ad6ae861dd6810661",
     name: "레노버 노트북",
     description: "레노버 아이디어패드 5",
     price: 800000,
@@ -1080,7 +1044,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 23,
+    id: "66e1685ad6ae861dd6810662",
     name: "갤럭시 S21",
     description: "삼성 갤럭시 S21",
     price: 600000,
@@ -1089,7 +1053,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 22,
+    id: "66e1685ad6ae861dd6810663",
     name: "아이패드",
     description: "애플 아이패드 10.2인치",
     price: 450000,
@@ -1098,7 +1062,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 21,
+    id: "66e1685ad6ae861dd6810664",
     name: "퀸사이즈 침대",
     description: "퀸사이즈 침대 프레임",
     price: 500000,
@@ -1107,7 +1071,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 20,
+    id: "66e1685ad6ae861dd6810665",
     name: "판다인형",
     description: "귀여운 판다인형입니다",
     price: 30000,
@@ -1116,7 +1080,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 19,
+    id: "66e1685ad6ae861dd6810666",
     name: "갤럭시 탭 S7",
     description: "삼성 갤럭시 탭 S7",
     price: 350000,
@@ -1125,7 +1089,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 18,
+    id: "66e1685ad6ae861dd6810667",
     name: "보스 헤드폰",
     description: "보스 노이즈 캔슬링 헤드폰 700",
     price: 350000,
@@ -1134,7 +1098,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 17,
+    id: "66e1685ad6ae861dd6810668",
     name: "사무용 의자",
     description: "편안한 사무용 의자",
     price: 120000,
@@ -1143,7 +1107,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 16,
+    id: "66e1685ad6ae861dd6810669",
     name: "스니커즈",
     description: "편안한 스니커즈",
     price: 100000,
@@ -1152,7 +1116,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 15,
+    id: "66e1685ad6ae861dd681066a",
     name: "레노버 노트북",
     description: "레노버 아이디어패드 5",
     price: 800000,
@@ -1161,7 +1125,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 14,
+    id: "66e1685ad6ae861dd681066b",
     name: "갤럭시 S21",
     description: "삼성 갤럭시 S21",
     price: 600000,
@@ -1170,7 +1134,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 13,
+    id: "66e1685ad6ae861dd681066c",
     name: "아이패드",
     description: "애플 아이패드 10.2인치",
     price: 450000,
@@ -1179,7 +1143,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 12,
+    id: "66e1685ad6ae861dd681066d",
     name: "퀸사이즈 침대",
     description: "퀸사이즈 침대 프레임",
     price: 500000,
@@ -1188,7 +1152,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 11,
+    id: "66e1685ad6ae861dd6810660e",
     name: "판다인형",
     description: "귀여운 판다인형입니다",
     price: 30000,
@@ -1197,7 +1161,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 10,
+    id: "66e1685ad6ae861dd681066f",
     name: "맥북 프로",
     description: "애플 맥북 프로 13인치",
     price: 1500000,
@@ -1206,7 +1170,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 9,
+    id: "66e1685ad6ae861dd6810670",
     name: "스니커즈",
     description: "편안한 스니커즈",
     price: 100000,
@@ -1215,7 +1179,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 8,
+    id: "66e1685ad6ae861dd6810671",
     name: "갤럭시 탭 S7",
     description: "삼성 갤럭시 탭 S7",
     price: 350000,
@@ -1224,7 +1188,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 7,
+    id: "66e1685ad6ae861dd6810672",
     name: "보스 헤드폰",
     description: "보스 노이즈 캔슬링 헤드폰 700",
     price: 350000,
@@ -1233,7 +1197,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 6,
+    id: "66e1685ad6ae861dd6810673",
     name: "사무용 의자",
     description: "편안한 사무용 의자",
     price: 120000,
@@ -1242,7 +1206,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 5,
+    id: "66e1685ad6ae861dd6810674",
     name: "레노버 노트북",
     description: "레노버 아이디어패드 5",
     price: 800000,
@@ -1251,7 +1215,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 4,
+    id: "66e1685ad6ae861dd6810675",
     name: "갤럭시 S21",
     description: "삼성 갤럭시 S21",
     price: 600000,
@@ -1260,7 +1224,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 3,
+    id: "66e1685ad6ae861dd6810676",
     name: "아이패드",
     description: "애플 아이패드 10.2인치",
     price: 450000,
@@ -1269,7 +1233,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 2,
+    id: "66e1685ad6ae861dd6810677",
     name: "퀸사이즈 침대",
     description: "퀸사이즈 침대 프레임",
     price: 500000,
@@ -1278,7 +1242,7 @@ export const PRODUCTS = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
   {
-    id: 1,
+    id: "66e1685ad6ae861dd6810678",
     name: "판다인형",
     description: "귀여운 판다인형입니다",
     price: 30000,
