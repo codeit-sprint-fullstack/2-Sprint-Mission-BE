@@ -14,6 +14,7 @@
   },
   "type": "module",
   "scripts": {
+    "seed": "node prisma/seed.js",
     "dev": "nodemon app.js",
     "start": "node app.js"
   },
