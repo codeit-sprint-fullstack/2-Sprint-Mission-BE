@@ -28,4 +28,4 @@ DELETE http://localhost:3000/products/66f141891052044ecb9792e6
 
 ###s
 
-GET http://localhost:3000/products?page=1&pageSize=3&sort=recent
+GET http://localhost:3000/products?page=1&pageSize=999&sort=recent
