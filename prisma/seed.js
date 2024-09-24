@@ -17,7 +17,7 @@ async function main() {
     data: article,
     skipDuplicates: true,
   });
-  
+
   await prisma.comment.createMany({
     data: comment,
   });

@@ -249,7 +249,7 @@ app.get(
   "/article/:id/comments",
   asyncHandler(async (req, res) => {
     const { id } = req.params;
-    const {comments} = await prisma.article.findUniqueOrThrow({
+    const { comments } = await prisma.article.findUniqueOrThrow({
       where: { id },
       include: {
         comments: true,
