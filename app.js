@@ -1,11 +1,19 @@
 import express from "express";
 import mongoose from "mongoose";
 import Product from "./models/Product.js";
-import dotenv from "dotenv";
+import cors from "cors";
+import * as dotenv from "dotenv";
 dotenv.config();
 
 const app = express();
+
+const corsOptions = {
+  origin: ["http://localhost:3000", "https://sprint-panda.netlify.app"],
+};
+
+app.use(cors());
 app.use(express.json());
+
 mongoose
   .connect(process.env.DATABASE_URL)
   .then(() => console.log("Connected to DB"));
