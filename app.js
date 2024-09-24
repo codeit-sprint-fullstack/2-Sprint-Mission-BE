@@ -178,7 +178,7 @@ app.get(
 app.get(
   "/articles/:id",
   asyncHandler(async (req, res) => {
-    const { id } = req.body;
+    const { id } = req.params;
     const article = await prisma.article.findUniqueOrThrow({
       where: { id }
     });
@@ -329,7 +329,7 @@ app.post(
         ...commentFields
       }
     });
-    res.status(203).send(comment);
+    res.status(201).send(comment);
   })
 );
 app.patch(
@@ -341,7 +341,7 @@ app.patch(
       where: { id },
       data: req.body
     });
-    res.send(comment);
+    res.status(203).send(comment);
   })
 );
 app.delete(
