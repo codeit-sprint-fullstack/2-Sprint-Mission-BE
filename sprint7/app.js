@@ -45,13 +45,12 @@ app.get(
   asyncHandler(async (req, res) => {
     const { page = 1, limit = 10, order = "newest", search = "" } = req.query;
     const offset = (page - 1) * limit;
-    let orderBy =
-      order === "oldest" ? { createdAt: "asc" } : { createdAt: "desc" };
     const products = await prisma.product.findMany({
       where: {
         name: { contains: search, mode: "insensitive" },
       },
-      orderBy,
+      orderBy:
+        order === "oldest" ? { createdAt: "asc" } : { createdAt: "desc" },
       take: parseInt(limit),
       skip: parseInt(offset),
       include: {
@@ -126,9 +125,6 @@ app.get(
     const { page = 1, limit = 10, order = "newest", search = "" } = req.query;
     const offset = (page - 1) * limit;
 
-    let orderBy =
-      order === "oldest" ? { createdAt: "asc" } : { createdAt: "desc" };
-
     const articles = await prisma.article.findMany({
       where: {
         OR: [
@@ -136,7 +132,8 @@ app.get(
           { content: { contains: search, mode: "insensitive" } },
         ],
       },
-      orderBy,
+      orderBy:
+        order === "oldest" ? { createdAt: "asc" } : { createdAt: "desc" },
       skip: Number(offset),
       take: Number(limit),
       select: {
@@ -226,7 +223,7 @@ app.get(
       cursor: {
         id: cursor,
       },
-      orderBy: { createdAt: "asc" },
+      orderBy: { createdAt: "desc" },
     });
     res.send(comments);
   })
@@ -286,7 +283,7 @@ app.get(
     const { productId } = req.params;
     const comments = await prisma.productComment.findMany({
       where: { productId },
-      orderBy: { createdAt: "asc" },
+      orderBy: { createdAt: "desc" },
     });
     res.send(comments);
   })
