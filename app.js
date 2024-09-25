@@ -1,22 +1,22 @@
-import express from "express";
-import mongoose from "mongoose";
-import Item from "./models/Product.js";
 import * as dotenv from "dotenv";
-import cors from "cors";
+dotenv.config();
+import express from "express";
+import { PrismaClient, Prisma } from "@prisma/client";
+import {
+  CreateProduct,
+  CreateArticle,
+  PatchProduct,
+  PatchArticle,
+  CreateComment,
+  PatchComment,
+} from "./structs.js";
+import { assert } from "superstruct";
+import cors from 'cors';
+
+const prisma = new PrismaClient();
 
 const app = express();
-dotenv.config();
-
-const corsOptions = {
-  origin: [
-    "http://127.0.0.1:3000",
-    "http://localhost:3000",
-    "https://codeit-sprint-mission1.netlify.app",
-  ],
-  methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
-};
-
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(express.json());
 
 function asyncHandler(handler) {
@@ -24,10 +24,16 @@ function asyncHandler(handler) {
     try {
       await handler(req, res);
     } catch (e) {
-      if (e.name === "ValidationError") {
+      if (
+        e.name === "StructError" ||
+        e instanceof Prisma.PrismaClientValidationError
+      ) {
         res.status(400).send({ message: e.message });
-      } else if (e.name === "CastError") {
-        res.status(404).send({ message: "아이디를 찾을 수 없습니다." });
+      } else if (
+        e instanceof Prisma.PrismaClientKnownRequestError &&
+        e.code === "P2025"
+      ) {
+        res.sendStatus(404);
       } else {
         res.status(500).send({ message: e.message });
       }
@@ -35,103 +41,278 @@ function asyncHandler(handler) {
   };
 }
 
+/*********** products ***********/
+
 app.get(
   "/items",
   asyncHandler(async (req, res) => {
-    //쿼리 파라미터
-    const { page = 1, limit = 10, sort = "recent", search = "" } = req.query;
-    //페이지 네이션 offset 계산
-    const offset = (page - 1) * limit;
-
-    // 검색 조건 설정(name, disciption에 serch단어가 포함된 경우)
-    const searchQuery = search
-      ? {
-          $or: [
-            { name: { $regex: search, $options: "i" } },
-            { description: { $regex: search, $options: "i" } },
-            //regex : 정규식 패턴 조건, options: i => 대소문자 구분없이
-          ],
-        }
-      : {};
-
-    //정렬조건 설정(최신순이면 createdAt 기준 내림차순 정렬)
-    const sortOption = { createdAt: sort === "recent" ? -1 : 1 };
-
-    //상품 목록 조회 (페이지 네이션, 검색, 정렬 적용)
-    const items = await Item.find(searchQuery)
-      .sort(sortOption) // 정렬 적용
-      .skip(offset) // offset 방식으로 페이지네이션
-      .limit(Number(limit)) // 한 번에 가져올 상품 수 제한
-      .select("id name price createdAt tags"); // 선택한 필드만 조회
-    //전체 상품 수 계산 (검색 조건 적용)
-    const totalItems = await Item.countDocuments(searchQuery);
-
-    res.send({
-      totalItems, //전체상품수
-      page: Number(page), // 현재 페이지
-      limit: Number(limit), // 한페이지에 표시할 상품 수
-      items, // 조회된 상품 목록
+    const { offset = 0, limit = 10, order = "recent", searchTerm } = req.query;
+    let orderBy;
+    switch (order) {
+      case "favorite":
+        orderBy = { favoriteCount: "desc" };
+        break;
+      case "recent":
+      default:
+        orderBy = { createdAt: "desc" };
+    }
+    const products = await prisma.product.findMany({
+      orderBy,
+      skip: parseInt(offset),
+      take: parseInt(limit),
+      include: {
+        comments: {
+          select: {
+            content: true,
+          },
+        },
+      },
+      where: {
+        OR: [
+          {
+            name: {
+              contains: searchTerm || " ",
+              mode: "insensitive",
+            },
+          },
+          {
+            description: {
+              contains: searchTerm || " ",
+              mode: "insensitive",
+            },
+          },
+        ],
+      },
     });
+    res.send(products);
   })
 );
 
-//상품 상세 조회 API
 app.get(
   "/items/:id",
   asyncHandler(async (req, res) => {
-    const id = req.params.id;
-    const item = await Item.findById(id).select(
-      "name description price tags createdAt"
-    );
-    if (item) {
-      res.send(item);
-    } else {
-      res.status(404).send({ message: "아이디를 찾을 수 없습니다." });
-    }
+    const { id } = req.params;
+    const product = await prisma.product.findUniqueOrThrow({
+      where: { id },
+      include: {
+        comments: true,
+      },
+    });
+    res.send(product);
   })
 );
 
 app.post(
   "/items",
   asyncHandler(async (req, res) => {
-    const newItem = await Item.create(req.body);
-    res.status(201).send(newItem);
+    assert(req.body, CreateProduct);
+    const product = await prisma.product.create({
+      data: req.body,
+    });
+    res.status(201).send(product);
   })
 );
 
 app.patch(
   "/items/:id",
   asyncHandler(async (req, res) => {
-    const id = req.params.id;
-    const item = await Item.findById(id);
-    if (item) {
-      Object.keys(req.body).forEach((key) => {
-        item[key] = req.body[key];
-      });
-      await item.save();
-      res.send(item);
-    } else {
-      res.status(404).send({ message: "아이디를 찾을 수 없습니다." });
-    }
+    assert(req.body, PatchProduct);
+    const { id } = req.params;
+    const product = await prisma.product.update({
+      where: { id },
+      data: req.body,
+    });
+    res.send(product);
   })
 );
 
 app.delete(
   "/items/:id",
   asyncHandler(async (req, res) => {
-    const id = req.params.id;
-    const item = await Item.findByIdAndDelete(id);
-    if (item) {
-      res.sendStatus(204);
-    } else {
-      res.status(404).send({ message: "아이디를 찾을 수 없습니다." });
-    }
+    const { id } = req.params;
+    await prisma.product.delete({
+      where: { id },
+    });
+    res.sendStatus(204);
   })
 );
 
-mongoose
-  .connect(process.env.DATABASE_URL)
-  .then(() => console.log("Connected to DB"));
+app.get(
+  "/items/:id/comments",
+  asyncHandler(async (req, res) => {
+    const { id } = req.params;
+    const { comments } = await prisma.product.findUniqueOrThrow({
+      where: { id },
+      include: {
+        comments: true,
+      },
+    });
+    res.send(comments);
+  })
+);
+
+/*********** article ***********/
+
+app.get(
+  "/article",
+  asyncHandler(async (req, res) => {
+    const { offset = 0, limit = 10, order = "recent", search } = req.query;
+    let orderBy;
+    switch (order) {
+      case "older":
+        orderBy = { createdAt: "asc" };
+        break;
+      case "recent":
+      default:
+        orderBy = { createdAt: "desc" };
+    }
+    const articles = await prisma.article.findMany({
+      skip: parseInt(offset),
+      take: parseInt(limit),
+      orderBy,
+      include: {
+        comments: {
+          select: {
+            content: true,
+          },
+        },
+      },
+      where: {
+        OR: [
+          {
+            title: {
+              contains: search || " ", //title에 사용자가 입력한 검색어를 담고있는 변수가 포함된경우
+              mode: "insensitive", //대소문자 구분없이 검색
+            },
+          },
+          {
+            content: {
+              contains: search || " ", //content에 사용자가 입력한 검색어를 담고있는 변수가 포함된경우
+              mode: "insensitive",
+            },
+          },
+        ],
+      },
+    });
+    res.send(articles);
+  })
+);
+
+app.get(
+  "/article/:id",
+  asyncHandler(async (req, res) => {
+    const { id } = req.params;
+    const article = await prisma.article.findUniqueOrThrow({
+      where: { id },
+      include: {
+        comments: true,
+      },
+    });
+    res.send(article);
+  })
+);
+
+app.post(
+  "/article",
+  asyncHandler(async (req, res) => {
+    assert(req.body, CreateArticle);
+    const article = await prisma.article.create({
+      data: req.body,
+    });
+    res.status(201).send(article);
+  })
+);
+
+app.patch(
+  "/article/:id",
+  asyncHandler(async (req, res) => {
+    assert(req.body, PatchArticle);
+    const { id } = req.params;
+    const article = await prisma.article.update({
+      where: { id },
+      data: req.body,
+    });
+    res.send(article);
+  })
+);
+
+app.delete(
+  "/article/:id",
+  asyncHandler(async (req, res) => {
+    const { id } = req.params;
+    await prisma.article.delete({
+      where: { id },
+    });
+    res.sendStatus(204);
+  })
+);
+
+app.get(
+  "/article/:id/comments",
+  asyncHandler(async (req, res) => {
+    const { id } = req.params;
+    const { comments } = await prisma.article.findUniqueOrThrow({
+      where: { id },
+      include: {
+        comments: true,
+      },
+    });
+    res.send(comments);
+  })
+);
+
+/*********** comment ***********/
+
+app.get(
+  "/comments",
+  asyncHandler(async (req, res) => {
+    const comments = await prisma.comment.findMany();
+    res.send(comments);
+  })
+);
+
+app.get(
+  "/comments/:id",
+  asyncHandler(async (req, res) => {
+    const { id } = req.params;
+    const comment = await prisma.comment.findUniqueOrThrow({
+      where: { id },
+    });
+    res.send(comment);
+  })
+);
+
+app.post(
+  "/comments",
+  asyncHandler(async (req, res) => {
+    assert(req.body, CreateComment);
+    const comment = await prisma.comment.create({
+      data: req.body,
+    });
+    res.status(201).send(comment);
+  })
+);
+
+app.patch(
+  "/comments/:id",
+  asyncHandler(async (req, res) => {
+    assert(req.body, PatchComment);
+    const { id } = req.params;
+    const comment = await prisma.comment.update({
+      where: { id },
+      data: req.body,
+    });
+    res.send(comment);
+  })
+);
+
+app.delete(
+  "/comments/:id",
+  asyncHandler(async (req, res) => {
+    const { id } = req.params;
+    await prisma.comment.delete({ where: { id } });
+    res.sendStatus(204);
+  })
+);
 
 app.listen(process.env.PORT || 3000, () => console.log("Server Started"));
-//포트번호는 컴퓨터 내에서 실행되는 프로세스를 구분짓기 위한 번호.
