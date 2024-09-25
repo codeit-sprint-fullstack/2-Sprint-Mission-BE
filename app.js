@@ -42,6 +42,23 @@ app.get("/products", asyncHandler(async (req, res) => {
   res.send({products, totalCount});
 }));
 
+app.get("/products/search", asyncHandler(async (req, res) => {
+  const { query } = req.query;
+
+  const products = await Product.find({
+    $or: [
+      { name: { $regex: query, $options: 'i' } },
+      { description: { $regex: query, $options: 'i' } }
+    ]
+  })
+
+  if (products.length > 0) {
+    res.send(products);
+  } else {
+    res.status(404).send({ message: '검색 결과가 없습니다!' })
+  }
+}))
+
 app.get("/products/:id", asyncHandler(async (req, res) => {
   const id = req.params.id;
   const product = await Product.findById(id);
@@ -52,6 +69,7 @@ app.get("/products/:id", asyncHandler(async (req, res) => {
     res.status(404).send({message: '해당 데이터를 찾을 수 없습니다!'});
   }
 }))
+
 app.post("/products", asyncHandler(async (req, res) => {
   const newProduct = await Product.create(req.body);
   res.send(newProduct);
