@@ -1,4 +1,4 @@
-const data = [
+export const PRODUCT_DATA = [
   {
     name: '쿠쿠 밥솥',
     description: '쿠쿠하세요~~쿠쿠하세요~~',
@@ -1185,4 +1185,31 @@ const data = [
   }
 ];
 
-export default data;
+export const USER_DATA = [
+  {
+    email: "A@example.com",
+    nickname: "A",
+    password: "pre-pass"
+  },
+  {
+    email: "B@example.com",
+    nickname: "B",
+    password: "pre-pass"
+  },
+  {
+    email: "C@example.com",
+    nickname: "C",
+    password: "pre-pass"
+  },
+  {
+    email: "D@example.com",
+    nickname: "D",
+    password: "pre-pass"
+  },
+  {
+    email: "E@example.com",
+    nickname: "E",
+    password: "pre-pass"
+  },
+];
+

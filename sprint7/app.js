@@ -2,8 +2,11 @@ import express from "express";
 import { Prisma, PrismaClient } from "@prisma/client";
 import cors from 'cors';
 import {
+	CreateArticle,
 	CreateProduct,
+	CreateUser,
 	PatchProduct,
+	PatchUser,
 } from './structs.js';
 import * as dotenv from 'dotenv';
 import { assert } from "superstruct";
@@ -49,10 +52,84 @@ function asyncHandler(handler) {
 	});
 }
 
+/////////////////////////////////////////////////////
+// Users
+/////////////////////////////////////////////////////
+
+app.post("/users", asyncHandler(async (req, res) => {
+	assert(req.body, CreateUser);
+	const user = await prisma.user.create({
+		data: req.body,
+	});
+	res.send(user);
+}));
+
+app.patch("/users/:id", asyncHandler(async (req, res) => {
+	assert(req.body, PatchUser);
+	const { id } = req.params;
+	const user = await prisma.user.update({
+		where: { id },
+		data: req.body,
+	});
+	res.send(user);
+}));
+
+app.get("/users", asyncHandler(async (req, res) => {
+	const { offset = 0, limit = 10, sort = "recent", keyword = "" } = req.query;
+	const query = keyword ? {
+		OR: [{
+				email: { contains: keyword }
+			},
+			{
+				nickname: { contains: keyword }
+			}]
+		}
+	: {};
+	let orderBy;
+	switch (orderBy) {
+		case "oldest":
+			orderBy = { createdAt: "asc" };
+			break;
+		case "recent":
+		default:
+			orderBy = { createdAt: "desc" };
+	}
+	const totalCount = await prisma.user.count({
+		where: query,
+	});
+	const users = await prisma.user.findMany({
+		where: query,
+		orderBy,
+		skip: parseInt(offset),
+		take: parseInt(limit),
+	});
+	res.send({ list: users, totalCount });
+}));
+
+app.get("/users/:id", asyncHandler(async (req, res) => {
+	const { id } = req.params;
+	const user = await prisma.user.findUniqueOrThrow({
+		where: { id },
+	});
+	res.send(user);
+}));
+
+app.delete("/users/:id", asyncHandler(async (req, res) => {
+	const { id } = req.params;
+	const user = await prisma.user.delete({
+		where: { id },
+	});
+	res.status(HttpStatus.NO_CONTENT).send(user);
+}));
+
+/////////////////////////////////////////////////////
+// Products
+/////////////////////////////////////////////////////
+
 app.post("/products", asyncHandler(async (req, res) => {
 	assert(req.body, CreateProduct);
 	const product = await prisma.product.create({
-		data: req.body
+		data: req.body,
 	});
 	res.send(product);
 }));
@@ -116,6 +193,53 @@ const { id } = req.params;
 		where: { id },
 	});
 	res.status(HttpStatus.NO_CONTENT).send(product);
+}));
+
+/////////////////////////////////////////////////
+// * Article
+/////////////////////////////////////////////////
+
+app.post("/articles", asyncHandler(async (req, res) => {
+	assert(req.body, CreateArticle);
+	const article = await prisma.article.create({
+		data: req.body,
+	});
+	res.send(article);
+}));
+
+app.get("/articles", asyncHandler(async (req, res) => {
+	const { offset = 0, limit = 12, sort = "recent", keyword = "" } = req.query;
+	const query = keyword ? {
+		OR: [{
+				name: { contains: keyword }
+			},
+			{
+				description: { contains: keyword }
+			}]
+		}
+	: {};
+	let orderBy;
+	switch (orderBy) {
+		case "favorite":
+			orderBy = { favoriteCount: "desc" };
+			break;
+		case "oldest":
+			orderBy = { createdAt: "asc" };
+			break;
+		case "recent":
+		default:
+			orderBy = { createdAt: "desc" };
+	}
+	const totalCount = await prisma.product.count({
+		where: query,
+	});
+	const products = await prisma.product.findMany({
+		where: query,
+		orderBy,
+		skip: parseInt(offset),
+		take: parseInt(limit),
+	});
+	res.send({ list: products, totalCount });
 }));
 
 app.listen(process.env.PORT || 3000, () => console.log("Server on"));

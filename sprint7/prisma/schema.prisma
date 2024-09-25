@@ -14,11 +14,12 @@ datasource db {
 }
 
 model User {
-  id              String           @id @default(uuid())
+  id              String           @id @default(uuid()) // * Can be used by salt in encryption.
   email           String           @unique
   nickname        String
   password        String
-  pwdIter         Int              @default(1000)
+  pwdIter         Int              @default(10000)
+  ssnIter         Int              @default(1000)
   articles        Article[]
   articleComments ArticleComment[]
   productComments ProductComment[]
@@ -42,8 +43,8 @@ model Product {
 model Article {
   id              String           @id @default(uuid())
   title           String
-  authorId        String
-  author          User             @relation(fields: [authorId], references: [id], onDelete: Restrict)
+  authorId        String?
+  author          User?            @relation(fields: [authorId], references: [id], onDelete: SetNull)
   content         String
   articleComments ArticleComment[]
   createdAt       DateTime         @default(now())
@@ -53,10 +54,10 @@ model Article {
 model ProductComment {
   id          String   @id @default(uuid())
   content     String
-  productId   String
-  product     Product  @relation(fields: [productId], references: [id], onDelete: Restrict)
-  commenterId String
-  commenter   User     @relation(fields: [commenterId], references: [id])
+  productId   String?
+  product     Product? @relation(fields: [productId], references: [id], onDelete: SetNull)
+  commenterId String?
+  commenter   User?    @relation(fields: [commenterId], references: [id], onDelete: SetNull)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
@@ -64,10 +65,10 @@ model ProductComment {
 model ArticleComment {
   id          String   @id @default(uuid())
   content     String
-  articleId   String
-  article     Article  @relation(fields: [articleId], references: [id])
-  commenterId String
-  commenter   User     @relation(fields: [commenterId], references: [id])
+  articleId   String?
+  article     Article? @relation(fields: [articleId], references: [id], onDelete: SetNull)
+  commenterId String?
+  commenter   User?    @relation(fields: [commenterId], references: [id], onDelete: SetNull)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }

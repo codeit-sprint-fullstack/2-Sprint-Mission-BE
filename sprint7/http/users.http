@@ -1,0 +1,33 @@
+GET http://localhost:3000/users
+
+###
+
+GET http://localhost:3000/users?offset=0&order=newest&keyword=.com
+
+###
+
+GET http://localhost:3000/users/f545b997-baaf-4eb3-8f78-a7fc62bd6538
+
+###
+
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+	"email": "kipacti@gmail.com",
+	"nickname": "kipid",
+	"password": "pre-pass"
+}
+
+###
+
+PATCH http://localhost:3000/users/1dbc0f2b-155a-4fbc-80ec-a2c66858952e
+Content-Type: application/json
+
+{
+	"nickname": "새로운 닉네임입니다."
+}
+
+###
+
+DELETE http://localhost:3000/users/1dbc0f2b-155a-4fbc-80ec-a2c66858952e

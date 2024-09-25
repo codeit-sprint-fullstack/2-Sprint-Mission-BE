@@ -35,13 +35,13 @@
 
 ## 기본: npx prisma init
 
-```
+```[.scrollable]
 npx prisma init --datasource-provider postgresql
 ```/
 
 명령을 실행해서 다음과 같은 파일을 얻자.
 
-```
+```[.scrollable]
 generator client {
   provider = "prisma-client-js"
 }
@@ -56,7 +56,7 @@ datasource db {
 <code>.env</code> 파일 설정을 다음과 같이 하자.
 </div>
 
-```
+```[.scrollable]
 DATABASE_URL="postgresql://postgres:[password]@localhost:5432/panda_market_dev?schema=public"
 PORT=3000
 ```/
@@ -67,7 +67,7 @@ panda_market_dev DATABASE 가 없으면 알아서 만들어 준다.
 
 ## Schema 모음.
 
-Product 관련: <refer class="model-Product"></refer>, <refer class="struct-Product"></refer>, <refer class="model-ProductComment"></refer>
+Product 관련: <refer class="model-Product"></refer>, <refer class="model-ProductComment"></refer>
 
 User 관련: <refer class="model-User"></refer>
 
@@ -75,11 +75,43 @@ Article 관련: <refer class="model-Article"></refer>, <refer class="model-Artic
 
 
 
+### Struct 제약조건 모음.
+
+Product 관련: <refer class="struct-Product"></refer>
+
+User 관련: <refer class="struct-User"></refer>
+
+Article 관련: <refer class="struct-Article"></refer>
+
+Comments 관련: <refer class="struct-ProductComment"></refer>, <refer class="struct-ArticleComment"></refer>
+
+
+
 ## Schema 짜기.
+
+<div id="model-User"><div class="number none">User</div>
+
+```[.scrollable]
+model User {
+  id              String           @id @default(uuid()) // * Can be used by salt in encryption.
+  email           String           @unique
+  nickname        String
+  password        String
+  pwdIter         Int              @default(10000)
+  ssnIter         Int              @default(1000)
+  articles        Article[]
+  articleComments ArticleComment[]
+  productComments ProductComment[]
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+}
+```/
+
+</div>
 
 <div id="model-Product"><div class="number none">Product</div>
 
-```
+```[.scrollable]
 model Product {
   id              String           @id @default(uuid())
   name            String
@@ -96,27 +128,9 @@ model Product {
 
 </div>
 
-<div id="model-User"><div class="number none">User</div>
-
-```
-model User {
-  id              String           @id @default(uuid())
-  email           String           @unique
-  nickname        String
-  password        String
-  articles        Article[]
-  articleComments ArticleComment[]
-  productComments ProductComment[]
-  createdAt       DateTime         @default(now())
-  updatedAt       DateTime         @updatedAt
-}
-```/
-
-</div>
-
 <div id="model-Article"><div class="number none">Article</div>
 
-```
+```[.scrollable]
 model Article {
   id              String           @id @default(uuid())
   title           String
@@ -133,7 +147,7 @@ model Article {
 
 <div id="model-ProductComment"><div class="number none">ProductComment</div>
 
-```
+```[.scrollable]
 model ProductComment {
   id          String   @id @default(uuid())
   content     String
@@ -150,7 +164,7 @@ model ProductComment {
 
 <div id="model-ArticleComment"><div class="number none">ArticleComment</div>
 
-```
+```[.scrollable]
 model ArticleComment {
   id          String   @id @default(uuid())
   content     String
@@ -167,13 +181,11 @@ model ArticleComment {
 
 
 
-
-
 ### DATA seeding
 
 적당한 mock data 를 가지고 DATA 를 seeding 해주자.
 
-```
+```[.scrollable]
 import { PrismaClient } from "@prisma/client";
 import data from "./mock.js";
 import * as dotenv from 'dotenv';
@@ -208,7 +220,7 @@ main()
 
 <div id="struct-Product"><div class="number none">struct-Product</div>
 
-```
+```[.scrollable]
 import * as s from 'superstruct';
 import isUuid from 'is-uuid';
 
@@ -235,17 +247,88 @@ export const PatchProduct = s.object({
 <code>s.set(s.string())</code> 은 어떻게 데이터를 보내는지 모르겠어서 못썼음. 그냥 array 방식으로 묶으면 될줄 알았는데... =ㅇ=;; <code>["가", "나", "다"]</code> 는 Set 가 아니라고 함.
 </div>
 
-<div id="struct-Article"><div class="number none">struct-Article</div>
+사용하는 <code>define</code> 은
 
-```
-export const CreateArticle = s.object()
- title           String
-  authorId        String
-  author          User             @relation(fields: [authorId], references: [id], onDelete: Restrict)
-  content         Str
+```[.scrollable]
+import * as s from 'superstruct';
+import isEmail from 'is-email';
+import isUuid from 'is-uuid';
+
+const Uuid = s.define('Uuid', (value) => isUuid.v4(value));
+const email = s.define('email', (value) => isEmail(value));
+```/
+
+<div id="struct-User"><div class="number none">struct-User</div>
+
+```[.scrollable]
+export const CreateUser = s.object({
+	email: email,
+	nickname: s.size(s.string(), 1, 20),
+	password: s.string()
+});
+export const PatchUser = s.partial(CreateUser);
+	// * User id 는 따로 받아야 함.
 ```/
 
 </div>
+
+<div id="struct-Product"><div class="number none">struct-Product</div>
+
+```[.scrollable]
+export const CreateProduct = s.object({
+	name: s.size(s.string(), 1, 10),
+	description: s.size(s.string(), 10, 100),
+	price: s.min(s.number(), 0),
+	tags: s.size(s.array(s.string()), 0, 15),
+	images: s.size(s.array(s.string()), 1, 2),
+	favoriteCount: s.min(s.integer(), 0),
+});
+export const PatchProduct = s.partial(CreateProduct);
+	// * Product id 는 따로 받아야 함.
+```/
+
+</div>
+
+<div id="struct-Article"><div class="number none">struct-Article</div>
+
+```[.scrollable]
+export const CreateArticle = s.object({
+	title: s.size(s.string(), 1, 20),
+	authorId: Uuid,
+	content: s.size(s.string(), 10, 500),
+});
+export const PatchArticle = s.partial(CreateArticle);
+	// * Article id 는 따로 받아야 함.
+```/
+
+</div>
+
+<div id="struct-ProductComment"><div class="number none">struct-ProductComment</div>
+
+```[.scrollable]
+export const CreateProductComment = s.object({
+	productId: Uuid,
+	commenterId: Uuid,
+	content: s.size(s.string(), 1, 255),
+});
+	// * Patch 는 위 데이터에 id 추가.
+```/
+
+</div>
+
+<div id="struct-ArticleComment"><div class="number none">struct-ArticleComment</div>
+
+```[.scrollable]
+export const CreateArticleComment = s.object({
+	articleId: Uuid,
+	commenterId: Uuid,
+	content: s.size(s.string(), 1, 255),
+});
+	// * Patch 는 위 데이터에 id 추가.
+```/
+
+</div>
+
 
 
 ## RRA
@@ -271,7 +354,7 @@ m.delayPad=0;
  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
 **/
 window.disqus_config=function () {
-	this.page.identifier="DATABASE-setup-of-View-My-StartUp"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+	this.page.identifier="DATABASE-setup-of-Panda-Market-by-kipid"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
 	this.page.url=`https://kipid.tistory.com/entry/${this.page.identifier}`; // Replace PAGE_URL with your page's canonical URL variable
 };
 })(window.k, jQuery);

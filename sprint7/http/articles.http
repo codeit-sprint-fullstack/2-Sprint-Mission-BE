@@ -1,0 +1,33 @@
+GET http://localhost:3000/articles
+
+###
+
+GET http://localhost:3000/articles?offset=0&order=newest&keyword=갤
+
+###
+
+GET http://localhost:3000/articles/43483dc9-0937-4508-8863-97913976511c
+
+###
+
+POST http://localhost:3000/articles
+Content-Type: application/json
+
+{
+	"title": "코드잇 후디5 후기",
+	"authorId": "",
+	"content": "38000원의 가성비 최고~!",
+}
+
+###
+
+PATCH http://localhost:3000/articles/e97045ac-5853-41c7-95a2-06e8c8c5acac
+Content-Type: application/json
+
+{
+	"description": "새로운 설명입니다."
+}
+
+###
+
+DELETE http://localhost:3000/articles/da8584a8-1048-4215-b271-29dbce8b97fc
