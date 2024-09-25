@@ -8,7 +8,7 @@ Content-Type: application/json
 
 ###
 
-PATCH http://localhost:3000/articles/6c378b9a-3fdd-453c-b6a9-6e2fc90666a5/comment/f0041831-0380-41dc-b254-49f8eb9f6d33
+PATCH http://localhost:3000/articles/6c378b9a-3fdd-453c-b6a9-6e2fc90666a5/comment/d9bc4a1b-bbd3-4936-8769-0c37536df8e4
 Content-Type: application/json
 
 {
@@ -32,7 +32,7 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost:3000/products/0478f776-6862-48f0-9022-122bb172930a/comment/aba915b4-81ca-4f73-9a45-0a1536cc7777
+PATCH http://localhost:3000/products/0478f776-6862-48f0-9022-122bb172930a/comment/023fe042-bab1-499e-945f-addfb42ea6df
 Content-Type: application/json
 
 {
@@ -43,3 +43,11 @@ Content-Type: application/json
 ###
 
 DELETE http://localhost:3000/products/0478f776-6862-48f0-9022-122bb172930a/comment/aba915b4-81ca-4f73-9a45-0a1536cc7777
+
+###
+
+GET http://localhost:3000/users/86f32cda-cc20-49e5-a1c8-a69ff98e5ebf/articleComments?limit=3&cursor=8166a719-2819-492a-b3d9-5ed6836f0afa
+
+###
+
+GET http://localhost:3000/users/86f32cda-cc20-49e5-a1c8-a69ff98e5ebf/productComments?limit=3&cursor=3a455f1f-e2db-4515-b379-7b8f32111a43

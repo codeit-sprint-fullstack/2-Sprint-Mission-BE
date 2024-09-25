@@ -60,6 +60,8 @@ model ProductComment {
   commenter   User?    @relation(fields: [commenterId], references: [id], onDelete: SetNull)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+
+  @@index([commenterId, updatedAt(sort: Desc)])
 }
 
 model ArticleComment {
@@ -71,4 +73,6 @@ model ArticleComment {
   commenter   User?    @relation(fields: [commenterId], references: [id], onDelete: SetNull)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+
+  @@index([commenterId, updatedAt(sort: Desc)])
 }

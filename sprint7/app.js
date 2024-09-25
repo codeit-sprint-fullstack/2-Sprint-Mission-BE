@@ -117,6 +117,68 @@ app.get("/users/:id", asyncHandler(async (req, res) => {
 	res.send(user);
 }));
 
+app.get("/users/:userId/productComments", asyncHandler(async (req, res) => {
+	const { userId } = req.params;
+	const { cursor, limit = 10, sort = "recent" } = req.query;
+	let orderBy;
+	switch (sort) {
+		case "oldest":
+			orderBy = { updatedAt: "asc" };
+			break;
+		case "recent":
+		default:
+			orderBy = { updatedAt: "desc" };
+	}
+	const [cursorComment, ...productComments] = await prisma.productComment.findMany({
+		orderBy,
+		where: {
+			commenterId: userId,
+		},
+		cursor: cursor ? {
+			id: cursor,
+		}: undefined,
+		take: parseInt(limit) + 1,
+		select: {
+			id: true,
+			content: true,
+			createdAt: true,
+			updatedAt: true,
+		},
+	});
+	res.send(productComments);
+}));
+
+app.get("/users/:userId/articleComments", asyncHandler(async (req, res) => {
+	const { userId } = req.params;
+	const { cursor, limit = 10, sort = "recent" } = req.query;
+	let orderBy;
+	switch (sort) {
+		case "oldest":
+			orderBy = { updatedAt: "asc" };
+			break;
+		case "recent":
+		default:
+			orderBy = { updatedAt: "desc" };
+	}
+	const [cursorComment, ...articleComments] = await prisma.articleComment.findMany({
+		orderBy,
+		where: {
+			commenterId: userId,
+		},
+		cursor: cursor ? {
+			id: cursor,
+		} : undefined,
+		take: parseInt(limit) + 1,
+		select: {
+			id: true,
+			content: true,
+			createdAt: true,
+			updatedAt: true,
+		},
+	});
+	res.send(articleComments);
+}));
+
 app.delete("/users/:id", asyncHandler(async (req, res) => {
 	const { id } = req.params;
 	const user = await prisma.user.delete({
@@ -187,19 +249,19 @@ app.patch("/products/:productId/comment/:commentId", asyncHandler(async (req, re
 					nickname: true,
 				},
 			},
-			product: {
-				select: {
-					id: true,
-					name: true,
-					description: true,
-					price: true,
-					tags: true,
-					images: true,
-					favoriteCount: true,
-					createdAt: true,
-					updatedAt: true,
-				}
-			}
+			// product: {
+			// 	select: {
+			// 		id: true,
+			// 		name: true,
+			// 		description: true,
+			// 		price: true,
+			// 		tags: true,
+			// 		images: true,
+			// 		favoriteCount: true,
+			// 		createdAt: true,
+			// 		updatedAt: true,
+			// 	}
+			// },
 		},
 	});
 	res.send(productComment);
@@ -342,20 +404,20 @@ app.patch("/articles/:articleId/comment/:commentId", asyncHandler(async (req, re
 					nickname: true,
 				},
 			},
-			article: {
-				select: {
-					id: true,
-					author: {
-						select: {
-							nickname: true,
-						},
-					},
-					title: true,
-					content: true,
-					createdAt: true,
-					updatedAt: true,
-				}
-			}
+			// article: {
+			// 	select: {
+			// 		id: true,
+			// 		author: {
+			// 			select: {
+			// 				nickname: true,
+			// 			},
+			// 		},
+			// 		title: true,
+			// 		content: true,
+			// 		createdAt: true,
+			// 		updatedAt: true,
+			// 	}
+			// },
 		},
 	});
 	res.send(articleComment);
