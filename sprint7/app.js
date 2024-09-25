@@ -3,7 +3,9 @@ import { Prisma, PrismaClient } from "@prisma/client";
 import cors from 'cors';
 import {
 	CreateArticle,
+	CreateArticleComment,
 	CreateProduct,
+	CreateProductComment,
 	CreateUser,
 	PatchArticle,
 	PatchProduct,
@@ -135,6 +137,39 @@ app.post("/products", asyncHandler(async (req, res) => {
 	res.send(product);
 }));
 
+app.post("/products/:id/comment", asyncHandler(async (req, res) => {
+	assert(req.body, CreateProductComment);
+	const { id: productId } = req.params;
+	const productComment = await prisma.productComment.create({
+		data: {
+			...req.body,
+			productId,
+		},
+		select: {
+			id: true,
+			content: true,
+			commenter: {
+				select: {
+					nickname: true,
+				},
+			},
+			product: {
+				select: {
+					name: true,
+					description: true,
+					price: true,
+					tags: true,
+					images: true,
+					favoriteCount: true,
+					createdAt: true,
+					updatedAt: true,
+				}
+			}
+		},
+	});
+	res.send(productComment);
+}));
+
 app.patch("/products/:id", asyncHandler(async (req, res) => {
 	assert(req.body, PatchProduct);
 	const { id } = req.params;
@@ -208,6 +243,40 @@ app.post("/articles", asyncHandler(async (req, res) => {
 	res.send(article);
 }));
 
+app.post("/articles/:id/comment", asyncHandler(async (req, res) => {
+	assert(req.body, CreateArticleComment);
+	const { id: articleId } = req.params;
+	const articleComment = await prisma.articleComment.create({
+		data: {
+			...req.body,
+			articleId,
+		},
+		select: {
+			id: true,
+			content: true,
+			createdAt: true,
+			updatedAt: true,
+			commenter: {
+				select: {
+					nickname: true,
+				},
+			},
+			article: {
+				select: {
+					title: true,
+					content: true,
+					author: {
+						select: {
+							nickname: true,
+						},
+					}
+				}
+			}
+		},
+	});
+	res.send(articleComment);
+}));
+
 app.patch("/articles/:id", asyncHandler(async (req, res) => {
 	assert(req.body, PatchArticle);
 	const { id } = req.params;
@@ -266,6 +335,7 @@ app.get("/articles/:id", asyncHandler(async (req, res) => {
 			createdAt: true,
 			updatedAt: true,
 			articleComments: {
+				orderBy: { createdAt: "desc" },
 				select: {
 					content: true,
 					commenter: {

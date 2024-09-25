@@ -33,14 +33,12 @@ export const PatchArticle = s.partial(CreateArticle);
 	// * Article id 는 따로 받아야 함.
 
 export const CreateProductComment = s.object({
-	productId: Uuid,
 	commenterId: Uuid,
 	content: s.size(s.string(), 1, 255),
 });
 	// * Patch 는 위 데이터에 id 추가.
 
 export const CreateArticleComment = s.object({
-	articleId: Uuid,
 	commenterId: Uuid,
 	content: s.size(s.string(), 1, 255),
 });

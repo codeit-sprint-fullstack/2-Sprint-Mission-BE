@@ -1,0 +1,17 @@
+POST http://localhost:3000/articles/6c378b9a-3fdd-453c-b6a9-6e2fc90666a5/comment
+Content-Type: application/json
+
+{
+	"commenterId": "86f32cda-cc20-49e5-a1c8-a69ff98e5ebf",
+	"content": "새로운 댓글을 답니다. 2안녕하세요?"
+}
+
+###
+
+POST http://localhost:3000/products/0478f776-6862-48f0-9022-122bb172930a/comment
+Content-Type: application/json
+
+{
+	"commenterId": "86f32cda-cc20-49e5-a1c8-a69ff98e5ebf",
+	"content": "토스터가 참 맛있는거 같아요."
+}
