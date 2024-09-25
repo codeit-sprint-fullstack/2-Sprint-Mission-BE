@@ -1,0 +1,87 @@
+GET https://two-sprint-mission-be-8e56.onrender.com/users
+###
+GET http://localhost:3000/users/f47ac10b-58cc-4372-a567-0e02b2c3d479
+###
+//**************************Product*********************************************
+GET https://two-sprint-mission-be-8e56.onrender.com/products
+###
+PATCH http://localhost:3000/products/2f72ee0e-be18-4fe5-bae0-28cc59a9a081
+Content-Type: application/json
+
+{
+    "name": "쿠쿠 밥솥",
+    "description": "쿠쿠하세요~~",
+    "price": 310000,
+    "tags": ["쿠쿠쿠쿠쿸"],
+    "images": [
+      "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/92/1725209779217/CRP-DHP0610FD.png"
+    ]
+}
+###
+DELETE http://localhost:3000/products/2f72ee0e-be18-4fe5-bae0-28cc59a9a081
+###
+//**********************Article******************************************
+GET https://two-sprint-mission-be-8e56.onrender.com/articles
+###
+POST https://two-sprint-mission-be-8e56.onrender.com/articles
+Content-Type: application/json
+
+{
+  "userId": "f47ac10b-58cc-4372-a567-0e02b2c3d480",
+  "title": "리퀘스트요청 제목",
+  "content": "리퀘스트요청 내용"
+}
+###
+PATCH http://localhost:3000/articles/02c75b12-c8fc-4fae-87db-053f98b6db11
+Content-Type: application/json
+
+{
+  "title": "리퀘스트 수정 요청"
+}
+###
+DELETE http://localhost:3000/articles/02c75b12-c8fc-4fae-87db-053f98b6db11
+###
+//********************Comment***********************************
+GET http://localhost:3000/product-comments
+###
+GET http://localhost:3000/product-comments/84ef0016-53bf-4241-8d66-0366df5a3cd2
+###
+PATCH http://localhost:3000/product-comments/7fdfdc33-f85a-4e5e-bc6b-67e2b8d0f1ea
+Content-Type: application/json
+
+{
+  "content": "수정된 댓글입니다"
+}
+###
+POST http://localhost:3000/product-comments
+Content-Type: application/json
+
+{
+  "userId": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+  "productId": "e075c0c7-ee54-4381-adc9-fdb2123e29b8",
+  "content": "댓글입니다"
+}
+###
+DELETE  http://localhost:3000/product-comments/f4fe5d2b-25e0-4274-be48-461ff6ae0884
+###
+
+//articleComment
+GET http://localhost:3000/article-comments
+###
+POST http://localhost:3000/article-comments
+Content-Type: application/json
+
+{
+  "userId": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+  "articleId": "a1b2c3d4-e5f6-7g8h-9i0j-k1l2m3n4o5p5",
+  "content": "댓글입니다"
+}
+###
+PATCH http://localhost:3000/article-comments/42c4f072-ad26-4650-b001-45a0666bf8af
+Content-Type: application/json
+
+{
+  "content": "수정된 댓글입니다"
+}
+###
+DELETE http://localhost:3000/article-comments/42c4f072-ad26-4650-b001-45a0666bf8af
