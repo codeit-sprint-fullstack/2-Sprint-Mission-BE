@@ -170,6 +170,41 @@ app.post("/products/:id/comment", asyncHandler(async (req, res) => {
 	res.send(productComment);
 }));
 
+app.post("/products/:productId/comment/:commentId", asyncHandler(async (req, res) => {
+	assert(req.body, CreateProductComment);
+	const { productId, commentId } = req.params;
+	const productComment = await prisma.productComment.update({
+		where: { id: commentId },
+		data: {
+			...req.body,
+			productId,
+		},
+		select: {
+			id: true,
+			content: true,
+			commenter: {
+				select: {
+					nickname: true,
+				},
+			},
+			product: {
+				select: {
+					id: true,
+					name: true,
+					description: true,
+					price: true,
+					tags: true,
+					images: true,
+					favoriteCount: true,
+					createdAt: true,
+					updatedAt: true,
+				}
+			}
+		},
+	});
+	res.send(productComment);
+}));
+
 app.patch("/products/:id", asyncHandler(async (req, res) => {
 	assert(req.body, PatchProduct);
 	const { id } = req.params;
@@ -263,13 +298,54 @@ app.post("/articles/:id/comment", asyncHandler(async (req, res) => {
 			},
 			article: {
 				select: {
-					title: true,
-					content: true,
+					id: true,
 					author: {
 						select: {
 							nickname: true,
 						},
-					}
+					},
+					title: true,
+					content: true,
+					createdAt: true,
+					updatedAt: true,
+				}
+			}
+		},
+	});
+	res.send(articleComment);
+}));
+
+app.patch("/articles/:articleId/comment/:commentId", asyncHandler(async (req, res) => {
+	assert(req.body, CreateArticleComment);
+	const { articleId, commentId } = req.params;
+	const articleComment = await prisma.articleComment.update({
+		where: { id: commentId },
+		data: {
+			...req.body,
+			articleId,
+		},
+		select: {
+			id: true,
+			content: true,
+			createdAt: true,
+			updatedAt: true,
+			commenter: {
+				select: {
+					nickname: true,
+				},
+			},
+			article: {
+				select: {
+					id: true,
+					author: {
+						select: {
+							nickname: true,
+						},
+					},
+					title: true,
+					content: true,
+					createdAt: true,
+					updatedAt: true,
 				}
 			}
 		},

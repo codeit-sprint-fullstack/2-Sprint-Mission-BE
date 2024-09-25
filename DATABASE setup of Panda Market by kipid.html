@@ -307,7 +307,6 @@ export const PatchArticle = s.partial(CreateArticle);
 
 ```[.scrollable]
 export const CreateProductComment = s.object({
-	productId: Uuid,
 	commenterId: Uuid,
 	content: s.size(s.string(), 1, 255),
 });
@@ -320,7 +319,6 @@ export const CreateProductComment = s.object({
 
 ```[.scrollable]
 export const CreateArticleComment = s.object({
-	articleId: Uuid,
 	commenterId: Uuid,
 	content: s.size(s.string(), 1, 255),
 });
@@ -342,8 +340,8 @@ export const CreateArticleComment = s.object({
 <codeprint id="docuK-script">
 <script>
 (function(m, $, undefined) {
-m.printMode=true;
-m.ripplesDisabled=true;
+m.printMode=false;
+m.ripplesDisabled=false;
 m.recoeveUserId="kipid";
 m.recoCats="";
 m.wait=1024;
