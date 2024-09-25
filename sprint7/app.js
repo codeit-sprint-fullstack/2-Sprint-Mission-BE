@@ -170,7 +170,7 @@ app.post("/products/:id/comment", asyncHandler(async (req, res) => {
 	res.send(productComment);
 }));
 
-app.post("/products/:productId/comment/:commentId", asyncHandler(async (req, res) => {
+app.patch("/products/:productId/comment/:commentId", asyncHandler(async (req, res) => {
 	assert(req.body, CreateProductComment);
 	const { productId, commentId } = req.params;
 	const productComment = await prisma.productComment.update({
@@ -203,6 +203,14 @@ app.post("/products/:productId/comment/:commentId", asyncHandler(async (req, res
 		},
 	});
 	res.send(productComment);
+}));
+
+app.delete("/products/:productId/comment/:commentId", asyncHandler(async (req, res) => {
+	const { commentId } = req.params;
+	const productComment = await prisma.productComment.delete({
+		where: { id: commentId },
+	});
+	res.status(HttpStatus.NO_CONTENT).send(productComment);
 }));
 
 app.patch("/products/:id", asyncHandler(async (req, res) => {
@@ -351,6 +359,14 @@ app.patch("/articles/:articleId/comment/:commentId", asyncHandler(async (req, re
 		},
 	});
 	res.send(articleComment);
+}));
+
+app.delete("/articles/:articleId/comment/:commentId", asyncHandler(async (req, res) => {
+	const { commentId } = req.params;
+	const articleComment = await prisma.articleComment.delete({
+		where: { id: commentId },
+	});
+	res.status(HttpStatus.NO_CONTENT).send(articleComment);
 }));
 
 app.patch("/articles/:id", asyncHandler(async (req, res) => {
