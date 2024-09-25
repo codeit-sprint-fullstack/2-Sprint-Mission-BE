@@ -1,0 +1,33 @@
+GET http://localhost:3000/products
+###
+GET http://localhost:3000/products/8b97d216-b1ed-43bb-a179-619d9b2cc104
+
+###
+POST http://localhost:3000/products
+Content-Type: application/json
+
+{
+    "name": "하 라우트 어렵네",
+    "description": "내가 바보가 되엇수",
+    "price": 20000,
+    "tag": ["테스트임"],
+  "image": [],
+  "favoriteCount": 0
+}
+
+###
+PATCH http://localhost:3000/products/00d9c3ca-bff0-4135-8868-b2b385d63272
+Content-Type: application/json
+
+{
+    "name": "수정수정",
+    "description": "수정가 10000원 할인",
+    "price": 10000,
+    "tag": ["수정 됐나요"],
+  "image": [],
+  "favoriteCount": 0
+}
+
+
+###
+DELETE http://localhost:3000/products/61003e12-6381-419c-a9d3-5f54f3448f52

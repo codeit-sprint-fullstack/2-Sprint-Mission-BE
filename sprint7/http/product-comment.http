@@ -1,0 +1,21 @@
+GET http://localhost:3000/products/17cc4f9c-1e71-4782-914a-c8a12dc6f94b/comments
+###
+GET http://localhost:3000/products/17cc4f9c-1e71-4782-914a-c8a12dc6f94b/comments?limit=5&cursor=2024-09-24T04:40:52.828Z
+###
+GET http://localhost:3000/products/17cc4f9c-1e71-4782-914a-c8a12dc6f94b/comments/2e1c1bf9-bf25-4c62-9f95-7a761176502f
+
+###
+POST http://localhost:3000/products/17cc4f9c-1e71-4782-914a-c8a12dc6f94b/comments
+Content-Type: application/json
+
+{"content": "이번엔 나옵니다"}
+
+###
+PATCH http://localhost:3000/products/17cc4f9c-1e71-4782-914a-c8a12dc6f94b/comments/2e1c1bf9-bf25-4c62-9f95-7a761176502f
+Content-Type: application/json
+
+{"content": "수정수정"}
+
+
+###
+DELETE http://localhost:3000/products/17cc4f9c-1e71-4782-914a-c8a12dc6f94b/comments/2e1c1bf9-bf25-4c62-9f95-7a761176502f
