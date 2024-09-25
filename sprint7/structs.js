@@ -25,7 +25,7 @@ export const PatchProduct = s.partial(CreateProduct);
 	// * Product id 는 따로 받아야 함.
 
 export const CreateArticle = s.object({
-	title: s.size(s.string(), 1, 20),
+	title: s.size(s.string(), 1, 50),
 	authorId: Uuid,
 	content: s.size(s.string(), 10, 500),
 });

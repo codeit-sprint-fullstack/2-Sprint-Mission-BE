@@ -26,17 +26,17 @@
 
 - [x] Article 스키마를 작성해 주세요.
 	- [x] id, title, content, createdAt, updatedAt 필드를 가집니다.
-- [ ] 게시글 등록 API를 만들어 주세요.
-	- [ ] title, content를 입력해 게시글을 등록합니다.
-- [ ] 게시글 조회 API를 만들어 주세요.
-	- [ ] id, title, content, createdAt를 조회합니다.
-- [ ] 게시글 수정 API를 만들어 주세요.
-- [ ] 게시글 삭제 API를 만들어 주세요.
-- [ ] 게시글 목록 조회 API를 만들어 주세요.
-	- [ ] id, title, content, createdAt를 조회합니다.
-	- [ ] offset 방식의 페이지네이션 기능을 포함해 주세요.
-	- [ ] 최신순(recent)으로 정렬할 수 있습니다.
-	- [ ] title, content에 포함된 단어로 검색할 수 있습니다.
+- [x] 게시글 등록 API를 만들어 주세요.
+	- [x] title, content를 입력해 게시글을 등록합니다.
+- [x] 게시글 조회 API를 만들어 주세요.
+	- [x] id, title, content, createdAt를 조회합니다.
+- [x] 게시글 수정 API를 만들어 주세요.
+- [x] 게시글 삭제 API를 만들어 주세요.
+- [x] 게시글 목록 조회 API를 만들어 주세요.
+	- [x] id, title, content, createdAt를 조회합니다.
+	- [x] offset 방식의 페이지네이션 기능을 포함해 주세요.
+	- [x] 최신순(recent)으로 정렬할 수 있습니다.
+	- [x] title, content에 포함된 단어로 검색할 수 있습니다.
 
 #### 댓글
 

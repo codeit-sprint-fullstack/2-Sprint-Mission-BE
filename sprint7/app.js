@@ -5,6 +5,7 @@ import {
 	CreateArticle,
 	CreateProduct,
 	CreateUser,
+	PatchArticle,
 	PatchProduct,
 	PatchUser,
 } from './structs.js';
@@ -207,22 +208,29 @@ app.post("/articles", asyncHandler(async (req, res) => {
 	res.send(article);
 }));
 
+app.patch("/articles/:id", asyncHandler(async (req, res) => {
+	assert(req.body, PatchArticle);
+	const { id } = req.params;
+	const article = await prisma.article.update({
+		where: { id },
+		data: req.body,
+	});
+	res.send(article);
+}));
+
 app.get("/articles", asyncHandler(async (req, res) => {
 	const { offset = 0, limit = 12, sort = "recent", keyword = "" } = req.query;
 	const query = keyword ? {
 		OR: [{
-				name: { contains: keyword }
+				title: { contains: keyword }
 			},
 			{
-				description: { contains: keyword }
+				content: { contains: keyword }
 			}]
 		}
 	: {};
 	let orderBy;
 	switch (orderBy) {
-		case "favorite":
-			orderBy = { favoriteCount: "desc" };
-			break;
 		case "oldest":
 			orderBy = { createdAt: "asc" };
 			break;
@@ -230,16 +238,58 @@ app.get("/articles", asyncHandler(async (req, res) => {
 		default:
 			orderBy = { createdAt: "desc" };
 	}
-	const totalCount = await prisma.product.count({
+	const totalCount = await prisma.article.count({
 		where: query,
 	});
-	const products = await prisma.product.findMany({
+	const articles = await prisma.article.findMany({
 		where: query,
 		orderBy,
 		skip: parseInt(offset),
 		take: parseInt(limit),
 	});
-	res.send({ list: products, totalCount });
+	res.send({ list: articles, totalCount });
 }));
+
+app.get("/articles/:id", asyncHandler(async (req, res) => {
+	const { id } = req.params;
+	const article = await prisma.article.findUniqueOrThrow({
+		where: { id },
+		select: {
+			id: true,
+			author: {
+				select: {
+					nickname: true,
+				}
+			},
+			title: true,
+			content: true,
+			createdAt: true,
+			updatedAt: true,
+			articleComments: {
+				select: {
+					content: true,
+					commenter: {
+						select: {
+							nickname: true,
+						}
+					},
+					createdAt: true,
+					updatedAt: true,
+				}
+			}
+		}
+	});
+	res.send(article);
+}));
+
+app.delete("/articles/:id", asyncHandler(async (req, res) => {
+const { id } = req.params;
+	const article = await prisma.article.delete({
+		where: { id },
+	});
+	res.status(HttpStatus.NO_CONTENT).send(article);
+}));
+
+
 
 app.listen(process.env.PORT || 3000, () => console.log("Server on"));
