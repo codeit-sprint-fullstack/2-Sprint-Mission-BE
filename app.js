@@ -187,4 +187,154 @@ app.get(
   })
 );
 
+// ProductComments
+app.post(
+  "/productComments",
+  asyncHandler(async (req, res) => {
+    const { content, productId } = req.body;
+    const comment = await prisma.productComment.create({
+      data: {
+        content,
+        product: {
+          connect: {
+            id: productId,
+          },
+        },
+      },
+    });
+    res.status(201).send(comment);
+  })
+);
+
+app.patch(
+  "/productComments/:id",
+  asyncHandler(async (req, res) => {
+    const { id } = req.params;
+    const comment = await prisma.productComment.update({
+      where: { id },
+      data: req.body,
+    });
+    res.send(comment);
+  })
+);
+
+app.delete(
+  "/productComments/:id",
+  asyncHandler(async (req, res) => {
+    const { id } = req.params;
+    await prisma.productComment.delete({
+      where: { id },
+    });
+    res.sendStatus(204);
+  })
+);
+
+app.get(
+  "/productComments/:id",
+  asyncHandler(async (req, res) => {
+    const { id } = req.params;
+    const comment = await prisma.productComment.findUniqueOrThrow({
+      where: { id },
+    });
+
+    res.send(comment);
+  })
+);
+
+// ArticleComments
+app.get(
+  "/articleComments",
+  asyncHandler(async (req, res) => {
+    const { cursor, take = 10 } = req.query;
+    const takeNumber = parseInt(take, 10);
+    const comment = await prisma.articleComment.findMany({
+      orderBy: {
+        createdAt: "desc",
+      },
+      take: takeNumber,
+    });
+    if (cursor) {
+      queryOptions.cursor = {
+        id: Number(cursor),
+      };
+      queryOptions.skip = 1;
+    }
+    res.send(comment);
+  })
+);
+
+app.post(
+  "/articleComments",
+  asyncHandler(async (req, res) => {
+    const { content, articleId } = req.body;
+    const comment = await prisma.articleComment.create({
+      data: {
+        content,
+        article: {
+          connect: {
+            id: articleId,
+          },
+        },
+      },
+    });
+    res.status(201).send(comment);
+  })
+);
+
+app.patch(
+  "/articleComments/:id",
+  asyncHandler(async (req, res) => {
+    const { id } = req.params;
+    const comment = await prisma.articleComment.update({
+      where: { id },
+      data: req.body,
+    });
+    res.send(comment);
+  })
+);
+
+app.delete(
+  "/articleComments/:id",
+  asyncHandler(async (req, res) => {
+    const { id } = req.params;
+    await prisma.articleComment.delete({
+      where: { id },
+    });
+    res.sendStatus(204);
+  })
+);
+
+app.get(
+  "/articleComments/:id",
+  asyncHandler(async (req, res) => {
+    const { id } = req.params;
+    const comment = await prisma.articleComment.findUniqueOrThrow({
+      where: { id },
+    });
+
+    res.send(comment);
+  })
+);
+
+app.get(
+  "/articleComments",
+  asyncHandler(async (req, res) => {
+    const { cursor, take = 10 } = req.query;
+    const takeNumber = parseInt(take, 10);
+    const comment = await prisma.articleComment.findMany({
+      orderBy: {
+        createdAt: "desc",
+      },
+      take: takeNumber,
+    });
+    if (cursor) {
+      queryOptions.cursor = {
+        id: Number(cursor),
+      };
+      queryOptions.skip = 1;
+    }
+    res.send(comment);
+  })
+);
+
 app.listen(process.env.PORT || 5000, () => console.log("server start"));

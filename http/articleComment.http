@@ -1,0 +1,24 @@
+GET http://localhost:5000/articleComments
+###
+GET http://localhost:5000/articleComments/96e1685ad6ae861dd6810a
+###
+POST http://localhost:5000/articleComments
+Content-Type: application/json
+
+{ 
+  "content": "제가 60만원에 구메하겠습니다!",
+  "articleId": "76e1685ad6ae861dd6810a"
+}
+###
+PATCH http://localhost:5000/articleComments/b874b099-0844-4ce9-bb61-e366db7ea49a
+Content-Type: application/json
+
+{
+  "content": "70만원에 바로 구매 가능합니다!"
+}
+###
+DELETE http://localhost:5000/articleComments/b874b099-0844-4ce9-bb61-e366db7ea49a
+###
+GET http://localhost:5000/articleComments?take=1
+
+

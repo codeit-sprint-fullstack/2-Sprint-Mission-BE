@@ -1279,3 +1279,35 @@ export const ARTICLES = [
     content: "갤럭시 탭 10+ 128기가 얼마에 팔아야 할까요?",
   },
 ];
+
+export const PRODCTCOMMENTS = [
+  {
+    id: "86e1685ad6ae861dd6810a",
+    content: "제품 가격을 더 내리는 것이 가능할까요??",
+    productId: "66e1685ad6ae861dd68105ed",
+  },
+  {
+    id: "86e1685ad6ae861dd6810b",
+    content: "제품의 성능을 자세히 설명해주세요",
+    productId: "66e1685ad6ae861dd68105ed",
+  },
+  {
+    id: "86e1685ad6ae861dd6810c",
+    content: "구매 의향이 있는데 예약자가 있을까요??",
+    productId: "66e1685ad6ae861dd68105ed",
+  },
+];
+
+export const ARTICLECOMMENTS = [
+  {
+    id: "96e1685ad6ae861dd6810a",
+    content: "70만원이 적당할 것 같아요!",
+    articleId: "76e1685ad6ae861dd6810a",
+  },
+  {
+    id: "96e1685ad6ae861dd6810b",
+    content:
+      "가격이 실시간으로 변동하고 있어서 가격 높을 때 파는 것이 좋을 것 같아요! 지금은 70만원 입니다.",
+    articleId: "76e1685ad6ae861dd6810a",
+  },
+];

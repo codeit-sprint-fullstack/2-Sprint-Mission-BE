@@ -14,19 +14,37 @@ datasource db {
 }
 
 model Product {
-  id          String   @id @default(uuid())
-  name        String
-  description String
-  price       Float
-  tags        String[]
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id              String           @id @default(uuid())
+  name            String
+  description     String
+  price           Float
+  tags            String[]
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  productComments ProductComment[]
 }
 
 model Article {
+  id              String           @id @default(uuid())
+  title           String
+  content         String
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  articleComments ArticleComment[]
+}
+
+model ProductComment {
   id        String   @id @default(uuid())
-  title     String
   content   String
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  product   Product  @relation(fields: [productId], references: [id])
+  productId String
+}
+
+model ArticleComment {
+  id        String   @id @default(uuid())
+  content   String
+  createdAt DateTime @default(now())
+  article   Article  @relation(fields: [articleId], references: [id])
+  articleId String
 }
