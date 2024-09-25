@@ -129,7 +129,7 @@ app.get("/users/:userId/productComments", asyncHandler(async (req, res) => {
 		default:
 			orderBy = { updatedAt: "desc" };
 	}
-	const [cursorComment, ...productComments] = await prisma.productComment.findMany({
+	const productComments = await prisma.productComment.findMany({
 		orderBy,
 		where: {
 			commenterId: userId,
@@ -137,7 +137,8 @@ app.get("/users/:userId/productComments", asyncHandler(async (req, res) => {
 		cursor: cursor ? {
 			id: cursor,
 		}: undefined,
-		take: parseInt(limit) + 1,
+		skip: cursor ? 1 : 0,
+		take: parseInt(limit),
 		select: {
 			id: true,
 			content: true,
@@ -160,7 +161,7 @@ app.get("/users/:userId/articleComments", asyncHandler(async (req, res) => {
 		default:
 			orderBy = { updatedAt: "desc" };
 	}
-	const [cursorComment, ...articleComments] = await prisma.articleComment.findMany({
+	const articleComments = await prisma.articleComment.findMany({
 		orderBy,
 		where: {
 			commenterId: userId,
@@ -168,7 +169,8 @@ app.get("/users/:userId/articleComments", asyncHandler(async (req, res) => {
 		cursor: cursor ? {
 			id: cursor,
 		} : undefined,
-		take: parseInt(limit) + 1,
+		skip: cursor ? 1 : 0,
+		take: parseInt(limit),
 		select: {
 			id: true,
 			content: true,
