@@ -1,12 +1,12 @@
 import express from "express";
-import mongoose from "mongoose";
-import Product from "./models/Product.js";
+import { PrismaClient, Prisma } from "@prisma/client";
+import { assert } from 'superstruct';
+import { CreateProduct, PatchProduct } from './struct.js';
 import cors from "cors";
 import * as dotenv from "dotenv";
 dotenv.config();
 
-mongoose.connect(process.env.DATABASE_URL).then(() => console.log("Connected to DB"));
-
+const prisma = new PrismaClient();
 const app = express();
 
 const corsOptions = {
@@ -21,9 +21,9 @@ function asyncHandler(handler) {
     try {
       await handler(req, res);
     } catch (e) {
-      if (e.name === "ValidationError") {
+      if (e.name === "StructError" || e instanceof Prisma.PrismaClientValidationError) {
         res.status(400).send({ message: e.message });
-      } else if (e.name === "CastError") {
+      } else if (e instanceof Prisma.PrismaClientKnownRequestError && e.code === 'P2025') {
         res.status(404).send({ message: "Cannot find given id." });
       } else {
         res.status(500).send({ message: e.message });
@@ -34,29 +34,39 @@ function asyncHandler(handler) {
 
 app.get("/products", 
   asyncHandler(async (req, res) => {
-    const sort = req.query.orderBy || "recent";
-    const count = Number(req.query.pageSize) || 10;
-    const page = Number(req.query.page) || 1;
-    const search = req.query.search || "";
+    const { page = 0, pageSize = 10, order = 'recent', search = '' } = req.query;
+    
+    const products = await prisma.product.findMany({
+      skip: parseInt(page) * parseInt(pageSize),
+      take: parseInt(pageSize),
+      orderBy: order === 'favorite' ? { favoriteCnt: 'desc' } : { createdAt: 'desc' },
+      where: {
+        OR: [
+          { name: { contains: search, mode: 'insensitive' } },
+          { description: { contains: search, mode: 'insensitive' } },
+        ]
+      }
+    });
 
-    const sortOptions = sort === "favorite" ? { favoriteCnt: -1 } : { createdAt: -1 };
-    const searchFilter = search ? { $or: [
-      { name: { $regex: search, $options: "i" } },
-      { description: { $regex: search, $options: "i" } },
-    ]}
-    : {};
+    const totalCount = await prisma.product.count({
+      where: {
+        OR: [
+          { name: { contains: search, mode: 'insensitive' } },
+          { description: { contains: search, mode: 'insensitive' } },
+        ]
+      }
+    });
 
-    const totalCount = await Product.countDocuments(searchFilter);   
-    const products = await Product.find(searchFilter).sort(sortOptions).limit(count).skip((page - 1) * count);
-
-    res.send({ data: products, totalCount });
+    res.send({ data: products, totalCount: totalCount });
   })
 );
 
 app.get("/products/:id", 
   asyncHandler(async (req, res) => {
-    const id = req.params.id;
-    const product = await Product.findById(id);
+    const { id } = req.params;
+    const product = await prisma.product.findUniqueOrThrow({
+      where: { id },
+    });
     if (product) {
       res.send(product);
     } else {
@@ -67,7 +77,10 @@ app.get("/products/:id",
 
 app.post("/products", 
   asyncHandler(async (req, res) => {
-    const product = await Product.create(req.body);
+    assert(req.body, CreateProduct);
+    const product = await prisma.product.create({
+      data: req.body,
+    });
 
     res.status(201).send(product);
   })
@@ -75,14 +88,15 @@ app.post("/products",
 
 app.patch("/products/:id", 
   asyncHandler(async (req, res) => {
-    const id = req.params.id;
-    const product = await Product.findById(id);
+    assert(req.body, PatchProduct);
+    const { id } = req.params;
+    const product = await prisma.product.update({
+      where: { id },
+      data: req.body,
+    });
+
 
     if(product) {
-      Object.keys(req.body).forEach((key) => {
-        product[key] = req.body[key];
-      });
-      await product.save();
       res.send(product);
     } else {
       res.status(404).send({ message: "Cannot find given id." });
@@ -92,8 +106,10 @@ app.patch("/products/:id",
 
 app.delete("/products/:id", 
   asyncHandler(async (req, res) => {
-    const id = req.params.id;
-    const product = await Product.findByIdAndDelete(id);
+    const { id } = req.params;
+    const product = await prisma.product.delet({
+      where: { id },
+    });
 
     if (product) {
       res.sendStatus(204);

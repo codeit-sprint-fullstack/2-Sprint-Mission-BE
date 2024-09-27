@@ -1,4 +1,4 @@
-const data = [
+export const PRODUCTS = [
   {
     name: "쿠쿠 밥솥",
     description: "쿠쿠하세요~~",
@@ -357,5 +357,3 @@ const data = [
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
 ];
-
-export default data;
