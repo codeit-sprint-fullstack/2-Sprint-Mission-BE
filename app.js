@@ -107,7 +107,7 @@ app.patch("/products/:id",
 app.delete("/products/:id", 
   asyncHandler(async (req, res) => {
     const { id } = req.params;
-    const product = await prisma.product.delet({
+    const product = await prisma.product.delete({
       where: { id },
     });
 
