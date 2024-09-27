@@ -14,21 +14,36 @@ datasource db {
 }
 
 model Product {
-  id          String   @id @default(uuid())
+  id          String    @id @default(uuid())
   name        String
   description String
   price       Int
   tags        String[]
   images      String[]
-  favoriteCnt Int      @default(0)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  favoriteCnt Int       @default(0)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  comments    Comment[] @relation("ProductComments")
 }
 
 model Article {
+  id          String    @id @default(uuid())
+  title       String
+  content     String
+  images      String[]
+  favoriteCnt Int       @default(0)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  comments    Comment[] @relation("ArticleComments")
+}
+
+model Comment {
   id        String   @id @default(uuid())
-  title     String
   content   String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  articleId String? // 실제 foreign key
+  productId String? // 실제 foreign key
+  article   Article? @relation("ArticleComments", fields: [articleId], references: [id], onDelete: Cascade)
+  product   Product? @relation("ProductComments", fields: [productId], references: [id], onDelete: Cascade)
 }
