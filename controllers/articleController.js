@@ -55,9 +55,9 @@ export const getArticleById =  async (req, res) => {
       articleComments: true, 
     }
   });
-  // if (!article) {
-  //   return res.status(404).send({message: 'No article found with the given ID'});
-  // }
+  if (!article) {
+     return res.status(404).send({message: 'No article found with the given ID'});
+  }
   res.send(article);
 };
 

@@ -1,5 +1,8 @@
 GET http://localhost:3000/articles/523e4567-e89b-12d3-a456-426614174004/comments
 
+### 댓글 없는 글
+GET http://localhost:3000/articles/0c215d64-524a-4d45-922f-3bd2a62e28d6/comments
+
 ###
 GET http://localhost:3000/articles/523e4567-e89b-12d3-a456-426614174004/comments?orderBy=oldest
 
@@ -8,6 +11,8 @@ GET http://localhost:3000/articles/523e4567-e89b-12d3-a456-426614174004/comments
 
 ###
 GET http://localhost:3000/articles/523e4567-e89b-12d3-a456-426614174004/comments?take=2&cursor=9a92b2b6-4690-47cf-b6f4-1c7df1f82b2d
+
+
 
 ###
 POST http://localhost:3000/articles/523e4567-e89b-12d3-a456-426614174004/comments

@@ -2,9 +2,6 @@
 GET http://localhost:3000/products
 
 ###
-GET http://localhost:3000/products/1e112c02-7c92-4d52-b76e-485e41e3f64d
-
-###
 GET http://localhost:3000/products?orderBy=oldest
 
 ###
@@ -12,6 +9,9 @@ GET http://localhost:3000/products?orderBy=recent&page=1&pageSize=2
 
 ###
 GET http://localhost:3000/products?keyword=고급스러운
+
+###
+GET http://localhost:3000/products/1e112c02-7c92-4d52-b76e-485e41e3f64d
 
 ###
 POST http://localhost:3000/products

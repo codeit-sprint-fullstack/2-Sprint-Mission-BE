@@ -29,9 +29,9 @@ export const getCommentsByProductId = async (req, res) => {
 
   const productComments = await prisma.productComment.findMany(queryOptions);
 
-   if (productComments.length === 0) {
-     return res.status(404).send({message: 'No comments for the given product ID'});
-   }
+  //  if (productComments.length === 0) {
+  //    return res.status(404).send({message: 'No comments for the given product ID'});
+  //  }
   res.send(productComments);
 }
 

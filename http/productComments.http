@@ -1,5 +1,8 @@
 GET http://localhost:3000/products/1e112c02-7c92-4d52-b76e-485e41e3f64d/comments
 
+### 댓글 없는 상품
+GET http://localhost:3000/products/6922d7f9-72d6-46fe-8b0e-890700aa8f13/comments
+
 ###
 GET http://localhost:3000/products/1e112c02-7c92-4d52-b76e-485e41e3f64d/comments?orderBy=oldest
 

@@ -2,9 +2,6 @@
 GET http://localhost:3000/articles
 
 ###
-GET http://localhost:3000/articles/523e4567-e89b-12d3-a456-426614174004
-
-###
 GET http://localhost:3000/articles?orderBy=oldest
 
 ###
@@ -12,6 +9,9 @@ GET http://localhost:3000/articles?orderBy=recent&page=1&pageSize=2
 
 ###
 GET http://localhost:3000/articles?keyword=중고거래
+
+###
+GET http://localhost:3000/articles/523e4567-e89b-12d3-a456-426614174004
 
 ###
 POST http://localhost:3000/articles

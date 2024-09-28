@@ -29,9 +29,9 @@ export const getCommentsByArticleId = async (req, res) => {
 
   const articleComments = await prisma.articleComment.findMany(queryOptions);
 
-   if (articleComments.length === 0) {
-     return res.status(404).send({message: 'No comments for the given aritcle ID'});
-   }
+  //  if (articleComments.length === 0) {
+  //    return res.status(404).send({message: 'No comments for the given aritcle ID'});
+  //  }
   res.send(articleComments);
 }
 
