@@ -201,64 +201,76 @@ app.delete("/articles/:id", asyncHandler(async (req, res) => {
 
 //////// Comment API ////////
 
-app.get("/products/comments", asyncHandler(async (req, res) => {
+app.get("/comments", asyncHandler(async (req, res) => {
   const { cursor } = req.query;
-  const take = 10;
 
   const comments = await prisma.comment.findMany({
-    where: { productId: req.query.articleId },
     cursor: cursor ? { id: cursor } : undefined,
-    take,
+    take: cursor ? 10 : undefined,
     skip: cursor ? 1 : 0,
   });
 
   res.send(comments);
 }));
 
-app.get("/articles/comments", asyncHandler(async (req, res) => {
+app.get("/products/:productId/comments", asyncHandler(async (req, res) => {
+  const { productId } = req.params;
   const { cursor } = req.query;
-  const take = 10;
 
   const comments = await prisma.comment.findMany({
-    where: { articleId: req.query.articleId },
+    where: { productId },
     cursor: cursor ? { id: cursor } : undefined,
-    take,
+    take: 10,
     skip: cursor ? 1 : 0,
   });
 
   res.send(comments);
 }));
 
-app.post("/products/comments", asyncHandler(async (req, res) => {
-  assert(req.body, CreateComment);
-  const comment = await prisma.comment.create({
-    data: {
-      content: req.body.content,
-      productId: req.body.productId,
-    }
+app.get("/articles/:articleId/comments", asyncHandler(async (req, res) => {
+  const { articleId } = req.params;
+  const { cursor } = req.query;
+
+  const comments = await prisma.comment.findMany({
+    where: { articleId },
+    cursor: cursor ? { id: cursor } : undefined,
+    take: 10,
+    skip: cursor ? 1 : 0,
   });
+
+  res.send(comments);
+}));
+
+app.post("/comments", asyncHandler(async (req, res) => {
+  assert(req.body, CreateComment);
+  const { content, productId, articleId } = req.body;
+
+  let comment;
+  if (productId) {
+    comment = await prisma.comment.create({
+      data: {
+        content: content,
+        productId: productId,
+      }
+    });
+  } else if (articleId) {
+    comment = await prisma.comment.create({
+      data: {
+        content: content,
+        articleId: articleId,
+      }
+    });
+  } 
 
   res.status(201).send(comment);
 }));
 
-app.post("/articles/comments", asyncHandler(async (req, res) => {
-  assert(req.body, CreateComment);
-  const comment = await prisma.comment.create({
-    data: {
-      content: req.body.content,
-      articleId: req.body.articleId,
-    }
-  });
-
-  res.status(201).send(comment);
-}));
-
-app.patch("/products/:productId/comments/:id", asyncHandler(async (req, res) => {
+app.patch("/comments/:id", asyncHandler(async (req, res) => {
   assert(req.body, PatchComment);
-  const { productId, id } = req.params;
+  const { id } = req.params;
 
   const comment = await prisma.comment.update({
-    where: { id, productId, },
+    where: { id },
     data: req.body,
   });
 
@@ -269,41 +281,11 @@ app.patch("/products/:productId/comments/:id", asyncHandler(async (req, res) => 
   }
 }));
 
-app.patch("/articles/:articleId/comments/:id", asyncHandler(async (req, res) => {
-  assert(req.body, PatchComment);
-  const { articleId, id } = req.params;
-
-  const comment = await prisma.comment.update({
-    where: { id, articleId, },
-    data: req.body,
-  });
-
-  if(comment) {
-    res.send(comment);
-  } else {
-    res.status(404).send({ message: "Cannot find given id." });
-  }
-}));
-
-app.delete("/products/:productId/comments/:id", asyncHandler(async (req, res) => {
-  const { productId, id } = req.params;
+app.delete("/comments/:id", asyncHandler(async (req, res) => {
+  const { id } = req.params;
 
   const comment = await prisma.comment.delete({
-    where: { id, productId, },
-  });
-
-  if (comment) {
-    res.sendStatus(204);
-  } else {
-    res.status(404).send({ message: "Cannot find given id." });
-  }
-}));
-
-app.delete("/articles/:articleId/comments/:id", asyncHandler(async (req, res) => {
-  const { articleId, id } = req.params;
-
-  const comment = await prisma.comment.delete({
-    where: { id, articleId, },
+    where: { id },
   });
 
   if (comment) {

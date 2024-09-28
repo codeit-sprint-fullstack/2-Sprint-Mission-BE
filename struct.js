@@ -6,13 +6,13 @@ export const CreateProduct = s.object({
     price: s.min(s.number(), 0),
     tags: s.array(s.string()),
     images: s.array(s.string()),
-    comments: s.array(s.string()),
+    // comments: s.array(s.string()),
 });
 
 export const CreateArticle = s.object({
-    title: s.size(s.string(), 1, 10),
+    title: s.size(s.string(), 1, 30),
     content: s.size(s.string(), 10, 100),
-    comments: s.array(s.string()),
+    // comments: s.array(s.string()),
     images: s.array(s.string()),
 });
 
