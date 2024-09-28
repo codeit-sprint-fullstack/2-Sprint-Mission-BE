@@ -288,7 +288,7 @@ app.patch("/products/:id", asyncHandler(async (req, res) => {
 }));
 
 app.get("/products", asyncHandler(async (req, res) => {
-	const { offset = 0, limit = 10, sort = "recent", keyword = "" } = req.query;
+	const { skip = 0, take = 10, sort = "recent", keyword = "" } = req.query;
 	const query = keyword ? {
 		OR: [{
 				name: { contains: keyword }
@@ -299,7 +299,7 @@ app.get("/products", asyncHandler(async (req, res) => {
 		}
 	: {};
 	let orderBy;
-	switch (orderBy) {
+	switch (sort) {
 		case "favorite":
 			orderBy = { favoriteCount: "desc" };
 			break;
@@ -316,8 +316,8 @@ app.get("/products", asyncHandler(async (req, res) => {
 	const products = await prisma.product.findMany({
 		where: query,
 		orderBy,
-		skip: parseInt(offset),
-		take: parseInt(limit),
+		skip: parseInt(skip),
+		take: parseInt(take),
 	});
 	res.send({ list: products, totalCount });
 }));
