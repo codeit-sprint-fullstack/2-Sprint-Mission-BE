@@ -20,18 +20,15 @@ export const getCommentsByArticleId = async (req, res) => {
   const queryOptions = {
     where: { articleId }, 
     take: parseInt(take),
-    orderBy: orderConfig
-  }
-  if (cursor) {
-    queryOptions.cursor = { id: cursor };
-    queryOptions.skip = 1;
-  }
+    orderBy: orderConfig,
+    ...(cursor && { 
+      cursor: { id: cursor}, 
+      skip: 1 
+    })
+  };
 
   const articleComments = await prisma.articleComment.findMany(queryOptions);
 
-  //  if (articleComments.length === 0) {
-  //    return res.status(404).send({message: 'No comments for the given aritcle ID'});
-  //  }
   res.send(articleComments);
 }
 
@@ -42,7 +39,7 @@ export const createArticleComment = async (req, res) => {
   const { content } = req.body;
 
   if(!content) {
-    return res.status(400).send({ message: 'Content is requied' });
+    return res.status(400).send({ message: 'Content is required' });
   }
 
   const articleComment = await prisma.articleComment.create({
@@ -60,10 +57,7 @@ export const updateArticleComment = async (req, res) => {
 
   const { commentId } = req.params;
   const { content } = req.body;
-  //유효성 검사를 추가하여 아래 코드는 더이상 필요없음
-  // if(!content) {
-  //   return res.status(400).send({ message: 'Content is requied' });
-  // }
+
   const updatedArticleComment = await prisma.articleComment.update({
     where: { id: commentId },
     data: { content },
