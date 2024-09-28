@@ -1,8 +1,6 @@
-import { PrismaClient } from "@prisma/client";
+import prisma from '../prisma.js';
 import { assert } from 'superstruct';
 import { CreateProductComment, PatchProductComment } from "../structs.js";
-
-const prisma = new PrismaClient();
 
 export const getCommentsByProductId = async (req, res) => {
   const { productId } = req.params;

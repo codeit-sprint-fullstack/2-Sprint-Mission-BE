@@ -1,8 +1,6 @@
-import { PrismaClient } from "@prisma/client";
+import prisma from '../prisma.js';
 import { assert } from 'superstruct';
 import { CreateArticle, PatchArticle } from "../structs.js";
-
-const prisma = new PrismaClient();
 
 export const getArticles = async (req, res) => {
   const { page = 1, pageSize = 10, orderBy = 'recent', keyword = '' } = req.query;

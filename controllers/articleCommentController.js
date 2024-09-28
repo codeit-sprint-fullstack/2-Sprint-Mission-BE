@@ -1,8 +1,6 @@
-import { PrismaClient } from "@prisma/client";
+import prisma from '../prisma.js';
 import { assert } from 'superstruct';
 import { CreateArticleComment, PatchArtcleComment } from "../structs.js";
-
-const prisma = new PrismaClient();
 
 export const getCommentsByArticleId = async (req, res) => {
   const { articleId } = req.params;
