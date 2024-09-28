@@ -5,24 +5,39 @@ import cors from 'cors';
 import * as dotenv from 'dotenv';
 dotenv.config();
 
-mongoose.connect(process.env.DATABASE_URL).then(() => console.log("Connected to DB."))
+await mongoose.connect(process.env.DATABASE_URL);
+console.log("Connected to DB.");
 
 const HttpStatus = Object.freeze({
-  SUCCESS: 200,
-  CREATED: 201,
-  ACCEPTED: 202,
-  NON_AUTHORITATIVE_INFORMATION: 203,
+	SUCCESS: 200,
+	CREATED: 201,
+	ACCEPTED: 202,
+	NON_AUTHORITATIVE_INFORMATION: 203,
 	NO_CONTENT: 204,
-  BAD_REQUEST: 400,
-  UNAUTHORIZED: 401,
-  FORBIDDEN: 403,
-  NOT_FOUND: 404,
-  SERVER_ERROR: 500,
+	BAD_REQUEST: 400,
+	UNAUTHORIZED: 401,
+	FORBIDDEN: 403,
+	NOT_FOUND: 404,
+	SERVER_ERROR: 500,
 });
 
 const app = express();
 
-app.use(cors());
+const allowedOrigins = ["172.30.1.44", "localhost", "https://panda-market-by-kipid.netlify.app"];
+app.use(cors({
+	"origin": (origin, callback) => {
+		if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+				// Allow the request if the origin is in the allowedOrigins array or if there's no origin (like in a server-to-server request)
+				callback(null, true);
+		} else {
+				// Disallow the request if the origin is not allowed
+				callback(new Error('Not allowed by CORS'));
+		}
+	},
+	"methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+	"preflightContinue": false,
+	"optionsSuccessStatus": 204
+}));
 app.use(express.json());
 
 // useAsync hook
@@ -104,12 +119,10 @@ app.patch("/products/:id", asyncHandler(async (req, res) => {
 app.delete("/products/:id", asyncHandler(async (req, res) => {
 	const id = req.params.id;
 	const product = await Product.findByIdAndDelete(id);
-	if (product) {
-		res.status(HttpStatus.NO_CONTENT).send(product);
+	if (!product) {
+		return res.status(HttpStatus.NOT_FOUND).send();
 	}
-	else {
-		res.status(HttpStatus.NOT_FOUND).send();
-	}
+	res.status(HttpStatus.NO_CONTENT).send(product);
 }));
 
 app.listen(process.env.PORT || 3000, () => console.log("Server on"));
