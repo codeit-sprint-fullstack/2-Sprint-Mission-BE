@@ -147,7 +147,6 @@ export const PRODUCTS = [
 export const PRODUCT_COMMENTS = [
   {
     id: "a1ee1e76-ea9w-423f-4ccf-8d9b4fbf331e",
-    userName: "홍길동",
     content: "삼성 냉장고 정말 좋네요!",
     createdAt: "2024-09-24T17:00:00Z",
     updatedAt: "2024-09-24T17:00:00Z",
@@ -155,7 +154,6 @@ export const PRODUCT_COMMENTS = [
   },
   {
     id: "1a3n1vv0-11c5-4d97-9019-9ebe3c4d1317",
-    userName: "김철수",
     content: "LG TV 만족스럽습니다.",
     createdAt: "2024-09-24T18:00:00Z",
     updatedAt: "2024-09-24T18:00:00Z",
@@ -163,7 +161,6 @@ export const PRODUCT_COMMENTS = [
   },
   {
     id: "6c7a90b0-31c5-4d97-9019-9ebe3c4d1317",
-    userName: "이영희",
     content: "애플워치 잘 쓰고 있어요.",
     createdAt: "2024-09-24T19:00:00Z",
     updatedAt: "2024-09-24T19:00:00Z",
@@ -212,7 +209,6 @@ export const ARTICLES = [
 export const ARTICLE_COMMENTS = [
   {
     id: "a1ee1e76-ea9w-423f-4ccf-8d9b4fbf331e",
-    userName: "박서준",
     content: "정말 유익한 글입니다!",
     createdAt: "2024-09-23T14:00:00Z",
     updatedAt: "2024-09-23T14:00:00Z",
@@ -220,7 +216,6 @@ export const ARTICLE_COMMENTS = [
   },
   {
     id: "1a3n1vv0-11c5-4d97-9019-9ebe3c4d1317",
-    userName: "최민식",
     content: "애플 제품 사용기 잘 읽었습니다.",
     createdAt: "2024-09-23T15:00:00Z",
     updatedAt: "2024-09-23T15:00:00Z",
@@ -228,7 +223,6 @@ export const ARTICLE_COMMENTS = [
   },
   {
     id: "6c7a90b0-31c5-4d97-9019-9ebe3c4d1317",
-    userName: "김지현",
     content: "청소기 비교 분석에 공감합니다.",
     createdAt: "2024-09-23T16:00:00Z",
     updatedAt: "2024-09-23T16:00:00Z",

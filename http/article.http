@@ -1,30 +1,29 @@
-GET http://localhost:3000/products/66f2e3ce973f7233f3e95823
+GET http://localhost:3000/articles/b8f11e76-0a9e-4b3f-bccf-8d9b4fbf331e
 
 ###
 
-GET http://localhost:3000/products?offset=0&limit=10&order=newest&search=냉장고
+GET http://localhost:3000/articles?offset=0&limit=10&order=recent
 
 ###
 
-POST http://localhost:3000/products
+POST http://localhost:3000/articles
 Content-Type: application/json
 
 {
-  "name": "안경",
-  "description": "동그랗고 까만 안경입니다",
-  "price": 20000
+    "title": "첫댓글",
+    "content": "처음으로 댓글 달아봅니다."
 }
 
 ###
 
-PATCH http://localhost:3000/products/66f2e3ce973f7233f3e95823
+PATCH http://localhost:3000/articles/b8f11e76-0a9e-4b3f-bccf-8d9b4fbf331e
 Content-Type: application/json
 
 {
-  "name": "Samsung",
-  "description": "Samsung 에어컨 입니다"
+  "title": "댓글 수정",
+  "content": "댓글 수정해봐요."
 }
 
 ###
 
-DELETE http://localhost:3000/products/66f2e3ce973f7233f3e95823
+DELETE http://localhost:3000/articles/b8f11e76-0a9e-4b3f-bccf-8d9b4fbf331e

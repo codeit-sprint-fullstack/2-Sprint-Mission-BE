@@ -20,7 +20,6 @@ export const getProductById = asyncHandler(async (req, res) => {
     include: {
       comments: {
         select: {
-          userName: true,
           content: true,
         },
       },
@@ -76,7 +75,7 @@ export const getProducts = asyncHandler(async (req, res) => {
   res.send(products);
 });
 
-//상품등록 POST
+//상품 등록 POST
 export const createProduct = asyncHandler(async (req, res) => {
   assert(req.body, CreateProduct);
 

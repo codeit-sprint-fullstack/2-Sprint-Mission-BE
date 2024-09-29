@@ -18,8 +18,8 @@ export const CreateProductComment = s.object({
 export const UpdateProductComment = s.partial(CreateProductComment);
 
 export const CreateArticle = s.object({
-  title: s.min(s.string(), 1),
-  content: s.min(s.string(), 1),
+  title: s.size(s.string(), 1, 100),
+  content: s.size(s.string(), 1, 1000),
 });
 
 export const UpdateArticle = s.partial(CreateArticle);
