@@ -1,137 +1,46 @@
-import express from "express";
-import mongoose from "mongoose";
-import Product from "./models/Product.js";
-import cors from "cors";
-import * as dotenv from "dotenv";
-dotenv.config();
-
-const app = express();
-
-const corsOptions = {
-  origin: ["http://localhost:3000", "https://sprint-panda.netlify.app"],
-};
-
-app.use(cors());
-app.use(express.json());
-
-mongoose
-  .connect(process.env.DATABASE_URL)
-  .then(() => console.log("Connected to DB"));
-
-//오류 처리
-function asyncHandler(handler) {
-  return async function (req, res) {
-    try {
-      await handler(req, res);
-    } catch (e) {
-      console.log(e.name);
-      console.log(e.message);
-    }
-  };
-}
+//상품 목록 조회 GET
+app.get("/users", async (req, res) => {
+  const { offset = 0, limit = 10, order = "newest" } = req.query;
+  let orderBy;
+  switch (order) {
+    case "oldest":
+      orderBy = { createdAt: "asc" };
+      break;
+    case "newest":
+    default:
+      orderBy = { createdAt: "desc" };
+  }
+  const users = await prisma.user.findMany({
+    orderBy,
+    skip: parseInt(offset),
+    take: parseInt(limit),
+  });
+  res.send(users);
+});
 
 //상품등록 POST
-app.post(
-  "/products",
-  asyncHandler(async (req, res) => {
-    const newProduct = await Product.create(req.body);
-    res.status(201).send(newProduct);
-  }),
-);
-
-//상품 상세 조회 GET:id
-app.get(
-  "/products/:id",
-  asyncHandler(async (req, res) => {
-    const id = req.params.id;
-    const product = await Product.findById(id).select(
-      "name description price tags createdAt",
-    );
-    if (product) {
-      res.status(200).send(product);
-    } else {
-      res.status(404).send({ message: "Cannot find given id. " });
-    }
-  }),
-);
+app.post("/users", async (req, res) => {
+  const user = await prisma.user.create({
+    data: req.body,
+  });
+  res.status(201).send(user);
+});
 
 //상품 수정 PATCH
-app.patch(
-  "/products/:id",
-  asyncHandler(async (req, res) => {
-    const id = req.params.id;
-    const product = await Product.findById(id);
-    if (product) {
-      Object.keys(req.body).forEach((key) => {
-        product[key] = req.body[key];
-      });
-      await product.save();
-      res.status(200).send(product);
-    } else {
-      res.status(404).send({ message: "Cannot find given id. " });
-    }
-  }),
-);
+app.patch("/users/:id", async (req, res) => {
+  const { id } = req.params;
+  const user = await prisma.user.updata({
+    where: { id },
+    data: req.body,
+  });
+  res.send(user);
+});
 
 //상품 삭제 DELETE
-app.delete(
-  "/products/:id",
-  asyncHandler(async (req, res) => {
-    const id = req.params.id;
-    const product = await Product.findByIdAndDelete(id);
-    if (product) {
-      res.sendStatus(204);
-    } else {
-      res.status(404).send({ message: "Cannot find given id. " });
-    }
-  }),
-);
-
-//상품 목록 조회 GET
-app.get(
-  "/products",
-  asyncHandler(async (req, res) => {
-    const page = Number(req.query.page) || 1;
-    const pageSize = Number(req.query.pageSize) || 999;
-    const offset = (page - 1) * pageSize;
-
-    const keyword = req.query.keyword || "";
-    const keywordRegex = new RegExp(keyword, "i");
-
-    const sort = req.query.sort || "recent";
-    let sortOption = {};
-    if (sort === "favoriteCount") {
-      sortOption = { favoriteCount: "desc" };
-    } else {
-      sortOption = { createdAt: sort === "recent" ? "desc" : "asc" };
-    }
-
-    const products = await Product.find(
-      {
-        $or: [{ name: keywordRegex }, { description: keywordRegex }],
-      },
-      {
-        name: 1,
-        description: 1,
-        price: 1,
-        favoriteCount: 1,
-        tags: 1,
-        images: 1,
-        createdAt: 1,
-      },
-    )
-      .sort(sortOption)
-      .skip(offset)
-      .limit(pageSize);
-
-    const totalProducts = await Product.countDocuments({
-      $or: [{ name: keywordRegex }, { description: keywordRegex }],
-    });
-
-    res.status(200).send({
-      products,
-    });
-  }),
-);
-
-app.listen(process.env.PORT || 3000, () => console.log("Server Started"));
+app.delete("/users/:id", async (req, res) => {
+  const { id } = req.params;
+  await prisma.user.delete({
+    where: { id: Number(id) },
+  });
+  res.sendStatus(204);
+});
