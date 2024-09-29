@@ -3,6 +3,7 @@ import cors from "cors";
 import * as dotenv from "dotenv";
 dotenv.config();
 import productRoutes from "./routes/productRoutes.js";
+import productCommentRoutes from "./routes/productCommentRoutes.js";
 import articleRoutes from "./routes/articleRoutes.js";
 
 const corsOptions = {
@@ -14,6 +15,7 @@ app.use(cors(corsOptions));
 app.use(express.json());
 
 app.use("/products", productRoutes);
+app.use("/productComments", productCommentRoutes);
 app.use("/articles", articleRoutes);
 
 app.listen(process.env.PORT || 3000, () => console.log("Server Started"));
