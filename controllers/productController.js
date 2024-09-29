@@ -3,8 +3,8 @@ dotenv.config();
 import express from "express";
 import { PrismaClient } from "@prisma/client";
 import asyncHandler from "../asyncHandler.js";
-// import { assert } from "superstruct";
-// import { CreateProduct, PatchProduct } from "./structs.js";
+import { assert } from "superstruct";
+import { CreateProduct, UpdateProduct } from "../structs.js";
 
 const prisma = new PrismaClient();
 
@@ -26,34 +26,88 @@ export const getProductById = asyncHandler(async (req, res) => {
       },
     },
   });
+
   res.send(product);
 });
 
 //상품 목록 조회 GET
-// app.get(
-//   "/products",
-//   asyncHandler(async (req, res) => {
-//     const { offset = 0, limit = 10, order = "newest" } = req.query;
-//     let orderBy;
-//     switch (order) {
-//       case "oldest":
-//         orderBy = { createdAt: "asc" };
-//         break;
-//       case "newest":
-//       default:
-//         orderBy = { createdAt: "desc" };
-//     }
-//     const users = await prisma.user.findMany({
-//       orderBy,
-//       skip: parseInt(offset),
-//       take: parseInt(limit),
-//     });
-//     res.send(users);
-//   }),
-// );
+export const getProducts = asyncHandler(async (req, res) => {
+  const { offset = 0, limit = 10, order = "newest", search = "" } = req.query;
+
+  let orderBy;
+  switch (order) {
+    case "newest":
+      orderBy = { createdAt: "desc" };
+      break;
+    default:
+      orderBy = { createdAt: "desc" };
+  }
+
+  const where = {
+    OR: [
+      {
+        name: {
+          contains: search,
+          mode: "insensitive",
+        },
+      },
+      {
+        description: {
+          contains: search,
+          mode: "insensitive",
+        },
+      },
+    ],
+  };
+
+  const products = await prisma.product.findMany({
+    where,
+    orderBy,
+    skip: parseInt(offset),
+    take: parseInt(limit),
+    select: {
+      id: true,
+      name: true,
+      price: true,
+      createdAt: true,
+    },
+  });
+
+  res.send(products);
+});
 
 //상품등록 POST
+export const createProduct = asyncHandler(async (req, res) => {
+  assert(req.body, CreateProduct);
+
+  const product = await prisma.product.create({
+    data: req.body,
+  });
+
+  res.status(201).send(product);
+});
 
 //상품 수정 PATCH
+export const updateProduct = asyncHandler(async (req, res) => {
+  assert(req.body, UpdateProduct);
+
+  const { id } = req.params;
+
+  const product = await prisma.product.update({
+    where: { id },
+    data: req.body,
+  });
+
+  res.status(201).send(product);
+});
 
 //상품 삭제 DELETE
+export const deleteProduct = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+
+  await prisma.product.delete({
+    where: { id },
+  });
+
+  res.sendStatus(204);
+});
