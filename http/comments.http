@@ -1,0 +1,25 @@
+GET http://localhost:3000/product-comments
+
+###
+
+GET http://localhost:3000/article-comments/
+
+###
+
+POST http://localhost:3000/article-comments
+
+###
+
+DELETE http://localhost:3000/article-comments/
+
+###
+
+POST http://localhost:3000/product-comments
+
+###
+
+PATCH http://localhost:3000/product-comments/
+
+###
+
+DELETE http://localhost:3000/product-comments/
