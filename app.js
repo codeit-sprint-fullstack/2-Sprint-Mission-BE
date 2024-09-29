@@ -206,12 +206,15 @@ app.delete(
 );
 
 // ProductComments ----------------------
+// 상품별 댓글 전체 조회 (by productId)
 app.get(
-  "/product-comments",
+  "/product-comments/:productId",
   asyncHandler(async (req, res) => {
     const { offset = 0, limit = 10 } = req.query;
+    const { productId } = req.params;
 
     const productComments = await prisma.productComment.findMany({
+      where: { productId },
       skip: parseInt(offset),
       take: parseInt(limit),
     });
@@ -219,6 +222,7 @@ app.get(
   })
 );
 
+// 개별 댓글 조회
 app.get(
   "/product-comments/:id",
   asyncHandler(async (req, res) => {
@@ -230,12 +234,19 @@ app.get(
   })
 );
 
+// 상품별 댓글 생성
 app.post(
-  "/product-comments",
+  "/product-comments/:productId",
   asyncHandler(async (req, res) => {
     assert(req.body, CreateProductComment);
+    const { productId } = req.params;
     const productComment = await prisma.productComment.create({
-      data: req.body,
+      data: {
+        ...req.body,
+        product: {
+          connect: { id: productId },
+        },
+      },
     });
     res.status(201).send(productComment);
   })
@@ -266,12 +277,15 @@ app.delete(
 );
 
 // ArticleComments ----------------------
+// 상품별 댓글 전체 조회 (by articleId)
 app.get(
-  "/article-comments",
+  "/article-comments/:articleId",
   asyncHandler(async (req, res) => {
     const { offset = 0, limit = 10 } = req.query;
+    const { articleId } = req.params;
 
     const articleComments = await prisma.articleComment.findMany({
+      where: { articleId },
       skip: parseInt(offset),
       take: parseInt(limit),
     });
@@ -279,6 +293,7 @@ app.get(
   })
 );
 
+// 개별 댓글 조회
 app.get(
   "/article-comments/:id",
   asyncHandler(async (req, res) => {
@@ -290,12 +305,19 @@ app.get(
   })
 );
 
+// 상품별 댓글 생성
 app.post(
-  "/article-comments",
+  "/article-comments/:articleId",
   asyncHandler(async (req, res) => {
     assert(req.body, CreateArticleComment);
+    const { articleId } = req.params;
     const articleComment = await prisma.articleComment.create({
-      data: req.body,
+      data: {
+        ...req.body,
+        article: {
+          connect: { id: articleId },
+        },
+      },
     });
     res.status(201).send(articleComment);
   })

@@ -1,4 +1,4 @@
-GET http://localhost:3000/products?search=high
+GET http://localhost:3000/products
 
 ###
 

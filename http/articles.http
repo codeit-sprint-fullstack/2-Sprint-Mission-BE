@@ -1,8 +1,8 @@
-GET http://localhost:3000/articles
+GET http://localhost:3000/articles/
 
 ###
 
-GET http://localhost:3000/articles/F6G7H8I9J1
+GET http://localhost:3000/articles/O1P2Q3R4S6
 
 ###
 
