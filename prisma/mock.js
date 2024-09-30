@@ -1,4 +1,57 @@
-const data = [
+export const USERS = [
+  {
+    id: "b8f11e76-0a9e-4b3f-bccf-8d9b4fbf331e",
+    email: "honggd@example.com",
+    firstName: "길동",
+    lastName: "홍",
+    nickname: "HGD",
+    address: "서울특별시 강남구 무실로 123번길 45-6",
+    createdAt: "2023-07-16T09:00:00Z",
+    updatedAt: "2023-07-16T09:00:00Z",
+  },
+  {
+    id: "6c3a18b0-11c5-4d97-9019-9ebe3c4d1317",
+    email: "kimyh@example.com",
+    firstName: "영희",
+    lastName: "김",
+    address: "경기도 고양시 봉명로 789번길 21",
+    nickname: "KYH",
+    createdAt: "2023-07-16T09:30:00Z",
+    updatedAt: "2023-07-16T09:30:00Z",
+  },
+  {
+    id: "fd3ae0a5-8dd5-40b6-b8fd-48870f731db1",
+    email: "lee.cs@example.com",
+    firstName: "철수",
+    lastName: "이",
+    address: "인천광역시 남구 향교로 567번길 8-2",
+    nickname: "LCS",
+    createdAt: "2023-07-16T10:00:00Z",
+    updatedAt: "2023-07-16T10:00:00Z",
+  },
+  {
+    id: "70e1e61d-f2ae-4d7d-bf8f-d65eafdb6a45",
+    email: "parkjy@example.com",
+    firstName: "지영",
+    lastName: "박",
+    address: "대전광역시 중구 성남로 432번길 76",
+    nickname: "PJY",
+    createdAt: "2023-07-16T10:30:00Z",
+    updatedAt: "2023-07-16T10:30:00Z",
+  },
+  {
+    id: "73cb9639-d8b7-4f11-9a62-53f4187f3f11",
+    email: "jungminsoo@example.com",
+    firstName: "민수",
+    lastName: "정",
+    address: "부산광역시 동래구 수림로 987번길 33-7",
+    nickname: "JMS",
+    createdAt: "2023-07-16T11:00:00Z",
+    updatedAt: "2023-07-16T11:00:00Z",
+  },
+];
+
+export const PRODUCTS = [
   {
     name: "쿠쿠 밥솥",
     description: "쿠쿠하세요~~",
@@ -7,7 +60,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/92/1725209779217/CRP-DHP0610FD.png",
     ],
-    ownerId: 92,
+    stock: 5,
     favoriteCount: 0,
     createdAt: "2024-09-01T15:56:53.858Z",
     updatedAt: "2024-09-02T01:15:56.841Z",
@@ -20,7 +73,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/72/1724836584916/2.jpg",
     ],
-    ownerId: 72,
+    stock: 5,
     favoriteCount: 0,
     createdAt: "2024-08-27T12:26:55.629Z",
     updatedAt: "2024-08-30T10:42:33.978Z",
@@ -31,7 +84,7 @@ const data = [
     price: 0,
     tags: [],
     images: ["https://example.com/..."],
-    ownerId: 78,
+    stock: 5,
     favoriteCount: 1,
     createdAt: "2024-08-25T17:41:10.901Z",
     updatedAt: "2024-09-04T08:20:57.019Z",
@@ -44,7 +97,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/36/1724120702896/water-lily-8175845_1280.jpg",
     ],
-    ownerId: 36,
+    stock: 5,
     favoriteCount: 1,
     createdAt: "2024-08-20T02:26:50.914Z",
     updatedAt: "2024-08-21T02:06:50.311Z",
@@ -57,7 +110,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/36/1724119838524/pexels-colour-creation-28649-112811.jpg",
     ],
-    ownerId: 36,
+    stock: 5,
     favoriteCount: 1,
     createdAt: "2024-08-20T02:12:42.228Z",
     updatedAt: "2024-08-21T02:06:47.586Z",
@@ -70,7 +123,7 @@ const data = [
     images: [
       "https://images.samsung.com/kdp/event/sec/2024/0301_galaxy_book4_ultra/buying/slide_v7/gbu_buying_defalut_pc.jpg",
     ],
-    ownerId: 29,
+    stock: 5,
     favoriteCount: 1,
     createdAt: "2024-08-16T02:27:54.293Z",
     updatedAt: "2024-08-21T02:06:41.073Z",
@@ -83,7 +136,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991844193/5146532.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 6,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -96,7 +149,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991827255/3514562.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 12,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -109,7 +162,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991812368/2313561.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 4,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -122,7 +175,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991853452/5389615.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 10,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -135,7 +188,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991798558/321351.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 4,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -148,7 +201,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991786504/31563.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 8,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -161,7 +214,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991756711/21353.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 15,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -174,7 +227,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991744735/2113.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 6,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -187,7 +240,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991725132/233.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 7,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -200,7 +253,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991786504/31563.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 7,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -213,7 +266,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991853452/5389615.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 10,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -226,7 +279,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991844193/5146532.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 6,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -239,7 +292,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991827255/3514562.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 12,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -252,7 +305,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991812368/2313561.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 4,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -265,7 +318,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991798558/321351.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 4,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -278,7 +331,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991786504/31563.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 8,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -291,7 +344,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991756711/21353.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 15,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -304,7 +357,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991744735/2113.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 6,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -317,7 +370,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991725132/233.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 7,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -330,7 +383,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991844193/5146532.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 6,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -343,7 +396,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991827255/3514562.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 12,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -356,7 +409,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991812368/2313561.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 4,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -369,7 +422,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991853452/5389615.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 10,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -382,7 +435,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991798558/321351.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 4,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -395,7 +448,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991786504/31563.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 8,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -408,7 +461,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991756711/21353.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 15,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -421,7 +474,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991744735/2113.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 6,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -434,7 +487,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991725132/233.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 7,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -447,7 +500,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991786504/31563.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 7,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -460,7 +513,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991853452/5389615.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 10,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -473,7 +526,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991844193/5146532.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 6,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -486,7 +539,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991827255/3514562.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 12,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -499,7 +552,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991812368/2313561.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 4,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -512,7 +565,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991798558/321351.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 4,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -525,7 +578,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991786504/31563.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 8,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -538,7 +591,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991756711/21353.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 15,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -551,7 +604,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991744735/2113.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 6,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -564,7 +617,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991725132/233.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 7,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -577,7 +630,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991844193/5146532.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 6,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -590,7 +643,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991827255/3514562.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 12,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -603,7 +656,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991812368/2313561.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 4,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -616,7 +669,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991853452/5389615.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 10,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -629,7 +682,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991798558/321351.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 4,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -642,7 +695,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991786504/31563.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 8,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -655,7 +708,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991756711/21353.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 15,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -668,7 +721,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991744735/2113.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 6,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -681,7 +734,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991725132/233.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 7,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -694,7 +747,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991786504/31563.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 7,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -707,7 +760,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991853452/5389615.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 10,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -720,7 +773,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991844193/5146532.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 6,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -733,7 +786,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991827255/3514562.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 12,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -746,7 +799,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991812368/2313561.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 4,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -759,7 +812,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991798558/321351.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 4,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -772,7 +825,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991786504/31563.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 8,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -785,7 +838,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991756711/21353.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 15,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -798,7 +851,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991744735/2113.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 6,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -811,7 +864,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991725132/233.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 7,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -824,7 +877,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991844193/5146532.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 6,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -837,7 +890,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991827255/3514562.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 12,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -850,7 +903,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991812368/2313561.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 4,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -863,7 +916,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991853452/5389615.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 10,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -876,7 +929,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991798558/321351.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 4,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -889,7 +942,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991786504/31563.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 8,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -902,7 +955,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991756711/21353.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 15,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -915,7 +968,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991744735/2113.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 6,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -928,7 +981,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991725132/233.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 7,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -941,7 +994,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991786504/31563.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 7,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -954,7 +1007,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991853452/5389615.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 10,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -967,7 +1020,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991844193/5146532.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 6,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -980,7 +1033,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991827255/3514562.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 12,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -993,7 +1046,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991812368/2313561.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 4,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -1006,7 +1059,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991798558/321351.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 4,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -1019,7 +1072,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991786504/31563.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 8,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -1032,7 +1085,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991756711/21353.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 15,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -1045,7 +1098,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991744735/2113.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 6,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -1058,7 +1111,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991725132/233.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 7,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -1071,7 +1124,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991844193/5146532.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 6,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -1084,7 +1137,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991827255/3514562.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 12,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -1097,7 +1150,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991812368/2313561.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 4,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -1110,7 +1163,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991853452/5389615.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 10,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -1123,7 +1176,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991798558/321351.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 4,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -1136,7 +1189,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991786504/31563.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 8,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -1149,7 +1202,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991756711/21353.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 15,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -1162,7 +1215,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991744735/2113.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 6,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -1175,7 +1228,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991725132/233.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 7,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -1188,7 +1241,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991786504/31563.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 7,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -1201,7 +1254,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991853452/5389615.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 10,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -1214,7 +1267,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991844193/5146532.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 6,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -1227,7 +1280,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991827255/3514562.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 12,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -1240,7 +1293,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991812368/2313561.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 4,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -1253,7 +1306,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991798558/321351.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 4,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -1266,7 +1319,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991786504/31563.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 8,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -1279,7 +1332,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991756711/21353.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 15,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -1292,7 +1345,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991744735/2113.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 1,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-08-08T03:07:23.555Z",
@@ -1305,7 +1358,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991725132/233.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 7,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -1318,7 +1371,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991844193/5146532.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 6,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -1331,7 +1384,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991827255/3514562.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 12,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -1344,7 +1397,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991812368/2313561.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 4,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -1357,7 +1410,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991853452/5389615.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 10,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -1370,7 +1423,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991798558/321351.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 4,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -1383,7 +1436,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991786504/31563.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 8,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -1396,7 +1449,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991756711/21353.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 15,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -1409,7 +1462,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991744735/2113.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 6,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -1422,7 +1475,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991725132/233.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 7,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -1435,7 +1488,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991786504/31563.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 7,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -1448,7 +1501,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991853452/5389615.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 10,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -1461,7 +1514,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991844193/5146532.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 6,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -1474,7 +1527,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991827255/3514562.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 12,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -1487,7 +1540,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991812368/2313561.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 4,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -1500,7 +1553,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991798558/321351.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 4,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -1513,7 +1566,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991786504/31563.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 8,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -1526,7 +1579,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991756711/21353.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 15,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -1539,7 +1592,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991744735/2113.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 6,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -1552,7 +1605,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991725132/233.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 7,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -1565,7 +1618,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991844193/5146532.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 6,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -1578,7 +1631,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991827255/3514562.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 12,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -1591,7 +1644,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991812368/2313561.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 4,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -1604,7 +1657,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991853452/5389615.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 10,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -1617,7 +1670,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991798558/321351.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 4,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -1630,7 +1683,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991786504/31563.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 8,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -1643,7 +1696,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991756711/21353.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 15,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -1656,7 +1709,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991744735/2113.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 6,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -1669,7 +1722,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991725132/233.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 7,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -1682,7 +1735,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991786504/31563.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 7,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -1695,7 +1748,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991853452/5389615.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 10,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -1708,7 +1761,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991844193/5146532.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 6,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -1721,7 +1774,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991827255/3514562.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 12,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -1734,7 +1787,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991812368/2313561.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 4,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -1747,7 +1800,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991798558/321351.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 4,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -1760,7 +1813,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991786504/31563.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 8,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -1773,7 +1826,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991756711/21353.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 15,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -1786,7 +1839,7 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991744735/2113.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 6,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
@@ -1799,11 +1852,13 @@ const data = [
     images: [
       "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Sprint_Mission/user/3/1721991725132/233.png",
     ],
-    ownerId: 1,
+    stock: 5,
     favoriteCount: 7,
     createdAt: "2024-07-29T05:45:03.249Z",
     updatedAt: "2024-07-29T05:45:03.249Z",
   },
 ];
 
-export default data;
+export const ARTICLES = [];
+export const ARTICLE_COMMENTS = [];
+export const PRODUCT_COMMENTS = [];
