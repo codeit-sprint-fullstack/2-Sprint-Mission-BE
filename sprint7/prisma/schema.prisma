@@ -1,0 +1,78 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              String           @id @default(uuid()) // * Can be used by salt in encryption.
+  email           String           @unique
+  nickname        String
+  password        String
+  pwdIter         Int              @default(10000)
+  ssnIter         Int              @default(1000)
+  articles        Article[]
+  articleComments ArticleComment[]
+  productComments ProductComment[]
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+}
+
+model Product {
+  id              String           @id @default(uuid())
+  name            String
+  description     String
+  price           Float
+  tags            String[]
+  images          String[]
+  favoriteCount   Int
+  productComments ProductComment[]
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+}
+
+model Article {
+  id              String           @id @default(uuid())
+  title           String
+  authorId        String?
+  author          User?            @relation(fields: [authorId], references: [id], onDelete: SetNull)
+  content         String
+  articleComments ArticleComment[]
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+}
+
+model ProductComment {
+  id          String   @id @default(uuid())
+  content     String
+  productId   String?
+  product     Product? @relation(fields: [productId], references: [id], onDelete: SetNull)
+  commenterId String?
+  commenter   User?    @relation(fields: [commenterId], references: [id], onDelete: SetNull)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([commenterId, updatedAt(sort: Desc)])
+}
+
+model ArticleComment {
+  id          String   @id @default(uuid())
+  content     String
+  articleId   String?
+  article     Article? @relation(fields: [articleId], references: [id], onDelete: SetNull)
+  commenterId String?
+  commenter   User?    @relation(fields: [commenterId], references: [id], onDelete: SetNull)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([commenterId, updatedAt(sort: Desc)])
+}

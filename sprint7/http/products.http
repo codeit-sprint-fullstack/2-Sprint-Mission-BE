@@ -1,0 +1,36 @@
+GET http://localhost:3000/products
+
+###
+
+GET http://localhost:3000/products?offset=0&order=newest&keyword=갤
+
+###
+
+GET http://localhost:3000/products/43483dc9-0937-4508-8863-97913976511c
+
+###
+
+POST http://localhost:3000/products
+Content-Type: application/json
+
+{
+	"name": "코드잇 후디5",
+	"description": "코드잇 로고가 세겨진 후디",
+	"price": 38000,
+	"tags": [ "코드잇", "로고", "후디" ],
+	"images": [ "No image" ],
+	"favoriteCount": 20
+}
+
+###
+
+PATCH http://localhost:3000/products/e97045ac-5853-41c7-95a2-06e8c8c5acac
+Content-Type: application/json
+
+{
+	"description": "새로운 설명입니다."
+}
+
+###
+
+DELETE http://localhost:3000/products/da8584a8-1048-4215-b271-29dbce8b97fc
