@@ -1,6 +1,6 @@
-import mongoose from 'mongoose';
+import { Schema } from 'mongoose';
 
-const ProductSchema = new mongoose.Schema(
+const productSchema = new Schema(
   {
     name: {
       type: String,
@@ -14,18 +14,16 @@ const ProductSchema = new mongoose.Schema(
       maxLength: 100,
       required: true,
     },
-    price: { type: Number, required: true, min: 0 },
+    price: { type: Number, required: true, min: 1 },
     tags: { type: [String] },
     images: { type: [String] },
     favoriteCount: { type: Number, default: 0, min: 0 },
   },
   {
     timestamps: true,
+    // 자동으로 생성해주는 collection을 사용하지 않고자 한다면 직접 명시할 수 있다.
+    collection: 'products',
   }
 );
 
-// model의 첫번째 인자: 대문자 시작, 단수형 - Product
-// model이 다루게 될 컬렉션: 소문자 시작, 복수형 - products
-const Product = mongoose.model('Product', ProductSchema);
-
-export default Product;
+export { productSchema };

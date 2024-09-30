@@ -1,4 +1,4 @@
 .env
-request.http
 /node_modules
+/http
 jsconfig.json

@@ -1,0 +1,87 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  nickname  String
+  image     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  favoriteProducts Product[]
+  ownArticles      Article[] @relation(name: "articleOwnership")
+  likeArticles     Article[] @relation(name: "likeOwnership")
+  ownComments      Comment[]
+}
+
+model Product {
+  id            String   @id @default(uuid())
+  name          String //min 1, max 10
+  description   String //min 10, max 100
+  price         Int //min 1
+  favoriteCount Int      @default(0) //min 0
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  favoriteUsers  User[]
+  comments       Comment[]
+  Product_Tags   Product_Tag[]
+  Product_Images Product_Image[]
+}
+
+model Product_Tag {
+  id  String @id @default(uuid())
+  tag String
+
+  product   Product @relation(fields: [productId], references: [id])
+  productId String
+}
+
+model Product_Image {
+  id    String @id @default(uuid())
+  image String
+
+  product   Product @relation(fields: [productId], references: [id])
+  productId String
+}
+
+model Article {
+  id        String   @id @default(uuid())
+  title     String
+  content   String
+  likeCount Int      @default(0) //min 0
+  images    String[] @default([])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  owner     User?     @relation(fields: [ownerId], references: [id], name: "articleOwnership", onDelete: SetNull)
+  ownerId   String?
+  likeUsers User[]    @relation(name: "likeOwnership")
+  comments  Comment[]
+}
+
+model Comment {
+  id        String   @id @default(uuid())
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  owner     User?    @relation(fields: [ownerId], references: [id], onDelete: SetNull)
+  ownerId   String?
+  article   Article? @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  articleId String?
+  product   Product? @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId String?
+}
