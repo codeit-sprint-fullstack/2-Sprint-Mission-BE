@@ -1,0 +1,24 @@
+GET http://localhost:5000/articles
+###
+GET http://localhost:5000/articles/76e1685ad6ae861dd6810a
+###
+POST http://localhost:5000/articles
+Content-Type: application/json
+
+{ 
+  "title": "전자담배도 판매 가능한가요??",
+  "content": "전자담배도 판매 가능한가요??"
+}
+###
+PATCH http://localhost:5000/articles/055ce7df-4e16-48f3-a2ca-70c032c36627
+Content-Type: application/json
+
+{
+  "title": "전자담배도 jelo는 얼마정도 할까요?"
+}
+###
+DELETE http://localhost:5000/articles/a96724dc-659d-407f-94bb-f8384e48081f
+###
+GET http://localhost:5000/articles?page=2&limit=2&sort=recent
+
+

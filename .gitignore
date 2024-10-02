@@ -3,3 +3,5 @@
 
 # env 무시
 .env
+
+/prisma/migrations

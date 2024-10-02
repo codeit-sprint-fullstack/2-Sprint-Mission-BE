@@ -1,0 +1,29 @@
+GET http://localhost:5000/products
+###
+GET http://localhost:5000/products/66e1685ad6ae861dd68105ed
+###
+POST http://localhost:5000/products
+Content-Type: application/json
+
+{ 
+  "name": "황금사과",
+  "price": 10000,
+  "description": "세상에서 제일 맛있는 황금사과",
+  "tags": ["사과"]
+}
+###
+PATCH http://localhost:5000/products/f7bfe386-65c6-4152-aeb2-7599ef6a3f64
+Content-Type: application/json
+
+{
+  "name": "Samsung Galuxy book",
+  "price": 160000,
+  "description": "samsung 노트북 사용하세요~",
+  "tags": ["노트북"]
+}
+###
+DELETE http://localhost:5000/products/f7bfe386-65c6-4152-aeb2-7599ef6a3f64
+###
+GET http://localhost:5000/products?page=2&limit=5&sort=recent
+
+

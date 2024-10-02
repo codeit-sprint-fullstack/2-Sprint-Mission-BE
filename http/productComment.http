@@ -1,0 +1,24 @@
+GET http://localhost:5000/productComments
+###
+GET http://localhost:5000/productComments/86e1685ad6ae861dd6810a
+###
+POST http://localhost:5000/productComments
+Content-Type: application/json
+
+{ 
+  "content": "황금사과",
+  "productId": "66e1685ad6ae861dd68105ee"
+}
+###
+PATCH http://localhost:5000/productComments/0740eae1-4039-478a-87ec-5426ee2ab8cb
+Content-Type: application/json
+
+{
+  "content": "Samsung Galuxy book"
+}
+###
+DELETE http://localhost:5000/productComments/0740eae1-4039-478a-87ec-5426ee2ab8cb
+###
+GET http://localhost:5000/productComments?take=1
+
+
