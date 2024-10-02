@@ -1,0 +1,26 @@
+GET http://localhost:4000/products
+###
+GET http://localhost:4000/products?page=2&pageSize=3
+###
+GET http://localhost:4000/products?keyword=깨끗
+###
+GET http://localhost:4000/products/daf3132b-ff3f-4aab-969d-4bce7610d233
+###
+POST http://localhost:4000/products
+Content-Type: application/json
+
+{
+    "name": "텀블러",
+    "description" : "들고 다니기 간편한 텀블러",
+    "price": 12000,
+    "tags": ["텀블러", "유용한"]
+}
+###
+PATCH http://localhost:4000/products/f743e29e-1481-4e15-868b-882f491c3f02
+Content-Type: application/json
+
+{
+    "price": 13000
+}
+###
+DELETE http://localhost:4000/products/f743e29e-1481-4e15-868b-882f491c3f02
