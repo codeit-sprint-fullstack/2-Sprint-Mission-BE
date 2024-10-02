@@ -1,0 +1,44 @@
+
+GET http://localhost:3000/products
+
+###
+GET http://localhost:3000/products?orderBy=oldest
+
+###
+GET http://localhost:3000/products?orderBy=recent&page=1&pageSize=2
+
+###
+GET http://localhost:3000/products?keyword=고급스러운
+
+###
+GET http://localhost:3000/products/1e112c02-7c92-4d52-b76e-485e41e3f64d
+
+###
+POST http://localhost:3000/products
+Content-Type: application/json
+
+{
+  "name": "신상품 111",
+  "description": "신상품 111에 대한 설명입니다.",
+  "category": "ELECTRONICS",
+  "price": 100000,
+  "stock": 10,
+  "tags": ["태그", "신상", "할인"]
+}
+
+###
+PATCH  http://localhost:3000/products/997b2f43-01d1-4ed8-a094-39cd4a4406c8
+Content-Type: application/json
+
+{
+  "name": "신상품 111 ",
+  "description": "신상품 수정에 대한 설명입니다.",
+  "price": 200000,
+  "tags": ["수정태그1", "수정태그2"]
+}
+
+###
+DELETE http://localhost:3000/products/997b2f43-01d1-4ed8-a094-39cd4a4406c8
+
+###
+GET http://localhost:3000/products/997b2f43-01d1-4ed8-a094-39cd4a4406c8

@@ -1,0 +1,34 @@
+GET http://localhost:3000/articles/523e4567-e89b-12d3-a456-426614174004/comments
+
+### 댓글 없는 글
+GET http://localhost:3000/articles/0c215d64-524a-4d45-922f-3bd2a62e28d6/comments
+
+###
+GET http://localhost:3000/articles/523e4567-e89b-12d3-a456-426614174004/comments?orderBy=oldest
+
+###
+GET http://localhost:3000/articles/523e4567-e89b-12d3-a456-426614174004/comments?take=2
+
+###
+GET http://localhost:3000/articles/523e4567-e89b-12d3-a456-426614174004/comments?take=2&cursor=bb1425d8-c2c3-4333-b20c-14c838b49b10
+
+
+
+###
+POST http://localhost:3000/articles/523e4567-e89b-12d3-a456-426614174004/comments
+Content-Type: application/json
+
+{
+  "content": "댓글 등록8"
+}
+
+###
+Patch http://localhost:3000/articles/comments/24495387-4e9c-45eb-8d1c-9e77642e33b2
+Content-Type: application/json
+
+{
+  "content": "댓글 등록4-수정"
+}
+
+###
+DELETE http://localhost:3000/articles/comments/24495387-4e9c-45eb-8d1c-9e77642e33b2
