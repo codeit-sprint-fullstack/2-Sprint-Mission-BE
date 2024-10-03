@@ -1,0 +1,19 @@
+GET http://localhost:3000/articles/
+
+###
+
+GET http://localhost:3000/articles/O1P2Q3R4S6
+
+###
+
+POST http://localhost:3000/articles/
+
+###
+
+PATCH http://localhost:3000/articles/F6G7H8I9J1
+
+###
+
+DELETE http://localhost:3000/articles/F6G7H8I9J1
+
+###
