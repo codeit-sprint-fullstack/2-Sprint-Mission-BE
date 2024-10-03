@@ -1,0 +1,39 @@
+GET http://localhost:3000/product-comments/I6J7K8L9M0
+
+###
+
+GET http://localhost:3000/article-comments/J6K7L8M9N1
+
+###
+
+POST http://localhost:3000/article-comments/J6K7L8M9N1
+Content-Type: application/json
+
+{
+	"content": "It looks awesome!!!"
+}
+
+###
+
+POST http://localhost:3000/product-comments/I6J7K8L9M0
+Content-Type: application/json
+
+{
+	"content": "It looks awesome!!!"
+}
+
+###
+
+DELETE http://localhost:3000/article-comments/
+
+###
+
+POST http://localhost:3000/product-comments
+
+###
+
+PATCH http://localhost:3000/product-comments/
+
+###
+
+DELETE http://localhost:3000/product-comments/954d3991-69ce-407a-b3be-17cb09d6b23c
