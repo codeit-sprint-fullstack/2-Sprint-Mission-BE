@@ -236,7 +236,7 @@ app.get(
 
 // 상품별 댓글 생성
 app.post(
-  "/product-comments/:productId",
+  "/product/:productId/comments",
   asyncHandler(async (req, res) => {
     assert(req.body, CreateProductComment);
     const { productId } = req.params;
@@ -253,7 +253,7 @@ app.post(
 );
 
 app.patch(
-  "/product-comments/:id",
+  "/product/comments/:commentId",
   asyncHandler(async (req, res) => {
     assert(req.body, PatchProductComment);
     const { id } = req.params;
@@ -266,7 +266,7 @@ app.patch(
 );
 
 app.delete(
-  "/product-comments/:id",
+  "/product/comments/:commentId",
   asyncHandler(async (req, res) => {
     const { id } = req.params;
     await prisma.productComment.delete({
@@ -279,7 +279,7 @@ app.delete(
 // ArticleComments ----------------------
 // 상품별 댓글 전체 조회 (by articleId)
 app.get(
-  "/article-comments/:articleId",
+  "/article/:articleId/comments",
   asyncHandler(async (req, res) => {
     const { offset = 0, limit = 10 } = req.query;
     const { articleId } = req.params;
@@ -295,7 +295,7 @@ app.get(
 
 // 개별 댓글 조회
 app.get(
-  "/article-comments/:id",
+  "/article/comments/:commentId",
   asyncHandler(async (req, res) => {
     const { id } = req.params;
     const articleComment = await prisma.articleComment.findUniqueOrThrow({
@@ -307,7 +307,7 @@ app.get(
 
 // 상품별 댓글 생성
 app.post(
-  "/article-comments/:articleId",
+  "/article/comments/:articleId",
   asyncHandler(async (req, res) => {
     assert(req.body, CreateArticleComment);
     const { articleId } = req.params;
@@ -324,7 +324,7 @@ app.post(
 );
 
 app.patch(
-  "/article-comments/:id",
+  "/article/comments/:commentId",
   asyncHandler(async (req, res) => {
     assert(req.body, PatchArticleComment);
     const { id } = req.params;
@@ -337,7 +337,7 @@ app.patch(
 );
 
 app.delete(
-  "/article-comments/:id",
+  "/article/comments/:commentId",
   asyncHandler(async (req, res) => {
     const { id } = req.params;
     await prisma.articleComment.delete({
