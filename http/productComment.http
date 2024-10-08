@@ -1,0 +1,24 @@
+GET http://localhost:3000/productComments/66f2e3ce973f7233f3e95823
+
+###
+
+POST http://localhost:3000/productComments/66f2e3ce973f7233f3e95823
+Content-Type: application/json
+
+{
+  "content": "댓글입니다"
+}
+
+###
+
+PATCH http://localhost:3000/productComments/1a3n1vv0-11c5-4d97-9019-9ebe3c4d1317
+Content-Type: application/json
+
+{
+  "content": "댓글 수정했어요"
+}
+
+###
+
+DELETE http://localhost:3000/productComments/1a3n1vv0-11c5-4d97-9019-9ebe3c4d1317
+

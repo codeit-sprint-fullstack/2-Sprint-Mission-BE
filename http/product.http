@@ -1,0 +1,31 @@
+GET http://localhost:3000/products/66f2e3ce973f7233f3e95823
+
+###
+
+GET http://localhost:3000/products?offset=0&limit=10&order=newest&search=냉장고
+
+###
+
+POST http://localhost:3000/products
+Content-Type: application/json
+
+{
+  "name": "안경",
+  "description": "동그랗고 까만 안경입니다",
+  "price": 20000
+}
+
+###
+
+PATCH http://localhost:3000/products/66f2e3ce973f7233f3e95823
+Content-Type: application/json
+
+{
+  "name": "Samsung",
+  "description": "Samsung 에어컨 입니다"
+}
+
+###
+
+DELETE http://localhost:3000/products/66f2e3ce973f7233f3e95823
+
