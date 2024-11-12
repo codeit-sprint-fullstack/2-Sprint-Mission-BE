@@ -1,7 +1,13 @@
-import productRepository from "../repositories/productRepository";
+import { ProductRepository } from "../repositories/productRepository";
 
 export class ProductService {
+  private productRepository: ProductRepository;
+
+  constructor(productRepository: ProductRepository) {
+    this.productRepository = productRepository;
+  }
+
   getById(id: number) {
-    return productRepository.getById(id);
+    return this.productRepository.getById(id);
   }
 }

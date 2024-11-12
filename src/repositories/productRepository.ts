@@ -1,9 +1,15 @@
-import prisma from "../config/prisma";
+import { PrismaClient } from "@prisma/client";
 
-function getById(id: number) {
-  return prisma.product.findUnique({
-    where: { id },
-  });
+export class ProductRepository {
+  private prisma: PrismaClient;
+
+  constructor(prisma: PrismaClient) {
+    this.prisma = prisma;
+  }
+
+  getById(id: number) {
+    return this.prisma.product.findUnique({
+      where: { id },
+    });
+  }
 }
-
-export default { getById };

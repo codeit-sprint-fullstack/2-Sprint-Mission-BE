@@ -1,11 +1,8 @@
-import { ProductController } from "./../controllers/productController";
-import { ProductService } from "../services/productService";
 import express from "express";
+import { productContainer } from "../containers/productContainer";
 
 const productRouter = express.Router();
-
-const productService = new ProductService();
-const productController = ProductController.getInstance(productService);
+const productController = productContainer.ProductController();
 
 productRouter.get("/:id", productController.getById);
 
