@@ -6,5 +6,5 @@ const app = express();
 app.use("/products", productRouter);
 
 app.listen(3000, () => {
-  console.log("Server Started");
+  console.log("Server Started!");
 });
