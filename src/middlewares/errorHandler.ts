@@ -9,6 +9,7 @@ export function asyncErrorHandler(
     try {
       await handler(req, res, next);
     } catch (error) {
+      console.error(error);
       next(error);
     }
   };
@@ -31,7 +32,7 @@ export function errorHandler(
     error instanceof Prisma.PrismaClientKnownRequestError &&
     error.code === "P2025"
   ) {
-    res.sendStatus(404);
+    res.sendStatus(404).send({ message: error.message });
   } else {
     res.status(500).send({ message: error.message });
   }
