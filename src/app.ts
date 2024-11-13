@@ -1,9 +1,6 @@
-import express from "express";
-import productRouter from "./routes/productRouter";
+import { appConfig } from "./appConfig";
 
-const app = express();
-
-app.use("/products", productRouter);
+const app = appConfig();
 
 app.listen(3000, () => {
   console.log("Server Started");

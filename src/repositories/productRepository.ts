@@ -1,11 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 
 export class ProductRepository {
-  private prisma: PrismaClient;
-
-  constructor(prisma: PrismaClient) {
-    this.prisma = prisma;
-  }
+  constructor(private prisma: PrismaClient) {}
 
   getById(id: number) {
     return this.prisma.product.findUnique({

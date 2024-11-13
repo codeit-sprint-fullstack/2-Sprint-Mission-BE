@@ -3,11 +3,11 @@ import { ProductService } from "../services/productService";
 import { ProductRepository } from "../repositories/productRepository";
 import { PrismaClient } from "@prisma/client";
 
-class ProductContainer {
-  private prisma: PrismaClient;
-  private productRepository: ProductRepository;
-  private productService: ProductService;
-  private productController: ProductController;
+export class ProductContainer {
+  public prisma: PrismaClient;
+  public productRepository: ProductRepository;
+  public productService: ProductService;
+  public productController: ProductController;
 
   constructor() {
     this.prisma = new PrismaClient();
@@ -15,10 +15,4 @@ class ProductContainer {
     this.productService = new ProductService(this.productRepository);
     this.productController = new ProductController(this.productService);
   }
-
-  ProductController(): ProductController {
-    return this.productController;
-  }
 }
-
-export const productContainer = new ProductContainer();

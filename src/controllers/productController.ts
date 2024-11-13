@@ -1,16 +1,20 @@
-import { Request, Response } from "express";
+import { Request, Response, Router } from "express";
 import { ProductService } from "../services/productService";
 
 export class ProductController {
-  private productService: ProductService;
+  public router: Router = Router();
 
-  constructor(productService: ProductService) {
-    this.productService = productService;
+  constructor(private service: ProductService) {
+    this.routes();
+  }
+
+  private routes() {
+    this.router.get("/:id", this.getById);
   }
 
   getById = (req: Request, res: Response) => {
     const { id } = req.params;
-    const products = this.productService.getById(Number(id));
+    const products = this.service.getById(Number(id));
     res.send(products);
   };
 }
