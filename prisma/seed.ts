@@ -5,11 +5,11 @@ const prisma = new PrismaClient();
 
 async function main() {
   //기존 데이터 삭제
-  await prisma.user.deleteMany();
-  await prisma.product.deleteMany();
-  await prisma.article.deleteMany();
-  await prisma.comment.deleteMany();
   await prisma.like.deleteMany();
+  await prisma.comment.deleteMany();
+  await prisma.article.deleteMany();
+  await prisma.product.deleteMany();
+  await prisma.user.deleteMany();
 
   // 목 데이터 삽입
   await prisma.user.createMany({

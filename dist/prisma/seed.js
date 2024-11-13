@@ -15,11 +15,11 @@ const prisma = new client_1.PrismaClient();
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
         //기존 데이터 삭제
-        yield prisma.user.deleteMany();
-        yield prisma.product.deleteMany();
-        yield prisma.article.deleteMany();
-        yield prisma.comment.deleteMany();
         yield prisma.like.deleteMany();
+        yield prisma.comment.deleteMany();
+        yield prisma.article.deleteMany();
+        yield prisma.product.deleteMany();
+        yield prisma.user.deleteMany();
         // 목 데이터 삽입
         yield prisma.user.createMany({
             data: mock_1.USERS,
