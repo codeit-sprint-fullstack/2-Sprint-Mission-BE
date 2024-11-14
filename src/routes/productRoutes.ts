@@ -1,14 +1,24 @@
 import { productContainer } from "../containers/productContainer";
-import express from "express";
+import { Router } from "express";
 
-const productRouter = express.Router();
+class ProductRouter {
+  public router: Router;
 
-productRouter.route("/").post(productContainer.productController.createProduct);
+  constructor() {
+    this.router = Router();
+    this.productRoutes();
+  }
 
-productRouter
-  .route("/:id")
-  .get(productContainer.productController.getProductById)
-  .patch(productContainer.productController.updateProduct)
-  .delete(productContainer.productController.deleteProduct);
+  productRoutes() {
+    this.router
+      .route("/")
+      .post(productContainer.productController.createProduct);
+    this.router
+      .route("/:id")
+      .get(productContainer.productController.getProductById)
+      .patch(productContainer.productController.updateProduct)
+      .delete(productContainer.productController.deleteProduct);
+  }
+}
 
-export default productRouter;
+export default new ProductRouter().router;
