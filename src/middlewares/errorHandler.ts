@@ -25,6 +25,8 @@ export function errorHandler(
       message: error.message,
       email: req.body.email,
     });
+  } else if (error.message === "Unauthorized") {
+    return res.status(401).json({ message: error.message });
   } else if (
     error instanceof Prisma.PrismaClientValidationError ||
     error.name === "StructError"
