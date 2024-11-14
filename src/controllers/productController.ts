@@ -12,14 +12,14 @@ export class ProductController {
       if (!product) {
         return res.status(404).json({ message: "Not Found" });
       }
-      res.send(product);
+      res.json(product);
     }
   );
 
   createProduct = asyncErrorHandler(
     async (req: Request, res: Response): Promise<any> => {
       const product = await this.service.createProduct(req.body);
-      res.send(product);
+      res.json(product);
     }
   );
 
@@ -27,7 +27,7 @@ export class ProductController {
     async (req: Request, res: Response): Promise<any> => {
       const { id } = req.params;
       const product = await this.service.updateProduct(req.body, Number(id));
-      res.send(product);
+      res.json(product);
     }
   );
 
