@@ -20,7 +20,6 @@ export class ProductController {
 
   createProduct = asyncErrorHandler(
     async (req: Request, res: Response): Promise<any> => {
-      assert(req.body, CreateProduct);
       const product = await this.service.createProduct(req.body);
       res.send(product);
     }
@@ -28,7 +27,6 @@ export class ProductController {
 
   updateProduct = asyncErrorHandler(
     async (req: Request, res: Response): Promise<any> => {
-      assert(req.body, UpdateProduct);
       const { id } = req.params;
       const product = await this.service.updateProduct(req.body, Number(id));
       res.send(product);
