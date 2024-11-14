@@ -1,6 +1,5 @@
-import { Request, Response } from "express";
+import { Request, Response, NextFunction } from "express";
 import { Prisma } from "@prisma/client";
-import { NextFunction } from "express-serve-static-core";
 
 export function asyncErrorHandler(
   handler: (req: Request, res: Response, next: NextFunction) => Promise<any>
@@ -9,7 +8,6 @@ export function asyncErrorHandler(
     try {
       await handler(req, res, next);
     } catch (error) {
-      console.error(error);
       next(error);
     }
   };
@@ -18,22 +16,27 @@ export function asyncErrorHandler(
 export function errorHandler(
   error: any,
   req: Request,
-  res: Response,
+  res: any,
   next: NextFunction
 ) {
-  const status = error.code ?? 500;
   console.error(error);
-  if (
+
+  if (error.message === "User already exists") {
+    return res.status(422).json({
+      message: error.message,
+      email: req.body.email,
+    });
+  } else if (
     error instanceof Prisma.PrismaClientValidationError ||
     error.name === "StructError"
   ) {
-    res.status(400).send({ message: error.message });
+    return res.status(400).json({ message: error.message });
   } else if (
     error instanceof Prisma.PrismaClientKnownRequestError &&
     error.code === "P2025"
   ) {
-    res.sendStatus(404).send({ message: error.message });
+    return res.status(404).json({ message: error.message });
   } else {
-    res.status(500).send({ message: error.message });
+    return res.status(500).json({ message: error.message });
   }
 }

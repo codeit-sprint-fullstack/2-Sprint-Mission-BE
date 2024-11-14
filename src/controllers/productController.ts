@@ -1,7 +1,5 @@
-import { Request, Response, Router } from "express";
+import { Request, Response } from "express";
 import { asyncErrorHandler } from "../middlewares/errorHandler";
-import { assert } from "superstruct";
-import { CreateProduct, UpdateProduct } from "../middlewares/structs";
 import { ProductService } from "../services/productService";
 
 export class ProductController {
