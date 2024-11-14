@@ -6,6 +6,7 @@ class UserRouter {
     const userRouter = Router();
 
     userRouter.route("/").post(userContainer.userController.createUser);
+    userRouter.route("/login").post(userContainer.userController.loginUser);
 
     return userRouter;
   }

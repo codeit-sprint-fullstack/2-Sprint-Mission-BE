@@ -20,7 +20,6 @@ export function errorHandler(
   next: NextFunction
 ) {
   console.error(error);
-
   if (error.message === "User already exists") {
     return res.status(422).json({
       message: error.message,
