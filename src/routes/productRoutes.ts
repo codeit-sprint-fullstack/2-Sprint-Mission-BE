@@ -1,5 +1,9 @@
-import { productContainer } from "../containers/productContainer";
 import { Router } from "express";
+import { productContainer } from "../containers/productContainer";
+import {
+  validateCreateProduct,
+  validateUpdateProduct,
+} from "../middlewares/validateProduct";
 
 class ProductRouter {
   public static productRoutes(): Router {
@@ -7,11 +11,17 @@ class ProductRouter {
 
     productRouter
       .route("/")
-      .post(productContainer.productController.createProduct);
+      .post(
+        validateCreateProduct,
+        productContainer.productController.createProduct
+      );
     productRouter
       .route("/:id")
       .get(productContainer.productController.getProductById)
-      .patch(productContainer.productController.updateProduct)
+      .patch(
+        validateUpdateProduct,
+        productContainer.productController.updateProduct
+      )
       .delete(productContainer.productController.deleteProduct);
 
     return productRouter;
