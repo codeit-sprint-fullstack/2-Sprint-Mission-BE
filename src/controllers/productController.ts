@@ -20,8 +20,6 @@ export class ProductController {
 
   createProduct = asyncErrorHandler(
     async (req: Request, res: Response): Promise<any> => {
-      const { userId } = req.body;
-      console.log("Received userId:", userId);
       assert(req.body, CreateProduct);
       const product = await this.service.createProduct(req.body);
       res.send(product);

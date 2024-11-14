@@ -2,23 +2,20 @@ import { productContainer } from "../containers/productContainer";
 import { Router } from "express";
 
 class ProductRouter {
-  public router: Router;
+  public static productRoutes(): Router {
+    const productRouter = Router();
 
-  constructor() {
-    this.router = Router();
-    this.productRoutes();
-  }
-
-  productRoutes() {
-    this.router
+    productRouter
       .route("/")
       .post(productContainer.productController.createProduct);
-    this.router
+    productRouter
       .route("/:id")
       .get(productContainer.productController.getProductById)
       .patch(productContainer.productController.updateProduct)
       .delete(productContainer.productController.deleteProduct);
+
+    return productRouter;
   }
 }
 
-export default new ProductRouter().router;
+export default ProductRouter;

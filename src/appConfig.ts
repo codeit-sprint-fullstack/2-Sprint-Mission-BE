@@ -6,7 +6,7 @@ export function appConfig() {
   const app = express();
   app.use(express.json());
 
-  app.use("/products", ProductRouter);
+  app.use("/products", ProductRouter.productRoutes());
   app.use(errorHandler);
 
   return app;
