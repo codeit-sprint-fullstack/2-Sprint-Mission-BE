@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { asyncErrorHandler } from "../middlewares/errorHandler";
 import { ProductService } from "../services/productService";
+import { AuthRequest } from "../types/requestType";
 
 export class ProductController {
   constructor(private service: ProductService) {}
@@ -17,8 +18,11 @@ export class ProductController {
   );
 
   createProduct = asyncErrorHandler(
-    async (req: Request, res: Response): Promise<any> => {
-      const product = await this.service.createProduct(req.body);
+    async (req: AuthRequest, res: Response): Promise<any> => {
+      const product = await this.service.createProduct({
+        ...req.body,
+        userId: req.auth?.userId,
+      });
       res.json(product);
     }
   );

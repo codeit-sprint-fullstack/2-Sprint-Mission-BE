@@ -4,6 +4,7 @@ import {
   validateCreateProduct,
   validateUpdateProduct,
 } from "../middlewares/validateProduct";
+import { verifyAccessToken, verifyProductAuth } from "../middlewares/auth";
 
 class ProductRouter {
   public static productRoutes(): Router {
@@ -12,6 +13,7 @@ class ProductRouter {
     productRouter
       .route("/")
       .post(
+        verifyAccessToken,
         validateCreateProduct,
         productContainer.productController.createProduct
       );
@@ -19,10 +21,16 @@ class ProductRouter {
       .route("/:id")
       .get(productContainer.productController.getProductById)
       .patch(
+        verifyAccessToken,
+        verifyProductAuth(productContainer.productRepository),
         validateUpdateProduct,
         productContainer.productController.updateProduct
       )
-      .delete(productContainer.productController.deleteProduct);
+      .delete(
+        verifyAccessToken,
+        verifyProductAuth(productContainer.productRepository),
+        productContainer.productController.deleteProduct
+      );
 
     return productRouter;
   }

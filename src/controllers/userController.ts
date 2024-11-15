@@ -16,7 +16,8 @@ export class UserController {
     async (req: Request, res: Response): Promise<any> => {
       const { email, password } = req.body;
       const user = await this.service.getUser(email, password);
-      return res.json(user);
+      const accessToken = this.service.createToken(user);
+      return res.json({ accessToken });
     }
   );
 }

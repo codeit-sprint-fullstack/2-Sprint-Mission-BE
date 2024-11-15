@@ -1,6 +1,7 @@
 import { UserRepository } from "../repositories/userRepository";
 import { User } from "../types/userType";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 export class UserService {
   constructor(private repository: UserRepository) {}
@@ -48,5 +49,11 @@ export class UserService {
       const error = new Error("Unauthorized");
       throw error;
     }
+  };
+
+  createToken = (user: User) => {
+    const payload = { userId: user.id };
+    const options = { expiresIn: "1h" };
+    return jwt.sign(payload, process.env.JWT_SECRET as string, options);
   };
 }

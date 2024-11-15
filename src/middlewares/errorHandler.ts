@@ -4,7 +4,11 @@ import { Prisma } from "@prisma/client";
 export function asyncErrorHandler(
   handler: (req: Request, res: Response, next: NextFunction) => Promise<any>
 ) {
-  return async function (req: Request, res: Response, next: NextFunction) {
+  return async function (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
     try {
       await handler(req, res, next);
     } catch (error) {

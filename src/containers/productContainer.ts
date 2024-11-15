@@ -8,4 +8,4 @@ const productRepository = new ProductRepository(prisma);
 const productService = new ProductService(productRepository);
 const productController = new ProductController(productService);
 
-export const productContainer = { productController };
+export const productContainer = { productController, productRepository };
