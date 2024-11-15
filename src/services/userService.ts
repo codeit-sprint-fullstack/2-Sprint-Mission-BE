@@ -22,7 +22,7 @@ export class UserService {
   };
 
   filterSensitiveUserData = (user: any) => {
-    const { password, ...rest } = user;
+    const { password, refreshToken, ...rest } = user;
     return rest;
   };
 
@@ -51,9 +51,22 @@ export class UserService {
     }
   };
 
-  createToken = (user: User) => {
-    const payload = { userId: user.id };
-    const options = { expiresIn: "1h" };
+  createToken = (userId: string, type: string = "access") => {
+    const payload = { userId };
+    const options = { expiresIn: type === "refresh" ? "2w" : "1h" };
     return jwt.sign(payload, process.env.JWT_SECRET as string, options);
+  };
+
+  updateUser = async (id: string, data: any) => {
+    return await this.repository.updateUser(id, data);
+  };
+
+  refreshToken = async (userId: string, refreshToken: any): Promise<any> => {
+    const user = await this.repository.findByUserId(userId);
+    if (!user || user.refreshToken !== refreshToken) {
+      const error = new Error("Unauthorized");
+      throw error;
+    }
+    return this.createToken(user);
   };
 }

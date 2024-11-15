@@ -14,4 +14,17 @@ export class UserRepository {
       data: user,
     });
   };
+
+  updateUser = async (id: string, data: any): Promise<User> => {
+    return await this.prisma.user.update({
+      where: { id },
+      data: data,
+    });
+  };
+
+  findByUserId = async (id: string): Promise<any> => {
+    return await this.prisma.user.findUnique({
+      where: { id },
+    });
+  };
 }
