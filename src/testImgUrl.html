@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Upload</title>
+  </head>
+  <body>
+    <input type="file" id="fileInput" />
+    <button id="uploadBtn">Upload</button>
+
+    <script>
+      document.getElementById("uploadBtn").addEventListener("click", () => {
+        const formData = new FormData();
+        const imageFile = document.getElementById("fileInput").files[0];
+        formData.append("image", imageFile); // "image"는 Multer에서 설정한 필드명입니다.
+
+        fetch("http://localhost:3000/images/upload", {
+          method: "POST",
+          headers: {
+            Authorization:
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTczMTU3MTgyMSwiZXhwIjoxNzMxNTc1NDIxfQ.S9VwymQuN9fztXoMMH7-UeNZg4PBWzL4LNPP7xVyGYU", // 인증 토큰 추가
+          },
+          body: formData,
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log("Uploaded Image URL:", data.url);
+          })
+          .catch((error) => {
+            console.error("Error uploading image:", error);
+          });
+      });
+    </script>
+  </body>
+</html>
