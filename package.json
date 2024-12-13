@@ -1,33 +1,62 @@
 {
   "type": "module",
+  "imports": {
+    "#configs/*": "./dist/src/configs/*",
+    "#connection/*": "./dist/src/connection/*",
+    "#containers/*": "./dist/src/containers/*",
+    "#controllers/*": "./dist/src/controllers/*",
+    "#interfaces/*": "./dist/src/interfaces/*",
+    "#middlewares/*": "./dist/src/middlewares/*",
+    "#repositories/*": "./dist/src/repositories/*",
+    "#routes/*": "./dist/src/routes/*",
+    "#services/*": "./dist/src/services/*",
+    "#types/*": "./dist/src/types/*",
+    "#utils/*": "./dist/src/utils/*",
+    "@/*": "./dist/*"
+  },
   "scripts": {
-    "dev": "nodemon src/app.js",
-    "start": "node --env-file=.env src/app.js",
-    "seed": "node --env-file=.env data/seed.js"
+    "dev": "tsx --env-file=.env --watch src/app.ts",
+    "start": "node --env-file=.env dist/src/app.js",
+    "build": "tsc",
+    "lint": "eslint .",
+    "format": "prettier --write ."
+  },
+  "prisma": {
+    "seed": "node prisma/seed.js"
   },
   "dependencies": {
     "@prisma/client": "^5.21.1",
+    "cookie-parser": "^1.4.7",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "express": "^4.19.2",
     "express-async-errors": "^3.1.1",
     "express-jwt": "^8.4.1",
     "is-email": "^1.0.2",
+    "express-jwt": "^8.4.1",
+    "is-email": "^1.0.2",
     "is-uuid": "^1.0.2",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.6.1",
     "multer": "^1.4.5-lts.1",
-    "prisma": "^5.21.1",
     "superstruct": "^2.0.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",
+    "@trivago/prettier-plugin-sort-imports": "^5.2.0",
+    "@types/cookie-parser": "^1.4.8",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "@types/is-email": "^1.0.0",
+    "@types/is-uuid": "^1.0.2",
+    "@types/multer": "^1.4.12",
     "eslint": "^9.13.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.31.0",
-    "eslint-plugin-jsx-a11y": "^6.10.1",
     "eslint-plugin-prettier": "^5.2.1",
     "globals": "^15.11.0",
-    "nodemon": "^3.1.4"
+    "prisma": "^5.21.1",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "typescript-eslint": "^8.18.0"
   }
 }
