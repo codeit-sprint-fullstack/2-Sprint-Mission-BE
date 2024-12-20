@@ -2,7 +2,6 @@ import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import globals from 'globals';
 import tsParser from '@typescript-eslint/parser';
-import tseslint from '@typescript-eslint/eslint-plugin';
 import tsPlugin from '@typescript-eslint/eslint-plugin';
 import prettierPlugin from 'eslint-plugin-prettier';
 
@@ -20,6 +19,7 @@ export default [
         tsconfigRootDir: __dirname,
         sourceType: 'module',
       },
+      ignorePatterns: ['dist/**/*'],
       globals: {
         ...globals.node,
         ...globals.browser,

@@ -1,9 +1,11 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "ESNext",
     "target": "ES2021",
     "baseUrl": "./",
     "outDir": "./dist",
+    "rootDir": "./",
+    "moduleResolution": "node",
     "lib": [],
 
     // strict
@@ -12,7 +14,7 @@
     "strictNullChecks": true, // 엄격한 null 확인 여부
     "strictFunctionTypes": true, // 함수 타입에 대한 엄격한 확인 여부
     "strictBindCallApply": true, // 함수에 엄격한 'bind', 'call' 그리고 'apply' 메소드 사용 여부
-    "strictPropertyInitialization": true, // 클래스의 값 초기화에 엄격한 확인 여부
+    "strictPropertyInitialization": false, // 클래스의 값 초기화에 엄격한 확인 여부
     "noImplicitThis": true, // 'any' 타입으로 구현된 'this' 표현식 에러처리 여부
     "alwaysStrict": true, // strict mode로 분석하고 모든 소스 파일에 "use strict"를 추가할 지 여부
     "suppressImplicitAnyIndexErrors": false, // 암시적 any 인덱스 에러 무시 여부
@@ -37,6 +39,6 @@
     "allowSyntheticDefaultImports": true, // default export가 없을때 기본 가져오기 구문을 허용하는가 여부
     "removeComments": true // 주석 삭제 여부
   },
-  "include": ["**/*.ts", "**/*.js", "eslint.config.js"],
-  "exclude": ["node_modules", "test"]
+  "include": ["**/*.ts", "prisma/**/*", "eslint.config.js"],
+  "exclude": ["node_modules", "test", "dist"]
 }
