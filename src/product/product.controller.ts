@@ -1,13 +1,14 @@
-import { ProductService } from './product.service';
+import { ProductService } from './product.service.js';
 import { Controller, Get, Param, Post, Body, Patch, Delete, HttpCode } from '@nestjs/common';
-import type { InputCreateProductDTO, InputUpdateProductDTO } from './product.dto.ts';
+import type { InputCreateProductDTO, InputUpdateProductDTO } from './product.dto.js';
 @Controller('products')
 export class ProductController {
   constructor(private readonly productService: ProductService) {}
 
   @Get(':id')
-  async getProductById(@Param() params: { id: string }) {
-    return await this.productService.getProductById(params.id);
+  async getProductById(@Param('id') id: string) {
+    console.log(id);
+    return await this.productService.getProductById(id);
   }
 
   @Post()

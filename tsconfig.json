@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "module": "CommonJS",
+    "module": "ESNext",
     "target": "ES2021",
     "baseUrl": "./",
     "outDir": "./dist",
@@ -39,6 +39,6 @@
     "allowSyntheticDefaultImports": true, // default export가 없을때 기본 가져오기 구문을 허용하는가 여부
     "removeComments": true // 주석 삭제 여부
   },
-  "include": ["**/*.ts", "prisma/**/*", "eslint.config.js"],
+  "include": ["**/*.ts", "prisma/**/*", "eslint.config.mjs"],
   "exclude": ["node_modules", "test", "dist"]
 }

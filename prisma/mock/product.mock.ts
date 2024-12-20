@@ -1,6 +1,6 @@
 export const PRODUCTS = [
   {
-    id: 'c4afcdb6-c821-4385-a919-e1e286bfea18',
+    id: '1e44a4af-d851-4497-a678-7767e93ef14c',
     name: '삼성 냉장고',
     description: '대형 가전 제품인 삼성 냉장고입니다.',
     price: 1500000,

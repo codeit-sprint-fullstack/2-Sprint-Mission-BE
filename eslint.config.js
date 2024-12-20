@@ -11,7 +11,7 @@ const __dirname = dirname(__filename);
 export default [
   {
     files: ['**/*.{js,ts}'],
-    ignores: ['eslint.config.js'],
+    ignores: ['eslint.config.js', 'dist/**/*'],
     languageOptions: {
       parser: tsParser,
       parserOptions: {
@@ -19,7 +19,6 @@ export default [
         tsconfigRootDir: __dirname,
         sourceType: 'module',
       },
-      ignorePatterns: ['dist/**/*'],
       globals: {
         ...globals.node,
         ...globals.browser,

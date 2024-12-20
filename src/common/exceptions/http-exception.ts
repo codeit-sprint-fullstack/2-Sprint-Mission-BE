@@ -1,5 +1,5 @@
 import { HttpException, HttpStatus } from '@nestjs/common';
-import ExceptionMessages from './exception-message';
+import ExceptionMessages from './exception-message.js';
 
 type ExceptionConstructor = new () => HttpException;
 

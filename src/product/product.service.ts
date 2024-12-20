@@ -1,7 +1,7 @@
-import { ProductRepository } from './product.repository';
+import { ProductRepository } from './product.repository.js';
 import { Injectable } from '@nestjs/common';
 import { Product } from '@prisma/client';
-import { ProductNotFoundException } from 'src/common/exceptions/http-exception';
+import { ProductNotFoundException } from '../common/exceptions/http-exception.js';
 
 @Injectable()
 export class ProductService {
@@ -9,6 +9,7 @@ export class ProductService {
 
   async getProductById(id: string) {
     const product = await this.productRepository.findProductById(id);
+
     if (!product) {
       throw new ProductNotFoundException();
     }
