@@ -7,7 +7,6 @@ export class ProductController {
 
   @Get(':id')
   async getProductById(@Param('id') id: string) {
-    console.log(id);
     return await this.productService.getProductById(id);
   }
 

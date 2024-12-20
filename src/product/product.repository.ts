@@ -7,7 +7,6 @@ export class ProductRepository {
   constructor(private readonly prisma: PrismaService) {}
 
   async findProductById(id: string): Promise<Product | null> {
-    console.log(`Searching for product with ID: ${id}`);
     return await this.prisma.product.findUnique({
       where: { id },
     });
