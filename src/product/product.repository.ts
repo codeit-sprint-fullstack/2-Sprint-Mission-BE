@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service.js';
 import type { Product } from '@prisma/client';
+import type { CreateProduct, PatchProduct } from './product.type.js';
 
 @Injectable()
 export class ProductRepository {
@@ -12,20 +13,20 @@ export class ProductRepository {
     });
   }
 
-  createProduct = async (req: any): Promise<Product> => {
+  createProduct = async (data: CreateProduct): Promise<Product> => {
     return await this.prisma.product.create({
-      data: req,
+      data,
     });
   };
 
-  updateProduct = async (req: any, id: string): Promise<Product> => {
+  updateProduct = async (data: PatchProduct, id: string): Promise<Product> => {
     return await this.prisma.product.update({
       where: { id },
-      data: req,
+      data,
     });
   };
 
-  deleteProduct = async (id: string): Promise<any> => {
+  deleteProduct = async (id: string): Promise<Product> => {
     return await this.prisma.product.delete({
       where: { id },
     });
