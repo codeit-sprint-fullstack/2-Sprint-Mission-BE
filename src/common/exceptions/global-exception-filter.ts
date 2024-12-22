@@ -1,5 +1,6 @@
-import { ExceptionFilter, Catch, ArgumentsHost, HttpException } from '@nestjs/common';
+import { ExceptionFilter, Catch, ArgumentsHost, HttpException, HttpStatus } from '@nestjs/common';
 import { Request, Response } from 'express';
+import ExceptionMessages from './exception-message.js';
 
 @Catch()
 export class GlobalExceptionFilter implements ExceptionFilter {
@@ -8,16 +9,13 @@ export class GlobalExceptionFilter implements ExceptionFilter {
     const request = ctx.getRequest<Request>();
     const response = ctx.getResponse<Response>();
 
-    let status = 500;
-    let message = 'Internal Server Error';
+    let status = HttpStatus.INTERNAL_SERVER_ERROR;
+    let message = ExceptionMessages.INTERNAL_SERVER_ERROR.toString();
 
     if (exception instanceof HttpException) {
       status = exception.getStatus();
       const responseMessage = exception.getResponse();
-      message = typeof responseMessage === 'string' ? responseMessage : (responseMessage as any)?.message || 'An error occurred';
-    } else if (exception instanceof Error) {
-      console.error('Unhandled exception:', exception.message);
-      message = exception.message;
+      message = typeof responseMessage === 'string' ? responseMessage : ExceptionMessages.BAD_REQUEST.toString();
     }
 
     response.status(status).json({

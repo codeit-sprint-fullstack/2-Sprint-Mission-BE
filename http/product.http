@@ -11,7 +11,7 @@ Content-Type: application/json
 {
   "name": "쿠쿠",
   "description": "쿠쿠하세용~",
-  "price": 10000
+  "price": "10000"
 }
 
 ###
