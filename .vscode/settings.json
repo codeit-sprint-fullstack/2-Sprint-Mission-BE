@@ -1,3 +1,4 @@
 {
-  "cSpell.words": ["expressjwt", "superstruct"]
+  "cSpell.words": ["Codeit", "datasource", "dotenv", "nestjs", "trivago", "tseslint"],
+  "editor.formatOnSave": true
 }
