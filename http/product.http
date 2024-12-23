@@ -1,0 +1,32 @@
+GET http://localhost:3000/products/1e44a4af-d851-4497-a678-7767e93ef14c
+
+### 
+// 소스 없음
+GET http://localhost:3000/products/3f2504e0-4f89-11d3-9a0c-0305e82c3301
+
+###
+POST http://localhost:3000/products
+Content-Type: application/json
+
+{
+  "name": "쿠쿠",
+  "description": "쿠쿠하세용~",
+  "price": "10000"
+}
+
+###
+
+PATCH http://localhost:3000/products/5a444318-c552-4916-9fdf-dacfb444abe5
+Content-Type: application/json
+
+{
+  "name": "코코",
+  "description": "코코하세용~"
+}
+
+###
+
+DELETE http://localhost:3000/products/5a444318-c552-4916-9fdf-dacfb444abe5
+
+
+

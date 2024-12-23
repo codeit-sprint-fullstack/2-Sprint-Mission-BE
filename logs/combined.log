@@ -1,0 +1,24 @@
+2024-12-23 02:12:13 info: Request: 
+      IP: ::ffff:127.0.0.1
+      Method: GET
+      URL: /products/1e44a4af-d851-4497-a678-7767e93ef14c
+      Headers: {"user-agent":"vscode-restclient","accept-encoding":"gzip, deflate","cookie":"refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1MDllZjAzMS03ZDNlLTRmMmEtYWQyOC00NzE3YjhhNzQ1YzciLCJpYXQiOjE3MzE2NjkxNzYsImV4cCI6MTczMjg3ODc3Nn0.jMtj0LacnreBbPUlZUPltCdaY9Ddpy-mApw-XUjnDlM","host":"localhost:3000","connection":"close"}
+      Body: {}
+    
+2024-12-23 02:12:13 info: Response: 
+            Response Status: 200
+            Response Body: {"id":"1e44a4af-d851-4497-a678-7767e93ef14c","name":"삼성 냉장고","description":"대형 가전 제품인 삼성 냉장고입니다.","price":1500000,"tags":["가전제품","냉장고"],"images":[],"likeCount":0,"createdAt":"2024-09-24T16:07:42.167Z","updatedAt":"2024-09-24T16:07:42.167Z"}
+            Cookies: undefined
+          
+2024-12-23 02:14:05 info: Request: 
+      IP: ::ffff:127.0.0.1
+      Method: GET
+      URL: /products/1e44a4af-d851-4497-a678-7767e93ef14c
+      Headers: {"user-agent":"vscode-restclient","accept-encoding":"gzip, deflate","cookie":"refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1MDllZjAzMS03ZDNlLTRmMmEtYWQyOC00NzE3YjhhNzQ1YzciLCJpYXQiOjE3MzE2NjkxNzYsImV4cCI6MTczMjg3ODc3Nn0.jMtj0LacnreBbPUlZUPltCdaY9Ddpy-mApw-XUjnDlM","host":"localhost:3000","connection":"close"}
+      Body: {}
+    
+2024-12-23 02:14:05 info: Response: 
+            Response Status: 200
+            Response Body: {"id":"1e44a4af-d851-4497-a678-7767e93ef14c","name":"삼성 냉장고","description":"대형 가전 제품인 삼성 냉장고입니다.","price":1500000,"tags":["가전제품","냉장고"],"images":[],"likeCount":0,"createdAt":"2024-09-24T16:07:42.167Z","updatedAt":"2024-09-24T16:07:42.167Z"}
+            Cookies: undefined
+          

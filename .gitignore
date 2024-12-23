@@ -1,4 +1,23 @@
+# compiled output
+/dist
+/node_modules
+/build
+
+# dotenv environment variable files
 .env
-http/
-node_modules/
-dist/
+
+# IDE - VSCode
+.vscode/*
+
+# Diagnostic reports (https://nodejs.org/api/report.html)
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+# Logs
+logs/
+
+# OS
+
+# Tests
+
+# IDEs and editors
+
