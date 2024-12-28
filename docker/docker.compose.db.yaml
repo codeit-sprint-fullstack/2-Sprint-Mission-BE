@@ -1,0 +1,15 @@
+services:
+  db:
+    container_name: postgresql
+    image: postgres:17
+    restart: always
+    environment:
+      POSTGRES_USER: 'postgres'
+      POSTGRES_PASSWORD: '123123123'
+      POSTGRES_DB: 'comazon'
+    ports:
+      - '5433:5432'
+    volumes:
+      - db_data:/var/lib/postgresql/data
+volumes:
+  db_data:

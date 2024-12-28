@@ -8,66 +8,53 @@ datasource db {
 }
 
 model User {
-  id              String           @id @default(uuid())
-  email           String           @unique
-  password        String
-  nickname        String           @unique
-  image           String?          @default("")
-  createdAt       DateTime         @default(now())
-  updatedAt       DateTime         @updatedAt
-  articles        Article[]
-  products        Product[]
-  productComments ProductComment[]
-  articleComments ArticleComment[]
+  id               String            @id @default(uuid())
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @default(now()) @updatedAt
+  isDeletedAt      DateTime?
+  name             String
+  email            String            @unique
+  password         String
+  products         Product[]
+  productFavorites ProductFavorite[]
+  ProductImages    ProductImage[]
 }
 
 model Product {
-  id              Int              @id @default(autoincrement())
-  name            String
-  description     String
-  price           Float
-  tags            String[]
-  images          String[]
-  favoriteCount   Int              @default(0)
-  user            User             @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId          String
-  createdAt       DateTime         @default(now())
-  updatedAt       DateTime         @updatedAt
-  productComments ProductComment[]
+  id               String            @id @default(uuid())
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @default(now()) @updatedAt
+  isDeletedAt      DateTime?
+  favoriteCount    Int               @default(0)
+  owner            User?             @relation(fields: [ownerId], references: [id], onDelete: SetNull)
+  ownerId          String?
+  title            String
+  tags             String[]
+  price            Int
+  description      String
+  productFavorites ProductFavorite[]
+  productImages    ProductImage[]
 }
 
-model Article {
-  id              Int              @id @default(autoincrement())
-  title           String
-  content         String
-  favoriteCount   Int              @default(0)
-  user            User             @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId          String
-  createdAt       DateTime         @default(now())
-  updatedAt       DateTime         @updatedAt
-  articleComments ArticleComment[]
+model ProductFavorite {
+  id          String    @id @default(uuid())
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @default(now()) @updatedAt
+  isDeletedAt DateTime?
+  product     Product   @relation(fields: [productId], references: [id])
+  productId   String
+  user        User      @relation(fields: [userId], references: [id])
+  userId      String
 }
 
-model ProductComment {
-  id            Int      @id @default(autoincrement())
-  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId        String
-  product       Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
-  productId     Int
-  content       String
-  favoriteCount Int      @default(0)
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-}
-
-model ArticleComment {
-  id            Int      @id @default(autoincrement())
-  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId        String
-  article       Article  @relation(fields: [articleId], references: [id], onDelete: Cascade)
-  articleId     Int
-  content       String
-  favoriteCount Int      @default(0)
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+model ProductImage {
+  id          String    @id @default(uuid())
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @default(now())
+  isDeletedAt DateTime?
+  s3key       String
+  owner       User?     @relation(fields: [ownerId], references: [id], onDelete: SetNull)
+  ownerId     String?
+  product     Product?  @relation(fields: [productId], references: [id], onDelete: SetNull)
+  productId   String?
 }
