@@ -1,0 +1,42 @@
+export const ProductMocks = [
+  {
+    ownerId: '1bed0fea-bc94-430f-8239-cd552aeca8ee',
+    name: 'Product 1',
+    description: 'Product 1 description',
+    price: 10,
+    tags: ['tag1'],
+    images: [],
+  },
+  {
+    ownerId: '1bed0fea-bc94-430f-8239-cd552aeca8ee',
+    name: 'Product 2',
+    description: 'Product 2 description',
+    price: 20,
+    tags: ['tag1', 'tag2'],
+    images: [],
+  },
+  {
+    ownerId: 'ccce1321-a6a5-458f-ae42-1ce48e439f47',
+    name: 'Product 3',
+    description: 'Product 3 description',
+    price: 30,
+    tags: ['tag3'],
+    images: [],
+  },
+  {
+    ownerId: 'ccce1321-a6a5-458f-ae42-1ce48e439f47',
+    name: 'Product 4',
+    description: 'Product 4 description',
+    price: 40,
+    tags: [],
+    images: [],
+  },
+  {
+    ownerId: '1bed0fea-bc94-430f-8239-cd552aeca8ee',
+    name: 'Product 5',
+    description: 'Product 5 description',
+    price: 50,
+    tags: [],
+    images: [],
+  },
+];
