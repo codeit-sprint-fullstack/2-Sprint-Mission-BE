@@ -1,24 +1,24 @@
 import { Injectable } from '@nestjs/common';
 import { Like, Prisma } from '@prisma/client';
-import { PrismaService } from 'src/database/prisma/prisma.service';
+import { DBClient } from 'src/database/prisma/prisma.service';
 
 @Injectable()
 export class LikeRepository {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private readonly db: DBClient) {}
 
   async get(where: Prisma.LikeWhereInput): Promise<Like[]> {
-    return await this.prisma.like.findMany({ where });
+    return await this.db.like.findMany({ where });
   }
 
   async count(where: Prisma.LikeWhereInput): Promise<number> {
-    return await this.prisma.like.count({ where });
+    return await this.db.like.count({ where });
   }
 
   async create(data: Prisma.LikeCreateInput): Promise<Like> {
-    return await this.prisma.like.create({ data });
+    return await this.db.like.create({ data });
   }
 
   async delete(where: Prisma.LikeWhereUniqueInput): Promise<Like> {
-    return this.prisma.like.delete({ where });
+    return this.db.like.delete({ where });
   }
 }

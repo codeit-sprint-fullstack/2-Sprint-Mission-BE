@@ -74,7 +74,7 @@ export class ArticleService {
     return await this.repository.update(where, data);
   }
 
-  async delete(articleId, userId): Promise<Article> {
+  async delete(articleId: string, userId: string): Promise<Article> {
     const where = { id: articleId };
 
     return await this.repository.delete(where);

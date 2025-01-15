@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { Like, Prisma, Product, User } from '@prisma/client';
-import { PrismaService } from 'src/database/prisma/prisma.service';
+import { DBClient } from 'src/database/prisma/prisma.service';
 
 @Injectable()
 export class UserRepository {
-  constructor(private prisma: PrismaService) {}
+  constructor(private db: DBClient) {}
 
   async findById(id: string): Promise<User> {
-    return this.prisma.user.findUnique({
+    return this.db.user.findUnique({
       where: {
         id,
       },
@@ -18,7 +18,7 @@ export class UserRepository {
     where: Prisma.UserWhereUniqueInput,
     data: Prisma.UserUpdateInput,
   ): Promise<User> {
-    return this.prisma.user.update({
+    return this.db.user.update({
       where,
       data,
     });
@@ -28,7 +28,7 @@ export class UserRepository {
     where: Prisma.UserWhereUniqueInput,
     newPassword: string,
   ): Promise<User> {
-    return this.prisma.user.update({
+    return this.db.user.update({
       where,
       data: {
         password: newPassword,
@@ -42,7 +42,7 @@ export class UserRepository {
     where?: Prisma.ProductWhereInput,
     orderBy?: Prisma.ProductOrderByWithRelationInput,
   ): Promise<Product[]> {
-    return await this.prisma.product.findMany({
+    return await this.db.product.findMany({
       skip,
       take,
       where,
@@ -56,7 +56,7 @@ export class UserRepository {
     where?: Prisma.LikeWhereInput,
     sortOrder?: Prisma.LikeOrderByWithRelationInput,
   ): Promise<Like[]> {
-    return await this.prisma.like.findMany({
+    return await this.db.like.findMany({
       skip,
       take,
       where,

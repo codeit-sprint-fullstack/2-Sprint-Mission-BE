@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { Article, Prisma } from '@prisma/client';
-import { PrismaService } from 'src/database/prisma/prisma.service';
+import { DBClient } from 'src/database/prisma/prisma.service';
 
 @Injectable()
 export class ArticleRepository {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private readonly db: DBClient) {}
 
   async get(
     skip?: number,
@@ -12,7 +12,7 @@ export class ArticleRepository {
     where?: Prisma.ArticleWhereInput,
     sortOrder?: Prisma.ArticleOrderByWithRelationInput,
   ): Promise<Article[]> {
-    return await this.prisma.article.findMany({
+    return await this.db.article.findMany({
       skip,
       take,
       where,
@@ -29,7 +29,7 @@ export class ArticleRepository {
   }
 
   async getById(id: string): Promise<Article> {
-    return await this.prisma.article.findUnique({
+    return await this.db.article.findUnique({
       where: { id },
       include: {
         writer: {
@@ -43,11 +43,11 @@ export class ArticleRepository {
   }
 
   async count(where: Prisma.ArticleWhereInput): Promise<number> {
-    return await this.prisma.article.count({ where });
+    return await this.db.article.count({ where });
   }
 
   async create(data: Prisma.ArticleCreateInput): Promise<Article> {
-    return await this.prisma.article.create({
+    return await this.db.article.create({
       data,
     });
   }
@@ -56,14 +56,14 @@ export class ArticleRepository {
     where: Prisma.ArticleWhereUniqueInput,
     data: Prisma.ArticleUpdateInput,
   ): Promise<Article> {
-    return await this.prisma.article.update({
+    return await this.db.article.update({
       data,
       where,
     });
   }
 
   async delete(where: Prisma.ArticleWhereUniqueInput): Promise<null> {
-    this.prisma.article.delete({
+    this.db.article.delete({
       where,
     });
 

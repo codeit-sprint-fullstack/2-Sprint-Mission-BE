@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma, Product } from '@prisma/client';
-import { PrismaService } from 'src/database/prisma/prisma.service';
+import { DBClient } from 'src/database/prisma/prisma.service';
 
 @Injectable()
 export class ProductRepository {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private readonly db: DBClient) {}
 
   async get(
     skip?: number,
@@ -12,7 +12,7 @@ export class ProductRepository {
     where?: Prisma.ProductWhereInput,
     sortOrder?: Prisma.ProductOrderByWithRelationInput,
   ): Promise<Product[]> {
-    return await this.prisma.product.findMany({
+    return await this.db.product.findMany({
       skip,
       take,
       where,
@@ -29,7 +29,7 @@ export class ProductRepository {
   }
 
   async getById(id: string): Promise<Product> {
-    return await this.prisma.product.findUnique({
+    return await this.db.product.findUnique({
       where: { id },
       include: {
         owner: {
@@ -43,11 +43,11 @@ export class ProductRepository {
   }
 
   async count(where: Prisma.ProductWhereInput): Promise<number> {
-    return await this.prisma.product.count({ where });
+    return await this.db.product.count({ where });
   }
 
   async create(data: Prisma.ProductCreateInput): Promise<Product> {
-    return await this.prisma.product.create({
+    return await this.db.product.create({
       data,
     });
   }
@@ -56,14 +56,14 @@ export class ProductRepository {
     where: Prisma.ProductWhereUniqueInput,
     data: Prisma.ProductUpdateInput,
   ): Promise<Product> {
-    return await this.prisma.product.update({
+    return await this.db.product.update({
       data,
       where,
     });
   }
 
   async delete(where: Prisma.ProductWhereUniqueInput): Promise<null> {
-    await this.prisma.product.delete({
+    await this.db.product.delete({
       where,
     });
 

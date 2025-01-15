@@ -11,8 +11,7 @@ import {
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
-import { ArticleResponse, ArticleService } from './article.service';
-import { Article } from '@prisma/client';
+import { ArticleService } from './article.service';
 import { CreateArticleDto } from './dto/createArticle.dto';
 import { UpdateArticleDto } from './dto/updateArticle.dto';
 import { UserId } from 'src/decorators/user.decorator';
@@ -34,15 +33,13 @@ export class ArticleController {
       orderBy?: 'oldest' | 'newest';
       keyword?: string;
     },
-  ): Promise<ArticleResponse> {
+  ) {
     return this.service.get(queries);
   }
 
   @Public()
   @Get(':articleId')
-  async getArticleById(
-    @Param('articleId') articleId: string,
-  ): Promise<Article> {
+  async getArticleById(@Param('articleId') articleId: string) {
     return this.service.getById(articleId);
   }
 
@@ -52,7 +49,7 @@ export class ArticleController {
     @UserId() userId: string,
     @UploadedFile() file: Express.Multer.File,
     @Body() data: CreateArticleDto,
-  ): Promise<Article> {
+  ) {
     return await this.service.create(userId, file, data);
   }
 
@@ -61,7 +58,7 @@ export class ArticleController {
   async updateArticle(
     @Param('articleId') articleId: string,
     @Body() data: UpdateArticleDto,
-  ): Promise<Article> {
+  ) {
     return await this.service.update(articleId, data);
   }
 
