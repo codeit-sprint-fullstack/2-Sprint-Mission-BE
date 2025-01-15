@@ -4,10 +4,12 @@ import { IProductRepository } from './product.repository.interface';
 import {
   CreateProductDTO,
   ProductOptions,
+  ProductOrderByField,
   ProductsOrderBy,
 } from '@/types/product.types';
 import { Product } from '@prisma/client';
 import { contains } from 'class-validator';
+import { SortDirection } from '@/common/enums/order.enum';
 
 @Injectable()
 export class ProductRepository implements IProductRepository {
@@ -19,10 +21,10 @@ export class ProductRepository implements IProductRepository {
     const whereCondition = keyword
       ? { title: { contains: keyword }, isDeletedAt: null }
       : { isDeletedAt: null };
-    const orderByField: { createdAt: 'desc' } | { favoriteCount: 'desc' } =
-      orderBy === ProductsOrderBy.recent
-        ? { createdAt: 'desc' }
-        : { favoriteCount: 'desc' };
+    const orderByField: ProductOrderByField =
+      orderBy === ProductsOrderBy.Recent
+        ? { createdAt: SortDirection.Desc }
+        : { favoriteCount: SortDirection.Desc };
 
     const products = await this.prisma.product.findMany({
       where: whereCondition,

@@ -1,7 +1,6 @@
 import { Controller } from '@nestjs/common';
 import { Body, Delete, Get, Param, Post, Query } from '@nestjs/common';
 import { UploadedFiles, UseInterceptors, HttpStatus } from '@nestjs/common';
-import { ProductService } from './product.service';
 import { Product } from '@prisma/client';
 import {
   CreateProductDTO,
@@ -10,10 +9,11 @@ import {
 } from '@/types/product.types';
 import { FilesInterceptor } from '@nestjs/platform-express';
 import { User } from '@/decorators/user.decorator';
+import { IProductService } from './product.service.interface';
 
 @Controller('/products')
 export class ProductController {
-  constructor(private readonly productService: ProductService) {}
+  constructor(private readonly productService: IProductService) {}
 
   @Get()
   async getProducts(@Query() query: ProductOptionsDTO) {

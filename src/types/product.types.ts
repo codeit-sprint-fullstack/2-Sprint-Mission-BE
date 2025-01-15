@@ -1,3 +1,4 @@
+import { SortDirection } from '@/common/enums/order.enum';
 import { ProductImage } from '@prisma/client';
 import { Transform, Type } from 'class-transformer';
 import {
@@ -11,8 +12,8 @@ import {
 } from 'class-validator';
 
 export enum ProductsOrderBy {
-  recent = 'recent',
-  favorite = 'favorite',
+  Recent = 'recent',
+  Favorite = 'favorite',
 }
 
 export class ProductOptionsDTO {
@@ -25,7 +26,7 @@ export class ProductOptionsDTO {
   pageSize: number = 10;
 
   @IsEnum(ProductsOrderBy)
-  orderBy: ProductsOrderBy = ProductsOrderBy.recent;
+  orderBy: ProductsOrderBy = ProductsOrderBy.Recent;
 
   @IsOptional()
   keyword?: string;
@@ -36,6 +37,11 @@ export class ProductOptions {
   pageSize: number;
   orderBy: ProductsOrderBy;
   keyword?: string;
+}
+
+export interface ProductOrderByField {
+  createdAt?: SortDirection.Desc;
+  favoriteCount?: SortDirection.Desc;
 }
 
 export class CreateProductWithoutFilesDTO {

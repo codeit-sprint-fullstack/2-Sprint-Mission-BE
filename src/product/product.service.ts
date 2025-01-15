@@ -12,11 +12,12 @@ import { S3Service } from '@/s3/s3.service';
 import { ConfigService } from '@nestjs/config';
 import addS3KeysToProductData from '@/utils/addS3KeysToProductData';
 import filterProductInfo from '@/utils/filterProductInfo';
+import { IProductRepository } from './product.repository.interface';
 
 @Injectable()
 export class ProductService implements IProductService {
   constructor(
-    private readonly productRepository: ProductRepository,
+    private readonly productRepository: IProductRepository,
     private readonly s3Service: S3Service,
   ) {}
 
